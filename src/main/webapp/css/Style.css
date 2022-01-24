@@ -1,0 +1,42 @@
+
+nav.header ul li a {
+    color: white;
+    font-weight: bold;
+    border: none;
+        text-decoration: none;
+}
+nav.header ul li {
+    display: inline-block;
+       padding: 5px 15px;
+    color: white;
+}
+nav.header ul {
+    list-style: none;
+    padding: 0px;
+    margin: 10px;
+}
+nav.header {
+    background: #160101;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav.header ul li:hover {
+    background: blue;
+}
+nav.header.seakerindex h1 {
+    color: white;
+    padding: 0px 29px;
+}
+
+ .homeContent img {
+    width: 100%;
+    height: -webkit-fill-available;
+} 
+.homeContent {
+    padding: 0px;
+    height: 570px;
+}
+body {
+    margin: 0px;
+}
