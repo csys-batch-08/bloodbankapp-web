@@ -15,52 +15,26 @@ import com.bloodbank.DaoImpl.AdminDAOlmpl;
 import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.AdminModel;
 
-/**
- * Servlet implementation class AdminController
- */
 @WebServlet("/AdminController")
 public class AdminServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AdminServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter pw = response.getWriter();
+		PrintWriter  writer = response.getWriter();
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		String username = request.getParameter("email");
 		String password = request.getParameter("password");
-		AdminModel model = new AdminModel(username, password, 0);
-		AdminDAOlmpl Dao = new AdminDAOlmpl();
+		AdminModel  adminModel = new AdminModel(username, password, 0);
+		AdminDAOlmpl  adminDAOlmpl = new AdminDAOlmpl();
 		try {
 			 //ADMIN Email and password validation
-			if (Dao.verificationAdmin(model) != null) {
+			if (adminDAOlmpl.verificationAdmin(adminModel) != null) {
 
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Login success');");
-				pw.println("location='AdminWork.jsp';");
-				pw.println("</script>");
+				writer.println("<script type=\"text/javascript\">");
+				writer.println("alert('Login success');");
+				writer.println("location='AdminWork.jsp';");
+				writer.println("</script>");
 
 			} else {
 
@@ -69,9 +43,11 @@ public class AdminServlet extends HttpServlet {
 			}
 		} catch (ExeceptionHandle e) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("error", e.AdminMessage());
-			response.sendRedirect("Adminlogin.jsp");
+		
+			request.setAttribute("error", e.AdminMessage());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("AdminLogin.jsp");
+			dispatcher.forward(request, response);
+			
 
 		}
 

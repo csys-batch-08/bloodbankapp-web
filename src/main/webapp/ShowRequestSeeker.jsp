@@ -4,6 +4,7 @@
 <%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,31 +103,22 @@ tbody {
 				<th>DATE</th>
 				<th>STATUS</th>
 			</tr>
-
-			<%
-			RequestDAOlmpl Dao = new RequestDAOlmpl();
-			RequestModel requestModel = null;
-			HttpSession hpt = request.getSession();
-			SeekerDetails seeker = (SeekerDetails) hpt.getAttribute("seeker");
-			List<RequestModel> requestList = Dao.ShowRequestSeeker(seeker.getPhoneNumber());
-			for (int i = 0; i < requestList.size(); i++) {
-				requestModel = requestList.get(i);
-			%>
-			<tr>
-				<td><%=requestModel.getHospitalName()%></td>
-				<td><%=requestModel.getBloodType()%></td>
-				<td><%=requestModel.getUnit()%></td>
-				<td><%=requestModel.getBloodCollectorName()%></td>
-				<td><%=requestModel.getPhoneNumber()%></td>
-				<td><%=requestModel.getAadharcard()%></td>
-				<td><%=requestModel.getRequestDate()%></td>
-				<td><%=requestModel.getStatus()%></td>
-			</tr>
-
-			<%
-			}
-			%>
-
+			
+			<c:forEach items="${requestScope.requestList }" var="List">
+              <tr>
+              <td>${List.hospitalName}</td>
+              <td>${List.bloodType}</td>
+              <td>${List.unit}</td>
+              <td>${List.bloodCollectorName}</td>
+              <td>${List.phoneNumber}</td>
+              <td>${List.aadharcard}</td>
+              <td>${List.requestDate}</td>
+              <td>${List.status}</td>       
+              
+            
+              </tr>
+              </c:forEach>
+            
 		</table>
 		<br>
 

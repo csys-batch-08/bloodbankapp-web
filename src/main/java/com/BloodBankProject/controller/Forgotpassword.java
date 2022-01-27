@@ -1,6 +1,8 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,30 +15,13 @@ import com.bloodbank.exception.ExeceptionHandle;
 
 @WebServlet("/Forgotpassword")
 public class Forgotpassword extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 * 
-	 * 
-	 *      /**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		// System.out.println("welcome gowtham");
 
-		SeekerDAOlmpl Dao = new SeekerDAOlmpl();
+		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		String password1 = request.getParameter("CONFIRM");
 		String password2 = request.getParameter("PASSWORD");
 
@@ -44,11 +29,9 @@ public class Forgotpassword extends HttpServlet {
 
 		// System.out.println(PhoneNumber+"gowtham");
 
-		HttpSession session = request.getSession();
-
 		try {
 
-			if (Dao.PhoneNumberValid(PhoneNumber) != null) {
+			if (seekerDAOlmpl.PhoneNumberValid(PhoneNumber) != null) {
 
 				try {
 
@@ -56,7 +39,7 @@ public class Forgotpassword extends HttpServlet {
 
 						// Long phoneNumber= (Long) request.getAttribute("SeekerPhoneNumber");
 
-						Dao.ForgotPassword(PhoneNumber, password2);
+						seekerDAOlmpl.ForgotPassword(PhoneNumber, password2);
 
 						response.sendRedirect("SeekerLogin.jsp");
 
@@ -66,9 +49,9 @@ public class Forgotpassword extends HttpServlet {
 					}
 				} catch (ExeceptionHandle e) {
 
-					session.setAttribute("PasswordError", e.ForgotPassword());
-
-					response.sendRedirect("Forgotpassword.jsp");
+					request.setAttribute("PasswordError", e.ForgotPassword());
+					RequestDispatcher dispatcher = request.getRequestDispatcher("Forgotpassword.jsp");
+					dispatcher.forward(request, response);
 
 				}
 
@@ -79,9 +62,9 @@ public class Forgotpassword extends HttpServlet {
 			}
 		} catch (ExeceptionHandle e) {
 
-			session.setAttribute("numbererror", e.SeekerPhoneNumberFind());
-
-			response.sendRedirect("Forgotpassword.jsp");
+			request.setAttribute("numbererror", e.SeekerPhoneNumberFind());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Forgotpassword.jsp");
+			dispatcher.forward(request, response);
 
 		}
 

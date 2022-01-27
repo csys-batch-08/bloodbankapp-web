@@ -71,19 +71,13 @@ nav {
 		<ul>
 			
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="LogoutDonor.jsp">Logout</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="problem">
 		<nav>
-			<div class="bookinner">
-				<form action=" ConfirmServlet" method="post">
-
-
-					<input class="submitBtn" type="submit" value="confirm">
-
-				</form>
-
+			<div class="bookinner">				
+                <a class="BookingChange" href="ConfirmServlet">CONFIRM</a><br><br>
 				<a class="BookingChange" href="BookingCancel.jsp">BOOKING CANCEL</a>
 
 			</div>

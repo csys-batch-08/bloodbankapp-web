@@ -18,35 +18,26 @@ import com.bloodbank.model.Donor;
 
 public class BookingDAOlmpl implements BookingDAO {
 
-	public int booking(BookingModel book) {
+	public int booking(BookingModel  bookingModel) {
 		int tempNumber = 0;
-//		`book.getDonor().
-//		
-//		DonorDao donorDao=new DonorDao();
-//		
-//		Long adharcard=donorDao.adharcardNumber(book.getDonor());
-//		
-//		Donor donor=donorDao.validAdharcardNumber(adharcard);
 
-		// System.out.println(donor.getAge());
-
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		String query = "insert into booking (aadharcard,address,book_date,blood_type,blood_collect_choice) values(?,?,?,?,?)";
-		Connection con=null;
+		Connection connection=null;
 		PreparedStatement  preparedStatement=null;
 		
 		try {
-			 con = connection.getConnection();
-			 preparedStatement = con.prepareStatement(query);
+			connection = connectionUtil.getConnection();
+			 preparedStatement = connection.prepareStatement(query);
 			// System.out.println("nothing"+book.getAddress());
 			// String commit="commit";
 			// System.out.println(book.getDonor().getAadharcard());
 
-			preparedStatement.setLong(1, book.getDonor().getAadharcard());
-			preparedStatement.setString(2, book.getAddress());
-			preparedStatement.setDate(3, java.sql.Date.valueOf(book.getAppdate()));
-			preparedStatement.setString(4, book.getBloodType());
-			preparedStatement.setString(5, book.getBloodCollectChoice());
+			preparedStatement.setLong(1, bookingModel.getDonor().getAadharcard());
+			preparedStatement.setString(2, bookingModel.getAddress());
+			preparedStatement.setDate(3, java.sql.Date.valueOf(bookingModel.getAppdate()));
+			preparedStatement.setString(4, bookingModel.getBloodType());
+			preparedStatement.setString(5, bookingModel.getBloodCollectChoice());
 
 			tempNumber = preparedStatement.executeUpdate();
 
@@ -62,26 +53,26 @@ public class BookingDAOlmpl implements BookingDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return tempNumber;
 
 	}
 
-	public int updateBooking(BookingModel book) {
+	public int updateBooking(BookingModel  bookingModel) {
 		int tempNumber = 0;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "update booking set address=?,book_date=?,blood_collect_choice=? where aadharcard=?";
-			 preparedStatement = con.prepareStatement(query);
+			 preparedStatement = connection.prepareStatement(query);
 			// String commit="commit";
-			preparedStatement.setString(1, book.getAddress());
-			preparedStatement.setDate(2, java.sql.Date.valueOf((book.getAppdate())));
-			preparedStatement.setLong(4, book.getDonor().getAadharcard());
-			preparedStatement.setString(3, book.getBloodCollectChoice());
+			preparedStatement.setString(1, bookingModel.getAddress());
+			preparedStatement.setDate(2, java.sql.Date.valueOf((bookingModel.getAppdate())));
+			preparedStatement.setLong(4, bookingModel.getDonor().getAadharcard());
+			preparedStatement.setString(3, bookingModel.getBloodCollectChoice());
 			tempNumber = preparedStatement.executeUpdate();
 			// pstmt.executeQuery(commit);
 		} catch (ClassNotFoundException e) {
@@ -93,24 +84,24 @@ public class BookingDAOlmpl implements BookingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return tempNumber;
 
 	}
 
 	public int deleteBooking(Long aadharcard) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		// System.out.println(aadharcard+"dfvgbhnjm");
 		int tempNumber = 0;
-		Connection con=null;
+		Connection connection=null;
 		PreparedStatement preparedStatement =null;
 		
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String commit = "commit";
 			String query = "delete from booking where aadharcard=?";
-			 preparedStatement = con.prepareStatement(query);
+			 preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, aadharcard);
 
@@ -125,33 +116,34 @@ public class BookingDAOlmpl implements BookingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return tempNumber;
 
 	}
 
 	public List<BookingModel> HomeCollection() {
-		BookingModel model = null;
-		ConnectionUtil connection = new ConnectionUtil();
+		BookingModel bookingModel = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		List<BookingModel> booking = new ArrayList<BookingModel>();
-		Connection con=null;
+		Connection connection=null;
 		Statement  statement=null;
+		ResultSet resultSet=null;
 		try {
 
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select  AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking where BLOOD_COLLECT_CHOICE ='home'";
-			  statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			  statement = connection.createStatement();
+			 resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				DonorDAOImpl donor = new DonorDAOImpl();
 
 				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(1));
 				// System.out.println(donor1);
-				model = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
+				bookingModel = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
 						resultSet.getString(5));
 
-				booking.add(model);
+				booking.add(bookingModel);
 
 			}
 
@@ -164,7 +156,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closeStatement(statement, connection,resultSet);
 		}
 		return booking;
 
@@ -172,18 +164,18 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	public LocalDate dateCheck(Donor donor) {
 		LocalDate date = null;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement  preparedStatement =null;
-		
+		ResultSet resultSet=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select book_date+90 from booking where aadharcard=?";
-			 preparedStatement = con.prepareStatement(query);
+			 preparedStatement = connection.prepareStatement(query);
 			// System.out.println(donor.getAadharcard()+"dfcvgbhnjmk,l");
 			preparedStatement.setLong(1, donor.getAadharcard());
 			// System.out.println(donor.getAdharcard());
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			// System.out.println("date");
 			while (resultSet.next()) {
 
@@ -202,23 +194,23 @@ public class BookingDAOlmpl implements BookingDAO {
 		// System.out.println(date);
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
 		return date;
 	}
 
-	public int updateDateForDonor(BookingModel book) {
+	public int updateDateForDonor(BookingModel  bookingModel) {
    int returnNumber=0;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String commit = "commit";
 			String query = "update booking set book_date=? where aadharcard=?";
-			 preparedStatement = con.prepareStatement(query);
-			preparedStatement.setDate(1, java.sql.Date.valueOf(book.getAppdate()));
-			preparedStatement.setLong(2, book.getDonor().getAadharcard());
+			 preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setDate(1, java.sql.Date.valueOf(bookingModel.getAppdate()));
+			preparedStatement.setLong(2, bookingModel.getDonor().getAadharcard());
 			returnNumber=preparedStatement.executeUpdate();
 			preparedStatement.executeQuery(commit);
 
@@ -231,29 +223,31 @@ public class BookingDAOlmpl implements BookingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return returnNumber;
 	}
 
 	public List<BookingModel> ShowBookingDonor(Donor donor) {
-		BookingModel model = null;
-		ConnectionUtil connection = new ConnectionUtil();
+		BookingModel bookingModel = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		List<BookingModel> booking = new ArrayList<BookingModel>();
-		Connection con=null;
-		Statement  statement=null;
+		Connection connection=null;
+		ResultSet resultSet=null;
+		 PreparedStatement  preparedStatement=null;
 		try {
 
-			 con = connection.getConnection();
-			String query = "select  AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking where aadharcard=" + donor.getAadharcard();
-			  statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			connection = connectionUtil.getConnection();
+			String query = "select  AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking where aadharcard=?" ;
+			    preparedStatement=connection.prepareStatement(query);
+			  preparedStatement.setLong(1, donor.getAadharcard());
+			 resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				// System.out.println(donor1);
-				model = new BookingModel(donor, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
+				bookingModel = new BookingModel(donor, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
 						resultSet.getString(5));
 
-				booking.add(model);
+				booking.add(bookingModel);
 
 			}
 
@@ -266,34 +260,34 @@ public class BookingDAOlmpl implements BookingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 		return booking;
 
 	}
 
 	public List<BookingModel> ShowBookingAdmin() {
-		BookingModel model = null;
-		ConnectionUtil connection = new ConnectionUtil();
+		BookingModel bookingModel = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		List<BookingModel> booking = new ArrayList<BookingModel>();
-		Connection con=null;
+		Connection connection=null;
 		Statement statement=null;
-		
+		ResultSet resultSet=null;
 		try {
 
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking ";
-			 statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
-			while (resultSet.next()) {
+			 statement = connection.createStatement();
+			 resultSet = statement.executeQuery(query);
+		    	while (resultSet.next()) {
 				DonorDAOImpl donor = new DonorDAOImpl();
 
 				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(1));
 				// System.out.println(donor1);
-				model = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
+				bookingModel = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(), resultSet.getString(4),
 						resultSet.getString(5));
 
-				booking.add(model);
+				booking.add(bookingModel);
 
 			}
 			// System.out.println(rs.getString(3));
@@ -306,7 +300,7 @@ public class BookingDAOlmpl implements BookingDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closeStatement(statement, connection,resultSet);
 		}
 
 		return booking;

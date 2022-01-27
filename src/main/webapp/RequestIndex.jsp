@@ -66,7 +66,7 @@ nav.header {
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="LogoutSeeker.jsp">Logout</a></li>
+			<li><a href="SeekerLogoutServlet">Logout</a></li>
 			
 		</ul>
 	</nav>
@@ -75,7 +75,7 @@ nav.header {
 			<div class="bookinner">
 				<h1 class="text-center">REQUISITION</h1>
 				<a href="requestSeeker.jsp">REQUEST</a> <a
-					href="ShowRequestSeeker.jsp">SHOW REQUEST</a>
+					href="ShowRequestSeekerServlet">SHOW REQUEST</a>
 			</div>
 		</nav>
 

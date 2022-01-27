@@ -69,14 +69,14 @@ nav.header {
 		<ul>
 		
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="LogoutDonor.jsp">Logout</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="problem">
 		<nav>
 			<div class="bookinner">
 				<h1 class="text-center">BOOKING</h1>
-				<a href="Booking.jsp">BOOK</a> <a href="ShowBooking.jsp">SHOW
+				<a href="Booking.jsp">BOOK</a> <a href="ShowDonorBookingServlet">SHOW
 					BOOKED</a>
 			</div>
 		</nav>

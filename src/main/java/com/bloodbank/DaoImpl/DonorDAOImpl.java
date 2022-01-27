@@ -14,17 +14,17 @@ import com.bloodbank.model.Donor;
 
 public class DonorDAOImpl implements DonorDAO {
 	public int insertDonor(Donor donor) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int tempNumber = 0;
 		
-		Connection con=null;
+		Connection connection=null;
 		PreparedStatement  preparedStatement=null;
 		try {
 
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "insert into donor_details values(?,?,?,?,?,?,?)";
 			String commit = "commit";
-			  preparedStatement = con.prepareStatement(query);
+			  preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, donor.getFirstName());
 			preparedStatement.setString(2, donor.getLastName());
 			preparedStatement.setString(3, donor.getAddress());
@@ -42,23 +42,24 @@ public class DonorDAOImpl implements DonorDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return tempNumber;
 	}
 
 	public Donor validAadharcardNumber(Long aadharcard) {
 		Donor donor = null;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con =null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection =null;
 		PreparedStatement  preparedStatement=null;
+		ResultSet resultSet=null;
 		try {
 
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details where aadharcard=?";
-			 preparedStatement=con.prepareStatement(query);
+			 preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setLong(1, aadharcard);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getLong(5),
 						resultSet.getDate(6), resultSet.getString(7));
@@ -73,22 +74,22 @@ public class DonorDAOImpl implements DonorDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
 		return donor;
 	}
 
 	public int updateDonor(Donor donor) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int returnNumber = 0;
-		Connection con=null;
+		Connection connection=null;
 		PreparedStatement  preparedStatement=null;
 		
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String commit = "commit";
 			String query = "update donor_details set address=?,age=?,phone=? where aadharcard=?";
-			  preparedStatement = con.prepareStatement(query);
+			  preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, donor.getAddress());
 			preparedStatement.setDate(2, new java.sql.Date(donor.getDonorDate().getTime()));
 			preparedStatement.setLong(3, donor.getNumber());
@@ -103,24 +104,25 @@ public class DonorDAOImpl implements DonorDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return returnNumber;
 	}
 
 	public List<Donor> showDonor() {
 		List<Donor> donorList = null;
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		donorList = new ArrayList<Donor>();
-		Connection con=null;
+		Connection connection=null;
+		ResultSet resultSet=null;
 		PreparedStatement  preparedStatement =null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details";
 
-		  preparedStatement = con.prepareStatement(query);
+		  preparedStatement = connection.prepareStatement(query);
 
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
 				Donor donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getLong(5),
@@ -139,7 +141,7 @@ public class DonorDAOImpl implements DonorDAO {
 
 		}
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
 		return donorList;
 
@@ -147,18 +149,19 @@ public class DonorDAOImpl implements DonorDAO {
 
 	public Long aadharcardNumber(Donor donor) {
 		Long aadharcardNumber = null;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ResultSet resultSet=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select AADHARCARD from donor_details where PHONE=? and FIRST_NAME=? and LAST_NAME=?";
-			 preparedStatement = con.prepareStatement(query);
+			 preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, donor.getNumber());
 			preparedStatement.setString(2, donor.getFirstName());
 			preparedStatement.setString(3, donor.getLastName());
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 
@@ -174,24 +177,25 @@ public class DonorDAOImpl implements DonorDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
 		return aadharcardNumber;
 	}
 
 	public Donor validNumber(Long aadharcardNumber) {
-		Donor donor1 = null;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		Donor donor = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection  connection=null;
+		ResultSet resultSet=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details where aadharcard=?";
-			 preparedStatement=con.prepareStatement(query);
+			 preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setLong(1, aadharcardNumber);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				donor1 = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getLong(5),
+				donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getLong(5),
 						resultSet.getDate(6), resultSet.getString(7));
 			}
 
@@ -204,9 +208,9 @@ public class DonorDAOImpl implements DonorDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
-		return donor1;
+		return donor;
 	}
 
 }

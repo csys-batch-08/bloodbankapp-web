@@ -93,7 +93,7 @@ body {
 		<div class="bookinner cal-sm-5">
 
 			<form action="BookingChangeServlet" onmouseover="check()"
-				method="post">
+				>
 
 				<h1>BOOKING</h1>
 				<div>

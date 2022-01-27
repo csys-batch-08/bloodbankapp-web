@@ -4,6 +4,7 @@
 <%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,35 +96,27 @@ table, th {
 				<th>DATE</th>
 				<th>STATUS</th>
 
+          
 			</tr>
-
-			<%
-			RequestDAOlmpl Dao = new RequestDAOlmpl();
-			List<RequestModel> requestList = Dao.ShowRequest();
-
-			RequestModel requestModel = null;
-			for (int i = 0; i < requestList.size(); i++) {
-				requestModel = requestList.get(i);
-			%>
+			<c:forEach items="${requestScope.requestList }" var="List">
 			<tr>
-				<td><%=requestModel.getHospitalName()%></td>
-				<td><%=requestModel.getBloodType()%></td>
-				<td><%=requestModel.getUnit()%></td>
-				<td><%=requestModel.getBloodCollectorName()%></td>
-				<td><%=requestModel.getPhoneNumber()%></td>
-				<td><%=requestModel.getAadharcard()%></td>
-				<td><%=requestModel.getRequestDate()%></td>
-				<td><%=requestModel.getStatus()%></td>
+			<td>${List.hospitalName}</td>
+              <td>${List.bloodType}</td>
+              <td>${List.unit}</td>
+              <td>${List.bloodCollectorName}</td>
+              <td>${List.phoneNumber}</td>
+              <td>${List.aadharcard}</td>
+              <td>${List.requestDate}</td>
+              <td>${List.status}</td>    
 
-			</tr>
-
-			<%
-			}
-			%>
+			<tr>
+			</c:forEach>	
+			
+		
 
 		</table>
 		<div class="backBtn">
-			<a href="RequestShowAndDeleteAdmin.jsp">Request Pending </a>
+			<a href="RequestShowAndDeleteServlet">Request Pending </a>
 		</div>
 		<div class="backBtn">
 			<a href="AdminWork.jsp">Back </a>

@@ -25,17 +25,10 @@ import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
-/**
- * Servlet implementation class BloodBookingServlet
- */
 @WebServlet("/BloodBookingServlet")
 public class BloodBookingServlet extends HttpServlet {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		LocalDate date = null;
@@ -43,43 +36,43 @@ public class BloodBookingServlet extends HttpServlet {
 
 		String choice = request.getParameter("Choice");
 
-		BookingDAOlmpl bookingDao = new BookingDAOlmpl();
-
+		BookingDAOlmpl  bookingDAOlmpl = new BookingDAOlmpl();
+		PrintWriter  writer = response.getWriter();
 		try {
 			date = LocalDate.parse(request.getParameter("bookingDate"));
 
-			HttpSession htp = request.getSession();
+			HttpSession  session = request.getSession();
 
-			Donor donor = (Donor) htp.getAttribute("Donor");
+			Donor donor = (Donor) session.getAttribute("Donor");
 
-			AdminDAOlmpl admin = new AdminDAOlmpl();
+			AdminDAOlmpl   adminDAOlmpl = new AdminDAOlmpl();
                // check the date for Donor validation
-			LocalDate date1 = bookingDao.dateCheck(donor);
+			LocalDate date1 = bookingDAOlmpl.dateCheck(donor);
 
 			
                    //check the amount in ADMIN wallet to above 300 to Allowed
 		
 			//Donor once Donated to come next Donate check the last Donating Date to  90day  after  come to allow
 
-			if (date1 != null && date.isAfter(date1) && admin.CheckWallet() > 300) {
+			if (date1 != null && date.isAfter(date1) && adminDAOlmpl.CheckWallet() > 300) {
 				
-				PrintWriter out = response.getWriter();
+				
 				
 				//User select by Center Address is Null  On time work this condition
 				if (address.isEmpty()) {
 
 					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
-					BookingModel booking = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-					htp.setAttribute("bookingDate", booking);
+					BookingModel bookingModel  = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					session.setAttribute("bookingDate", bookingModel);
 
-					int i = bookingDao.booking(booking);
+					
 
-					if (i > 0) {
+					if (bookingDAOlmpl.booking(bookingModel)> 0) {
 
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Booking Successfully');");
-						out.println("location='BookingProcess.jsp';");
-						out.println("</script>");
+						writer.println("<script type=\"text/javascript\">");
+						writer.println("alert('Booking Successfully');");
+						writer.println("location='BookingProcess.jsp';");
+						writer.println("</script>");
 						
 					}
 
@@ -89,16 +82,16 @@ public class BloodBookingServlet extends HttpServlet {
 
 					//User select by Home  On time work this condition
 
-					BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-					htp.setAttribute("bookingDate", booking);
-					int i = bookingDao.booking(booking);
+					BookingModel bookingModel  = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					session.setAttribute("bookingDate", bookingModel);
+					
 
-					if (i > 0) {
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Booking Successfully');");
-						out.println("location='BookingProcess.jsp';");
-						out.println("</script>");
+						writer.println("<script type=\"text/javascript\">");
+						writer.println("alert('Booking Successfully');");
+						writer.println("location='BookingProcess.jsp';");
+						writer.println("</script>");
 						// response.sendRedirect("");
 						// System.out.println("Hello Peter");
 						// response.sendRedirect("BookingProcess.jsp");
@@ -109,7 +102,7 @@ public class BloodBookingServlet extends HttpServlet {
 			}
 			 //check the amount in ADMIN wallet to above 300 to Allowed
 			
-			else if (date1 == null && admin.CheckWallet() > 300) {
+			else if (date1 == null && adminDAOlmpl.CheckWallet() > 300) {
 				
 				//User select by Center Address is Null  On time work this condition
 				
@@ -117,17 +110,17 @@ public class BloodBookingServlet extends HttpServlet {
 
 					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
 
-					BookingModel booking = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-					htp.setAttribute("bookingDate", booking);
+					BookingModel  bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					session.setAttribute("bookingDate", bookingModel);
 
-					if (bookingDao.booking(booking) > 0) {
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-						PrintWriter out = response.getWriter();
+						
 
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Booking Successfully');");
-						out.println("location='BookingProcess.jsp';");
-						out.println("</script>");
+						writer.println("<script type=\"text/javascript\">");
+						writer.println("alert('Booking Successfully');");
+						writer.println("location='BookingProcess.jsp';");
+						writer.println("</script>");
 
 						// System.out.println("Hello Peter");
 
@@ -138,19 +131,18 @@ public class BloodBookingServlet extends HttpServlet {
 				} else {
 					//User select by Home  On time work this condition
 
-					BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-					htp.setAttribute("bookingDate", booking);
-					int i = bookingDao.booking(booking);
+					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					session.setAttribute("bookingDate", bookingModel);
+					
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					if (i > 0) {
+						
 
-						PrintWriter out = response.getWriter();
-
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Booking Successfully');");
-						out.println("location='BookingProcess.jsp';");
-						out.println("</script>");
-						System.out.println("Hello Peter 2");
+						writer.println("<script type=\"text/javascript\">");
+						writer.println("alert('Booking Successfully');");
+						writer.println("location='BookingProcess.jsp';");
+						writer.println("</script>");
+						//System.out.println("Hello Peter 2");
 						// response.sendRedirect("BookingProcess.jsp");
 
 					}
@@ -163,12 +155,12 @@ public class BloodBookingServlet extends HttpServlet {
 
 				
 				
-				PrintWriter out = response.getWriter();
+			
 
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
-				out.println("location='index.jsp';");
-				out.println("</script>");
+				writer.println("<script type=\"text/javascript\">");
+				writer.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
+				writer.println("location='NotQualified.jsp';");
+				writer.println("</script>");
 				
 				
 				// System.out.println("Joh Wick");

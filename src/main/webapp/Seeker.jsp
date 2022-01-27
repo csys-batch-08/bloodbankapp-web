@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,8 +123,8 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="SeekerRigester" method="post">
-				<h1 style="text-align: center;">RIGESTER</h1>
+			<form action="SeekerRigester">
+				<h1 style="text-align: center;">REGISTER</h1>
 				<div class="formcontrol">
 
 
@@ -192,23 +194,10 @@ p {
 
 					<button type="reset">Reset</button>
 				</div>
-				<%
-				String error = (String) session.getAttribute("phoneNumber");
-				if (error != null) {
-				%>
-
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("phoneNumber", null);
-				%>
-				<%
-				}
-				%>
-
-
-
-
+				
+				<c:if test="${requestScope.phoneNumber!=null }">
+				<p class="text-primary">${phoneNumber}</p>
+						</c:if>
 
 			</form>
 		</div>

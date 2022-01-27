@@ -10,54 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class SeekerLogoutServlet
- */
 @WebServlet("/SeekerLogoutServlet")
 public class SeekerLogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SeekerLogoutServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		
-		HttpSession hpt = request.getSession();
-		hpt.setAttribute("seeker", null);
-		hpt.setAttribute("requestModel", null);
-		hpt.setAttribute("biilingProces", null);
+		HttpSession session = request.getSession();
+		PrintWriter writer = response.getWriter();
+		session.setAttribute("seeker", null);
+		session.setAttribute("requestModel", null);
+		session.setAttribute("biilingProces", null);
 
-		PrintWriter pw = response.getWriter();
+		
 
-		pw.println("<script type=\"text/javascript\">");
-		pw.println("alert('Logout success');");
-		pw.println("location='index.jsp';");
-		pw.println("</script>");
+		writer.println("<script type=\"text/javascript\">");
+		writer.println("alert('Logout success');");
+		writer.println("location='index.jsp';");
+		writer.println("</script>");
 		// response.sendRedirect("index.jsp");
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }

@@ -8,6 +8,7 @@
 <%@page import="com.bloodbank.DaoImpl.BloodStackDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,43 +90,24 @@ tbody {
 	<div class="adminCard">
 		<table class="center">
 			<tr>
-				<th><strong>Aadharcard</strong></th>
-				<th><strong> BLOODTYPE</strong></th>
-				<th><strong> UNIT</strong></th>
-				<th><strong>PRICE</strong></th>
-				<th><strong>Date</strong></th>
+				<th><strong>AADHARCARD</strong></th>
+				<th><strong>ADDRESS</strong></th>
+				<th><strong>BOOK DATE</strong></th>
+				<th><strong>BLOOD TYPE</strong></th>
+				<th><strong>BLOOD COLLECT CHOICE</strong></th>
+
 			</tr>
-			<%
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-			HttpSession htp = request.getSession();
-			Donor donor = (Donor) htp.getAttribute("Donor");
-			BookingModel book = (BookingModel) htp.getAttribute("bookingDate");
-
-			BloodDetailsDAOlmpl Dao = new BloodDetailsDAOlmpl();
-
-			List<BloodDetailsModel> DetailsList = Dao.ShowBloodDetails(donor);
-
-			for (int i = 0; i < DetailsList.size(); i++) {
-
-				BloodDetailsModel details = DetailsList.get(i);
-			%>
-
-
+			<c:forEach items="${requestScope.DetailsList }" var="List">
 			<tr>
-
-				<td><%=details.getDonor().getAadharcard()%></td>
-				<td><%=details.getDonor().getBloodType()%></td>
-				<td><%=details.getUnit()%></td>
-				<td><%=details.getPrice()%></td>
-				<td><%=sdf.format(book.getAppdate())%></td>
-
-
+			 <td>${List.donor.aadharcard }</td>
+               <td>${List.address }</td>
+               <td>${List.appdate }</td>
+               <td>${List.bloodType }</td>
+               <td>${List.bloodCollectChoice }</td>
+			
+			
 			</tr>
-
-			<%
-			}
-			%>
+			</c:forEach>
 
 
 

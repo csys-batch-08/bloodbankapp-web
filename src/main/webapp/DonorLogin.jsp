@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,7 +121,7 @@ body {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
+			<li><a href="DonorRegister.jsp">Register</a></li>
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
 			<li><a href="index.jsp">Home</a></li>
 		</ul>
@@ -133,7 +133,7 @@ body {
 
 		<div class="cardContent">
 
-			<form action="login" method="post">
+			<form action="login">
 				<h1>login</h1>
 				<div class="formcontrol">
 					<input type="text" id="aadharcard" name="aadharcard" autofocus
@@ -148,21 +148,10 @@ body {
 					<input type="submit" value="login">
 
 				</div>
-				<%
-				String error = (String) session.getAttribute("DonorError");
-
-				if (error != null) {
-				%>
-
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("DonorError", null);
-				%>
-
-				<%
-				}
-				%>
+				
+<c:if test="${requestScope.DonorError!=null }">
+				<p class="text-primary">${DonorError}</p>
+				</c:if>
 
 			</form>
 		</div>

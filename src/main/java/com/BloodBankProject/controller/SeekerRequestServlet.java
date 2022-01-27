@@ -24,36 +24,10 @@ import com.bloodbank.model.Donor;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
-/**
- * Servlet implementation class SeekerRequestServlet
- */
 @WebServlet("/SeekerRequestServlet")
 public class SeekerRequestServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SeekerRequestServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,31 +48,31 @@ public class SeekerRequestServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			RequestDAOlmpl Dao = new RequestDAOlmpl();
-
-			HttpSession htp = request.getSession();
-			SeekerDetails seeker = (SeekerDetails) htp.getAttribute("seeker");
+			RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
+			PrintWriter writer = response.getWriter();
+			HttpSession session = request.getSession();
+			SeekerDetails seekerDetails = (SeekerDetails) session.getAttribute("seeker");
 
 			// System.out.println(date);
 			// System.out.println(request.getParameter("currentdate"));
 
-			BloodStackDAOlmpl stockDao = new BloodStackDAOlmpl();
+			BloodStackDAOlmpl stackDAOlmpl = new BloodStackDAOlmpl();
 
 		//	if (Dao.AadharcardValid(aadharcard) == null) {
 				
 
-				if (stockDao.checkOfQuantity(bloodtype) > unit) {
+				if (stackDAOlmpl.checkOfQuantity(bloodtype) > unit) {
 
 					String status = "approved";
 
-					RequestModel model = new RequestModel(hospitalName, bloodtype, unit, collectorName,
-							seeker.getPhoneNumber(), aadharcard, date, status);
+					RequestModel requestModel = new RequestModel(hospitalName, bloodtype, unit, collectorName,
+							seekerDetails.getPhoneNumber(), aadharcard, date, status);
 
-					htp.setAttribute("requestModel", model);
+					session.setAttribute("requestModel", requestModel);
 
-					int n = Dao.insertRequest(model);
+					
 					// System.out.println(n+"insert request");
-					if (n > 0) {
+					if (requestDAOlmpl.insertRequest(requestModel) > 0) {
 
 						// System.out.println("request insert");
 
@@ -110,19 +84,19 @@ public class SeekerRequestServlet extends HttpServlet {
 				} else {
 					String status = "pending";
 
-					RequestModel model = new RequestModel(hospitalName, bloodtype, unit, collectorName,
-							seeker.getPhoneNumber(), aadharcard, date, status);
+					RequestModel requestModel = new RequestModel(hospitalName, bloodtype, unit, collectorName,
+							seekerDetails.getPhoneNumber(), aadharcard, date, status);
 
-					htp.setAttribute("requestModel", model);
+					session.setAttribute("requestModel", requestModel);
 
 					// RequestDAOlmpl Dao=new RequestDAOlmpl();
 
-					if (Dao.insertRequest(model) > 0) {
-						PrintWriter pw = response.getWriter();
-						pw.println("<script type=\"text/javascript\">");
-						pw.println("alert('your request accepted and status is pending');");
-						pw.println("location='RequestIndex.jsp';");
-						pw.println("</script>");
+					if (requestDAOlmpl.insertRequest(requestModel) > 0) {
+						
+						writer.println("<script type=\"text/javascript\">");
+						writer.println("alert('your request accepted and status is pending');");
+						writer.println("location='RequestIndex.jsp';");
+						writer.println("</script>");
 						// response.sendRedirect("RequestIndex.jsp");
 
 					}

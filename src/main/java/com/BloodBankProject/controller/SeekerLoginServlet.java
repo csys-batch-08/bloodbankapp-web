@@ -15,59 +15,34 @@ import com.bloodbank.DaoImpl.SeekerDAOlmpl;
 import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.SeekerDetails;
 
-/**
- * Servlet implementation class SeekerLoginServlet
- */
 @WebServlet("/SeekerLoginServlet")
 public class SeekerLoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SeekerLoginServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		PrintWriter pw = response.getWriter();
+		HttpSession session=request.getSession(); 
+		PrintWriter writer = response.getWriter();
 
 		String password = request.getParameter("PASSWORD");
 		Long phoneNumber = Long.parseLong(request.getParameter("number"));
-		HttpSession session = request.getSession();
+		
 		session.setAttribute("SeekerPhoneNumber", phoneNumber);
-		SeekerDetails seeker = new SeekerDetails();
-		SeekerDAOlmpl dao = new SeekerDAOlmpl();
+		
+		SeekerDetails seekerDetails = new SeekerDetails();
+		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 
-		seeker = dao.seekerObject(password, phoneNumber);
+		seekerDetails = seekerDAOlmpl.seekerObject(password, phoneNumber);
 
 		try {
-			if (seeker != null) {
+			if (seekerDetails != null) {
 
-				session.setAttribute("seeker", seeker);
+				session.setAttribute("seeker", seekerDetails);
 
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Login success');");
-				pw.println("location='RequestIndex.jsp';");
-				pw.println("</script>");
+				writer.println("<script type=\"text/javascript\">");
+				writer.println("alert('Login success');");
+				writer.println("location='RequestIndex.jsp';");
+				writer.println("</script>");
 
 			} else {
 
@@ -77,9 +52,10 @@ public class SeekerLoginServlet extends HttpServlet {
 
 		} catch (ExeceptionHandle e) {
 
-			session.setAttribute("SeekerError", e.SeekerMessage());
-
-			response.sendRedirect("SeekerLogin.jsp");
+			request.setAttribute("SeekerError", e.SeekerMessage());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("SeekerLogin.jsp");
+            dispatcher.forward(request, response);
+			
 
 		}
 

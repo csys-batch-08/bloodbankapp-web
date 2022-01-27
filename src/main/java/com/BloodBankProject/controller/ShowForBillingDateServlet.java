@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,36 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ShowForBillingDateServlet
- */
+import com.bloodbank.DaoImpl.BillingDAOlmpl;
+import com.bloodbank.model.BillingModel;
+
 @WebServlet("/ShowForBillingDateServlet")
 public class ShowForBillingDateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ShowForBillingDateServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate date = null;
@@ -51,11 +30,17 @@ public class ShowForBillingDateServlet extends HttpServlet {
 		date = LocalDate.parse(request.getParameter("date"));
 
 		// System.out.println(date);
-		HttpSession session = request.getSession();
+	
 
-		session.setAttribute("billingdate", date);
+		BillingDAOlmpl billingDAOlmpl = new BillingDAOlmpl();
+		
+		List<BillingModel> billingList = billingDAOlmpl.biilingShowAdminDate(date);
+		request.setAttribute("billingList", billingList);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowForBillingDate.jsp");
+	     dispatcher.forward(request, response);
+		
 
-		response.sendRedirect("ShowForBillingDate.jsp");
+		
 
 	}
 

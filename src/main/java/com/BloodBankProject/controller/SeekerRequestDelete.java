@@ -13,55 +13,29 @@ import javax.servlet.http.HttpSession;
 import com.bloodbank.DaoImpl.RequestDAOlmpl;
 import com.bloodbank.exception.ExeceptionHandle;
 
-/**
- * Servlet implementation class SeekerRequestDelete
- */
 @WebServlet("/SeekerRequestDelete")
 public class SeekerRequestDelete extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SeekerRequestDelete() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
+		HttpSession session = request.getSession();
+		PrintWriter writer = response.getWriter();
+		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 		
-		PrintWriter pw = response.getWriter();
-		RequestDAOlmpl dao = new RequestDAOlmpl();
+		if(requestDAOlmpl.AadharcardValid(aadharcard)!=null) {
 		
-		if(dao.AadharcardValid(aadharcard)!=null) {
 		
-		String status=dao.StatusCheck(aadharcard);
 		
 	
-		if(status.equals("approved")) {
+		if(requestDAOlmpl.StatusCheck(aadharcard).equals("approved")) {
      
 			
 
-			pw.println("<script type=\"text/javascript\">");
-			pw.println("alert('can t delete the request it is approved');");
-			pw.println("location='ShowRequestSeeker.jsp';");
-			pw.println("</script>");
+			writer.println("<script type=\"text/javascript\">");
+			writer.println("alert('can t delete the request it is approved');");
+			writer.println("location='ShowRequestSeeker.jsp';");
+			writer.println("</script>");
                 
 			
 			
@@ -71,18 +45,18 @@ public class SeekerRequestDelete extends HttpServlet {
 	}else {
 
 		
-		if (dao.deleteRequest(aadharcard) > 0) {
+		if (requestDAOlmpl.deleteRequest(aadharcard) > 0) {
 
 
 			
 
-			pw.println("<script type=\"text/javascript\">");
-			pw.println("alert('Request cancel');");
-			pw.println("location='RequestIndex.jsp';");
-			pw.println("</script>");
+			writer.println("<script type=\"text/javascript\">");
+			writer.println("alert('Request cancel');");
+			writer.println("location='RequestIndex.jsp';");
+			writer.println("</script>");
 
-			HttpSession htp = request.getSession();
-			htp.setAttribute("seeker", null);
+			
+			session.setAttribute("seeker", null);
 
 		}
 		
@@ -91,10 +65,10 @@ public class SeekerRequestDelete extends HttpServlet {
 			
 			
 
-			pw.println("<script type=\"text/javascript\">");
-			pw.println("alert('invalid Aadharcard ');");
-			pw.println("location='RequestCancel.jsp';");
-			pw.println("</script>");
+			writer.println("<script type=\"text/javascript\">");
+			writer.println("alert('invalid Aadharcard ');");
+			writer.println("location='RequestCancel.jsp';");
+			writer.println("</script>");
 			
 		}
 

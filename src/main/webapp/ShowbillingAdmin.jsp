@@ -3,6 +3,7 @@
 <%@page import="com.bloodbank.model.BillingModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,27 +129,27 @@ tbody {
 						<th><strong>PRICE</strong></th>
 						<th><strong>Date</strong></th>
 					</tr>
-					<%
-					BillingDAOlmpl Dao = new BillingDAOlmpl();
-
-					List<BillingModel> billingList = Dao.biilingShowAdmin();
-
-					for (int i = 0; i < billingList.size(); i++) {
-
-						BillingModel billingModel = billingList.get(i);
-					%>
-
-					<tr>
-						<td><%=billingModel.getBloodType()%></td>
-						<td><%=billingModel.getSeeker().getFirstName()%></td>
-						<td><%=billingModel.getSeeker().getPhoneNumber()%></td>
-						<td><%=billingModel.getUnit()%></td>
-						<td><%=billingModel.getTotalprice()%></td>
-						<td><%=billingModel.getBillDate()%></td>
-						<%
-						}
-						%>
 					
+					
+					
+					<c:forEach items="${requestScope.billingList}" var="billingList">
+					
+					
+				<tr>
+					<td>${billingList.bloodType}</td>
+					<td>${billingList.seeker.firstName}</td>
+					<td>${billingList.seeker.phoneNumber}</td>
+					<td>${billingList.unit}</td>
+					<td>${billingList.totalprice}</td>
+					<td>${billingList.billDate}</td>
+					
+					</tr>
+					</c:forEach>
+					
+					
+					
+					
+				
 				</table>
 			</div>
 			<div class="content">

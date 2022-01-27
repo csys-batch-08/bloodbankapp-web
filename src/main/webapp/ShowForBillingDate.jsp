@@ -6,6 +6,7 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,34 +97,24 @@ tbody {
 			</tr>
 
 
-			<%
-			LocalDate date = (LocalDate) session.getAttribute("billingdate");
 
-			BillingDAOlmpl billigDao = new BillingDAOlmpl();
-			//System.out.println(date);
-			List<BillingModel> billingList = billigDao.biilingShowAdminDate(date);
-			for (int i = 0; i < billingList.size(); i++) {
-
-				BillingModel model = billingList.get(i);
-			%>
-			<tr>
-				<td><%=model.getBloodType()%></td>
-				<td><%=model.getSeeker().getFirstName()%></td>
-				<td><%=model.getSeeker().getPhoneNumber()%></td>
-				<td><%=model.getUnit()%></td>
-				<td><%=model.getTotalprice()%></td>
-				<td><%=model.getBillDate()%></td>
-				<%
-				}
-				%>
-
-
-
+           <c:forEach items="${requestScope.billingList}" var="billingList">
+                
+			<tr> 
+			
+			<td>${billingList.bloodType}</td>
+					<td>${billingList.seeker.firstName}</td>
+					<td>${billingList.seeker.phoneNumber}</td>
+					<td>${billingList.unit}</td>
+					<td>${billingList.totalprice}</td>
+					<td>${billingList.billDate}</td>
 			</tr>
+			</c:forEach>
+			
 		</table>
 
 		<div class="backBtn">
-			<a href="ShowbillingAdmin.jsp">back</a>
+			<a href="ShowBillingAdminServlet">back</a>
 		</div>
 	</div>
 

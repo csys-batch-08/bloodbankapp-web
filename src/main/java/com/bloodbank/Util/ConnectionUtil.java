@@ -3,6 +3,7 @@ package com.bloodbank.Util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,16 +16,19 @@ public class ConnectionUtil {
 		return con;
 	}
 	
-public  static void closePreparedStatement(PreparedStatement preparedStatement,Connection con) {
+public  static void closePreparedStatement(PreparedStatement preparedStatement,Connection connection,ResultSet resultSet) {
 	try {
+		if(resultSet!=null) {
+			resultSet.close();
+		}
 	if(preparedStatement!=null) {
 		
 		preparedStatement.close();
-	}if(con!=null) {
-		con.close();
+	}if(connection!=null) {
+		connection.close();
 		
 	}
-			preparedStatement.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,17 +36,20 @@ public  static void closePreparedStatement(PreparedStatement preparedStatement,C
 	
 	}
 
-	 public  static void closeStatement(Statement statement,Connection con) {
+	 public  static void closeStatement(Statement statement,Connection connection,ResultSet resultSet) {
 	try {
+		if(resultSet!=null) {
+			resultSet.close();
+		}
 	if(statement!=null) {
 		
 		statement.close();
 		
-	 }if(con!=null) {
-		con.close();
+	 }if(connection!=null) {
+		 connection.close();
 		
 	}
-			statement.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

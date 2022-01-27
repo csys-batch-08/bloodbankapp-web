@@ -16,60 +16,37 @@ import com.bloodbank.DaoImpl.DonorDAOImpl;
 import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.Donor;
 
-/**
- * Servlet implementation class Login
- */
 @WebServlet("/login")
 public class LoginDonorServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginDonorServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter pw = response.getWriter();
-		// System.out.println("sdfghjkl");
+		PrintWriter writer = response.getWriter();
+		
 		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
-		// Donor donor =new Donor();
-		DonorDAOImpl donorDao = new DonorDAOImpl();
+		HttpSession session = request.getSession();
+		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
 		// System.out.println(aadharcard);
-
-		Donor donor = donorDao.validAadharcardNumber(aadharcard);
-		// System.out.println(donor.getAddress()+"cvbnm");
+		// Donor donor =new Donor();
+		
+		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
+		
+		
 		try {
 
 			if (donor != null) {
+				
 				// System.out.println("dfghjnmk,l");
-				HttpSession session = request.getSession();
+			
 				session.setAttribute("Donor", donor);
 
 				// System.out.println(donor.getAddress()+"longin");
 
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('Login success');");
-				pw.println("location='PhysicalCheck.jsp';");
-				pw.println("</script>");
+				writer.println("<script type=\"text/javascript\">");
+				writer.println("alert('Login success');");
+				writer.println("location='PhysicalCheck.jsp';");
+				writer.println("</script>");
 
 			} else {
 
@@ -78,9 +55,10 @@ public class LoginDonorServlet extends HttpServlet {
 			}
 		} catch (ExeceptionHandle e) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("DonorError", e.DonorMessage());
-			response.sendRedirect("DonorLogin.jsp");
+			
+			request.setAttribute("DonorError", e.DonorMessage());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("DonorLogin.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	}

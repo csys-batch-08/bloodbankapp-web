@@ -4,6 +4,7 @@
 <%@page import="com.bloodbank.DaoImpl.BloodStackDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,23 +80,14 @@ table, th {
 				<th><strong>PRICE</strong></th>
 
 			</tr>
-			<%
-			BloodStackDAOlmpl Dao = new BloodStackDAOlmpl();
-
-			BloodStack stack = null;
-			List<BloodStack> stockDetails = Dao.showStack();
-			for (int i = 0; i < stockDetails.size(); i++) {
-				stack = stockDetails.get(i);
-			%>
-			<tr>
-				<td><%=stack.getBloodType()%></td>
-				<td><%=stack.getQuantity()%></td>
-				<td><%=stack.getPrice()%></td>
-			</tr>
-			<%
-			}
-			%>
-
+			<c:forEach items="${requestScope.stockList}" var="stockList">
+		<tr>
+			<td>${stockList.bloodType}</td>
+			<td>${stockList.bloodType}</td>
+			<td>${stockList.price}</td>
+		</tr>
+</c:forEach>
+			
 		</table>
 
 		<div class="backBtn">

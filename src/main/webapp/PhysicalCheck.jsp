@@ -127,9 +127,10 @@ p {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
+			
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="index.jsp">Home</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
+		
 		</ul>
 	</nav>
 
@@ -139,7 +140,7 @@ p {
 		<div class="cardContent">
 
 			<form action="CheckDonorServlet" style="text-align: center;"
-				method="post">
+				>
 
 
 				<h1>CHECK-UP</h1>

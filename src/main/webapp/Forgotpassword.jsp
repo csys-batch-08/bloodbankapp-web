@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -135,7 +136,7 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="Forgotpassword" method="post">
+			<form action="Forgotpassword">
 				<h1 style="text-align: center;">Forgot Password</h1>
 
 
@@ -171,34 +172,16 @@ p {
 				</div>
 
 
-				<%
-				String error = (String) session.getAttribute("PasswordError");
-				if (error != null) {
-				%>
-
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("PasswordError", null);
-				%>
-				<%
-				}
-				%>
+				
+<c:if test="${requestScope.PasswordError!=null }">
+				<p class="text-primary">${PasswordError}</p>
+				</c:if>
 
 
-				<%
-				String error1 = (String) session.getAttribute("numbererror");
-				if (error1 != null) {
-				%>
-
-				<p class="text-primary">
-					<%=error1%></p>
-				<%
-				session.setAttribute("numbererror", null);
-				%>
-				<%
-				}
-				%>
+				
+<c:if test="${requestScope.numbererror!=null }">
+				<p class="text-primary">${numbererror}</p>
+				</c:if>
 
 
 			</form>

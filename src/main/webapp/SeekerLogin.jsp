@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,7 +135,7 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="SeekerLoginServlet" method="post"
+			<form action="SeekerLoginServlet"
 				style="text-align: center;">
 
 
@@ -163,25 +164,12 @@ p {
 					</button>
 
 				</div>
+				
+              <c:if test="${requestScope.SeekerError!=null }">
+				<p class="text-primary">${SeekerError}</p>
+				</c:if>
 
-
-
-
-				<%
-				String error = (String) session.getAttribute("SeekerError");
-				if (error != null) {
-				%>
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("SeekerError", null);
-				%>
-
-
-				<%
-				}
-				%>
-
+								
 
 
 			</form>

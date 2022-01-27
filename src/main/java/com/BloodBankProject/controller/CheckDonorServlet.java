@@ -17,36 +17,10 @@ import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.Donor;
 
-/**
- * Servlet implementation class CheckDonorServlet
- */
 @WebServlet("/CheckDonorServlet")
 public class CheckDonorServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public CheckDonorServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int height = Integer.parseInt(request.getParameter("Height"));
 		int weight = Integer.parseInt(request.getParameter("weight"));
@@ -54,7 +28,7 @@ public class CheckDonorServlet extends HttpServlet {
 		// String value=request.getParameter("health");
 		int pressure = Integer.parseInt(request.getParameter("pressure"));
 		int pluse = Integer.parseInt(request.getParameter("pulse"));
-		PrintWriter pw = response.getWriter();
+		PrintWriter  writer = response.getWriter();
 
 		if (temp <= 100 && temp >= 80) {
 
@@ -64,10 +38,10 @@ public class CheckDonorServlet extends HttpServlet {
 
 					// PrintWriter pw=response.getWriter();
 
-					pw.println("<script type=\"text/javascript\">");
-					pw.println("alert('you are eligible to blood donate');");
-					pw.println("location='BookingIndex.jsp';");
-					pw.println("</script>");
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('you are eligible to blood donate');");
+					writer.println("location='BookingIndex.jsp';");
+					writer.println("</script>");
 
 					// response.sendRedirect("BookingIndex.jsp");
 

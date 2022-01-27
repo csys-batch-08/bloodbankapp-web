@@ -16,27 +16,27 @@ import com.bloodbank.model.SeekerDetails;
 
 public class RequestDAOlmpl implements RequestDAO {
 
-	public int insertRequest(RequestModel request) {
+	public int insertRequest(RequestModel  requestModel) {
 		int returnNumber = 0;
 		
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		String query = "insert into request_details (hospital_name,blood_type,unit,blood_collector_name,phone_number,aadharcard_number,request_date,status) values(?,?,?,?,?,?,?,?)";
 		// String commit="commit";
 
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			// System.out.println( new java.sql.Date( request.getRequestDate().getTime()));
-			 preparedStatement = con.prepareStatement(query);
-			preparedStatement.setString(1, request.getHospitalName());
-			preparedStatement.setString(2, request.getBloodType());
-			preparedStatement.setInt(3, request.getUnit());
-			preparedStatement.setString(4, request.getBloodCollectorName());
-			preparedStatement.setLong(5, request.getPhoneNumber());
-			preparedStatement.setLong(6, request.getAadharcard());
-			preparedStatement.setDate(7, new java.sql.Date(request.getRequestDate().getTime()));
-			preparedStatement.setString(8, request.getStatus());
+			 preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, requestModel.getHospitalName());
+			preparedStatement.setString(2, requestModel.getBloodType());
+			preparedStatement.setInt(3, requestModel.getUnit());
+			preparedStatement.setString(4, requestModel.getBloodCollectorName());
+			preparedStatement.setLong(5, requestModel.getPhoneNumber());
+			preparedStatement.setLong(6, requestModel.getAadharcard());
+			preparedStatement.setDate(7, new java.sql.Date(requestModel.getRequestDate().getTime()));
+			preparedStatement.setString(8, requestModel.getStatus());
 			returnNumber = preparedStatement.executeUpdate();
 			// pstmt.executeQuery(commit);
 
@@ -48,7 +48,7 @@ public class RequestDAOlmpl implements RequestDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 
 		return returnNumber;
@@ -56,19 +56,22 @@ public class RequestDAOlmpl implements RequestDAO {
 	}
 
 	public int deleteRequest(Long aadharcardNumber) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int tempNumber = 0;
-		Connection con=null;
-		Statement statement=null;
+		Connection connection=null;
+	PreparedStatement preparedStatement=null;
 		// System.out.println(aadharcard);
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String commit = "commit";
 			
-			String query = "delete from request_details where aadharcard_number =" + aadharcardNumber;
-			 statement = con.createStatement();
-			tempNumber = statement.executeUpdate(query);
-			statement.executeQuery(commit);
+			String query = "delete from request_details where aadharcard_number =? " ;
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setLong(1, aadharcardNumber);
+			
+			tempNumber = preparedStatement.executeUpdate();
+			
+			preparedStatement.executeQuery(commit);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -78,7 +81,8 @@ public class RequestDAOlmpl implements RequestDAO {
 			e.printStackTrace();
 		}
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 		}
 
 		return tempNumber;
@@ -86,18 +90,20 @@ public class RequestDAOlmpl implements RequestDAO {
 	}
 
 	public String StatusCheck(Long aadharcardNumber) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		String status = null;
-		Connection con=null;
-		Statement statement=null;
+		Connection connection=null;
+		ResultSet resultSet=null;
+		PreparedStatement preparedStatement=null;
 		
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			// String commit="commit";
-			String query = "select status from  request_details where aadharcard_number =" + aadharcardNumber;
+			String query = "select status from  request_details where aadharcard_number =?" ;
 			
-			 statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setLong(1, aadharcardNumber);
+		   resultSet = preparedStatement.executeQuery();
 
 			// stmt.executeQuery(commit);
 			while (resultSet.next()) {
@@ -115,7 +121,8 @@ public class RequestDAOlmpl implements RequestDAO {
 		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
+			
 		}
 		return status;
 
@@ -123,20 +130,21 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	public List<RequestModel> ShowRequest() {
 		List<RequestModel> requestList = new ArrayList<RequestModel>();
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		Statement statement=null;
+		ResultSet resultSet=null;
 		try {
-			 con = connection.getConnection();
-			String query = "select HOSPITAL_NAME,BLOOD_TYPE,UNIT,BLOOD_COLLECTOR_NAME,PHONE_NUMBER,AADHARCARD_NUMBER,REQUEST_DATE,STATUS	 from request_details order by request_id desc";
-			 statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			connection = connectionUtil.getConnection();
+			String query = "select HOSPITAL_NAME,BLOOD_TYPE,UNIT,BLOOD_COLLECTOR_NAME,PHONE_NUMBER,AADHARCARD_NUMBER,REQUEST_DATE,STATUS from request_details order by request_id desc";
+			 statement = connection.createStatement();
+			 resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
 
-				RequestModel request = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+				RequestModel requestModel = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
 						resultSet.getLong(5), resultSet.getLong(6), resultSet.getDate(7), resultSet.getString(8));
-				requestList.add(request);
+				requestList.add(requestModel);
 
 			}
 
@@ -149,28 +157,29 @@ public class RequestDAOlmpl implements RequestDAO {
 		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
 		}
 		return requestList;
 	}
 
 	public List<RequestModel> ShowRequestSeeker(Long phoneNumber) {
 		List<RequestModel> requestList = new ArrayList<RequestModel>();
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
+		ResultSet resultSet=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select HOSPITAL_NAME,BLOOD_TYPE,UNIT,BLOOD_COLLECTOR_NAME,PHONE_NUMBER,AADHARCARD_NUMBER,REQUEST_DATE,STATUS from request_details where PHONE_NUMBER =?";
-			 preparedStatement=con.prepareStatement(query);
+			 preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setLong(1, phoneNumber);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 
-				RequestModel request = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+				RequestModel requestModel = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
 						resultSet.getLong(5), resultSet.getLong(6), resultSet.getDate(7), resultSet.getString(8));
-				requestList.add(request);
+				requestList.add(requestModel);
 
 
 				
@@ -185,26 +194,27 @@ public class RequestDAOlmpl implements RequestDAO {
 			e.printStackTrace();
 		}
        finally {
-    	   ConnectionUtil.closePreparedStatement(preparedStatement, con);
+    	   ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
        }
 		return requestList;
 	}
 
 	public RequestModel RequestObject(Long phoneNumber) {
-		RequestModel request = null;
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		RequestModel requestModel = null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
+		ResultSet resultSet=null;
 		PreparedStatement preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select HOSPITAL_NAME,BLOOD_TYPE,UNIT,BLOOD_COLLECTOR_NAME,PHONE_NUMBER,AADHARCARD_NUMBER,REQUEST_DATE,STATUS from request_details where PHONE_NUMBER =?" ;
-		 preparedStatement=con.prepareStatement(query);
+		 preparedStatement=connection.prepareStatement(query);
 		preparedStatement.setLong(1, phoneNumber);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 
-				request = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+				requestModel = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
 						resultSet.getLong(5), resultSet.getLong(6), resultSet.getDate(7), resultSet.getString(8));
 
 			}
@@ -218,23 +228,24 @@ public class RequestDAOlmpl implements RequestDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
-		return request;
+		return requestModel;
 	}
 
 	public Long AadharcardValid(Long aadharcardNumber) {
-		ConnectionUtil connection = new ConnectionUtil();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Long tempNumber = null;
-		Connection con =null;
+		ResultSet resultSet=null;
+		Connection connection =null;
 		PreparedStatement  preparedStatement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			// String commit="commit";
 			String query = "select AADHARCARD_NUMBER from request_details where aadharcard_number =?";
-			  preparedStatement=con.prepareStatement(query);
-			preparedStatement.setLong(1, aadharcardNumber);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			  preparedStatement=connection.prepareStatement(query);
+			 preparedStatement.setLong(1, aadharcardNumber);
+			 resultSet = preparedStatement.executeQuery();
 
 			// stmt.executeQuery(commit);
 			while (resultSet.next()) {
@@ -251,7 +262,7 @@ public class RequestDAOlmpl implements RequestDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 		return tempNumber;
 
@@ -259,20 +270,21 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	public List<RequestModel> RequestUpdateAndDelete() {
 		List<RequestModel> requestList = new ArrayList<RequestModel>();
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
+		ResultSet resultSet=null;
 		Statement statement=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select HOSPITAL_NAME,BLOOD_TYPE,UNIT,BLOOD_COLLECTOR_NAME,PHONE_NUMBER,AADHARCARD_NUMBER,REQUEST_DATE,STATUS from request_details where status='pending' order by request_id desc";
-			 statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+			 statement = connection.createStatement();
+			 resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
 
-				RequestModel request = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
+				RequestModel requestModel = new RequestModel(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4),
 						resultSet.getLong(5), resultSet.getLong(6), resultSet.getDate(7), resultSet.getString(8));
-				requestList.add(request);
+				requestList.add(requestModel);
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -284,8 +296,42 @@ public class RequestDAOlmpl implements RequestDAO {
 		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, con);
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
 		}
 		return requestList;
 	}
+	public int RequestUpdate(RequestModel  requestModel) {
+		int returnNumber = 0;
+		
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		String query = "update   request_details set status='approved' where aadharcard_number=? and BLOOD_TYPE=?";
+		// String commit="commit";
+
+		try {
+			connection = connectionUtil.getConnection();
+			// System.out.println( new java.sql.Date( request.getRequestDate().getTime()));
+			 preparedStatement = connection.prepareStatement(query);		
+			preparedStatement.setLong(1, requestModel.getAadharcard());
+			preparedStatement.setString(2, requestModel.getBloodType());
+			returnNumber = preparedStatement.executeUpdate();
+			// pstmt.executeQuery(commit);
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
+		}
+
+		return returnNumber;
+
+	}
+
+	
 }

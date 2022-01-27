@@ -10,50 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class DonorLogoutServlet
- */
 @WebServlet("/DonorLogoutServlet")
 public class DonorLogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public DonorLogoutServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	  
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		HttpSession hpt = request.getSession();
-		hpt.setAttribute("Donor", null);
-		hpt.setAttribute("currentModel", null);
+		HttpSession session = request.getSession();
+		session.setAttribute("Donor", null);
+		session.setAttribute("currentModel", null);
 
-		PrintWriter pw = response.getWriter();
+		PrintWriter writer = response.getWriter();
 
-		pw.println("<script type=\"text/javascript\">");
-		pw.println("alert('Logout success');");
-		pw.println("location='index.jsp';");
-		pw.println("</script>");
+		writer.println("<script type=\"text/javascript\">");
+		writer.println("alert('Logout success');");
+		writer.println("location='index.jsp';");
+		writer.println("</script>");
 		// response.sendRedirect("index.jsp");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
 
 }

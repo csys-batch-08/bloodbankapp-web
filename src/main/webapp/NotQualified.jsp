@@ -14,7 +14,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
+	
+<link rel="stylesheet" type="text/css" href="css/Style.css">
 <style type="text/css">
 #not {
 	background-color: tomato;
@@ -39,16 +40,29 @@
 .bodycontent p {
 	font-family: cursive;
 }
+nav.header {
+	background: #160101;
+}
+
 </style>
 </head>
 <body>
+
+<nav class="header seakerindex">
+		<h1 style="text-align: left;">BLOOD BANK</h1>
+		<ul>
+			
+			<li><a href="SeekerIndex.jsp">Seeker</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
+		</ul>
+	</nav>
 	<div class="d-flex bodycontent align-items-center">
 		<div class="text-center">
 			<p>The donor must be fit and healthy, and should not be
 				suffering from transmittable diseases.</p>
 
 
-			<p>Age and weight- Between 18–65 years old and should weigh a
+			<p>Age and weight- Between 18 and 65 years old and should weigh a
 				minimum of 50 kg</p>
 
 			<p>Pulse rate- Between 50 and 100 without irregularities.</p>

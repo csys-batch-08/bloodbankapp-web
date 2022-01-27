@@ -4,6 +4,7 @@
 <%@page import="com.bloodbank.model.Donor"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,28 +95,18 @@ tbody {
 				<th><strong>BLOOD COLLECT CHOICE</strong></th>
 
 			</tr>
-
-			<%
-			Donor donor = (Donor) session.getAttribute("Donor");
-			BookingDAOlmpl Dao = new BookingDAOlmpl();
-
-			List<BookingModel> bookingList = Dao.ShowBookingDonor(donor);
-
-			for (int i = 0; i < bookingList.size(); i++) {
-
-				BookingModel booking = bookingList.get(i);
-			%>
+			<c:forEach items="${requestScope.bookingList }" var="List">
 			<tr>
-				<td><%=booking.getDonor().getAadharcard()%></td>
-				<td><%=booking.getAddress()%></td>
-				<td><%=booking.getAppdate()%></td>
-				<td><%=booking.getBloodType()%></td>
-				<td><%=booking.getBloodCollectChoice()%></td>
-
+			 <td>${List.donor.aadharcard }</td>
+               <td>${List.address }</td>
+               <td>${List.appdate }</td>
+               <td>${List.bloodType }</td>
+               <td>${List.bloodCollectChoice }</td>
+			
+			
 			</tr>
-			<%
-			}
-			%>
+</c:forEach>
+			
 		</table>
 		<br>
 		<br>

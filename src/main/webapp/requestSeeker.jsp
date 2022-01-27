@@ -137,13 +137,14 @@ p {
 		<ul>
 			<li><a href="DonorIndex.jsp">Donor</a></li>
 
-			<li><a href="LogoutSeeker.jsp">Logout</a></li>
+			<li><a href="SeekerLogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="loginForm">
+	
 		<div class="cardContent">
 
-			<form action="SeekerRequestServlet" method="post">
+			<form action="SeekerRequestServlet" >
 				<h1>Request</h1>
 				<div class="formcontrol">
 
@@ -206,28 +207,13 @@ p {
 
 
 					<button type="reset">Reset</button>
-				</div>
-				<%
-				String error = (String) session.getAttribute("Aadharcard");
-
-				if (error != null) {
-				%>
-
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("Aadharcard", null);
-				%>
-
-				<%
-				}
-				%>
+				</div>			
 			
 		</div>
 
 		</form>
 	</div>
-	</div>
+	
 </body>
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,7 +122,7 @@ body {
 
 
 
-			<form action="AdminController" method="post"
+			<form action="AdminController" 
 				style="text-align: center;">
 
 				<h1>Admin login</h1>
@@ -141,21 +142,17 @@ body {
 					&nbsp; <input type="reset" value="reset">
 
 				</div>
-				<%
-				String error = (String) session.getAttribute("error");
-				if (error != null) {
-				%>
+				
+				<c:if test="${requestScope.error!=null }">
+				<p class="text-primary">${error}</p>
+				</c:if>
+				
+				
 
-				<p class="text-primary">
-					<%=error%></p>
-				<%
-				session.setAttribute("error", null);
-				%>
+			
+			
+				
 
-
-				<%
-				}
-				%>
 			</form>
 		</div>
 	</div>

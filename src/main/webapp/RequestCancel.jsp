@@ -75,6 +75,19 @@ nav.header {
 	background: #160101;
 	width: 100%;
 }
+.backBtn {
+    color: white;
+    text-decoration: none;
+    background: black;
+   
+    border-radius: 3px;
+    float: right;
+    margin-top: 2px;
+    font-size: 16px;
+    padding: 10px 22px;
+    margin-right: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -85,8 +98,8 @@ nav.header {
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="index.jsp">Home</a></li>
+			<li><a href="SeekerLogoutServlet">Logout</a></li>
+			
 		</ul>
 	</nav>
 
@@ -94,7 +107,7 @@ nav.header {
 		<div class="col-sm-4"></div>
 		<div class="bookinner col-sm-4">
 
-			<form action="SeekerRequestDelete" method="post">
+			<form action="SeekerRequestDelete" >
 
 
 				<h2>REQUEST CANCEL</h2>
@@ -104,7 +117,10 @@ nav.header {
 				</div>
 				<div class="submit">
 					<input type="submit" value="cancel">
+					
+					<a class="backBtn" href="ShowRequestSeekerServlet">Back</a>
 				</div>
+				
 			</form>
 
 

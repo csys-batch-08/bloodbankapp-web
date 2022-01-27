@@ -9,15 +9,17 @@ public interface RequestDAO {
 	
 	public int insertRequest(RequestModel request);
 	
-	public int deleteRequest(Long aadharcard);
+	public int deleteRequest(Long aadharcardNumber);
 	
 	public List<RequestModel> ShowRequest();
+	
 	public String StatusCheck(Long aadharcard);
 	
 	public List<RequestModel> ShowRequestSeeker(Long phoneNumber);
 	
 	public RequestModel RequestObject(Long phoneNumber);
 	
+	public int RequestUpdate(RequestModel  requestModel);
 	
 	public Long AadharcardValid(Long aadharcard);
 	

@@ -10,6 +10,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 a {
 	text-decoration: none
@@ -126,7 +127,7 @@ p {
 
 
 
-			<form action="Register" method="post">
+			<form action="Register">
 				<h1>Register</h1>
 				<div class="formcontrol">
 
@@ -180,19 +181,10 @@ p {
 						<option value="bombay">bombay</option>
 					</datalist>
 
-					<%
-					String error = (String) session.getAttribute("aadharcardNumber");
-					if (error != null) {
-					%>
-
-					<p class="text-primary">
-						<%=error%></p>
-					<%
-					session.setAttribute("aadharcardNumber", null);
-					%>
-					<%
-					}
-					%>
+					
+             <c:if test="${requestScope.aadharcardNumber!=null }">
+				<p class="text-primary">${aadharcardNumber}</p>
+				</c:if>
 
 				</div>
 				<div class="formbtn">

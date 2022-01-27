@@ -22,26 +22,31 @@ import com.bloodbank.model.SeekerDetails;
 
 public class BillingDAOlmpl implements BillingDAO {
 
-	public int insertBilling(BillingModel bill) {
+	public int insertBilling(BillingModel  billingModel) {
 		int returnNumber = 0;
 
-		ConnectionUtil connection = new ConnectionUtil();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		Connection connection=null;
 		PreparedStatement  preparedStatement=null;
 		try {
-			RequestDAOlmpl requestDao = new RequestDAOlmpl();
-			RequestModel model = requestDao.RequestObject(bill.getSeeker().getPhoneNumber());
+			
+//			RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
+//			RequestModel requestModel = requestDAOlmpl.RequestObject(billingModel.getSeeker().getPhoneNumber());
 
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "insert into billing (blood_type,seeker_id,quantity,price) values(?,?,?,?)";
 			String commit = "commit";
-			SeekerDAOlmpl seeker = new SeekerDAOlmpl();
-			int seekerId = seeker.seekerIdFind(bill.getSeeker());
-			  preparedStatement = con.prepareStatement(query);
-			preparedStatement.setString(1, bill.getBloodType());
+			
+			SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
+			int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
+			
+			
+			  preparedStatement = connection.prepareStatement(query);
+			  
+			preparedStatement.setString(1, billingModel.getBloodType());
 			preparedStatement.setInt(2, seekerId);
-			preparedStatement.setInt(3, bill.getUnit());
-			preparedStatement.setDouble(4, bill.getTotalprice());
+			preparedStatement.setInt(3, billingModel.getUnit());
+			preparedStatement.setDouble(4, billingModel.getTotalprice());
 			returnNumber = preparedStatement.executeUpdate();
 			preparedStatement.executeQuery(commit);
 
@@ -55,36 +60,37 @@ public class BillingDAOlmpl implements BillingDAO {
 
 		
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
 		}
 		return returnNumber;
 
 	}
 
-	public List<BillingModel> biilingShow(BillingModel bill) {
+	public List<BillingModel> biilingShow(BillingModel  billingModel) {
 
 		List<BillingModel> billingList = new ArrayList<BillingModel>();
 
-		ConnectionUtil connection = new ConnectionUtil();
-		SeekerDAOlmpl seekerDao = new SeekerDAOlmpl();
-		Connection con=null;
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
+		Connection connection=null;
+		ResultSet resultSet=null;
 		PreparedStatement preparedStatement=null;
-		int seekerId = seekerDao.seekerIdFind(bill.getSeeker());
+		int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
 		try {
-		     con = connection.getConnection();
+		    connection = connectionUtil.getConnection();
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE  from billing where SEEKER_ID=? order by bill_id desc";
-		     preparedStatement = con.prepareStatement(query);
+		     preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, seekerId);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				SeekerDetails seeker = null;
-				seeker = seekerDao.FindSeekerId(resultSet.getInt(3));
+				SeekerDetails seekerDetails = null;
+				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));
 
 //				RequestDAOlmpl requestDao = new RequestDAOlmpl();
 //				RequestModel model = requestDao.RequestObject(bill.getSeeker().getPhoneNumber());
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seeker, resultSet.getInt(3), resultSet.getInt(4),
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
 						resultSet.getDate(5).toLocalDate());
 				
 				billingList.add(billing);
@@ -99,7 +105,7 @@ public class BillingDAOlmpl implements BillingDAO {
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, con);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
 		}
 		return billingList;
 	}
@@ -108,25 +114,25 @@ public class BillingDAOlmpl implements BillingDAO {
 
 		List<BillingModel> billingList = new ArrayList<BillingModel>();
 
-		ConnectionUtil connection = new ConnectionUtil();
-		SeekerDAOlmpl seekerDao = new SeekerDAOlmpl();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		
-		Connection con=null;
+		Connection connection=null;
 		Statement  statement=null;
+		ResultSet resultSet=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing order by bill_id desc ";
-			  statement = con.createStatement();
+			  statement = connection.createStatement();
 
-			ResultSet resultSet = statement.executeQuery(query);
+			 resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 
-				SeekerDetails seeker = null;
-				seeker = seekerDao.FindSeekerId(resultSet.getInt(3));
-				RequestDAOlmpl requestDao = new RequestDAOlmpl();
-				RequestModel model = requestDao.RequestObject(seeker.getPhoneNumber());
+				SeekerDetails seekerDetails = null;
+				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));
+				
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seeker, resultSet.getInt(3), resultSet.getInt(4),
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
 						resultSet.getDate(5).toLocalDate());
 				billingList.add(billing);
 			}
@@ -140,7 +146,7 @@ public class BillingDAOlmpl implements BillingDAO {
 		}
       finally {
     	  
-    	  ConnectionUtil.closeStatement(statement, con);
+    	  ConnectionUtil.closeStatement(statement, connection,resultSet);
       }
 		return billingList;
 	}
@@ -151,27 +157,28 @@ public class BillingDAOlmpl implements BillingDAO {
 
 		// SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyy");
 
-		ConnectionUtil connection = new ConnectionUtil();
-		SeekerDAOlmpl seekerDao = new SeekerDAOlmpl();
+		ConnectionUtil connectionUtil = new ConnectionUtil();
+		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		PreparedStatement  preparedStatement=null;
-		Connection con=null;
+		Connection connection=null;
+		SeekerDetails seekerDetails = null;
+		ResultSet resultSet=null;
 		try {
-			 con = connection.getConnection();
+			connection = connectionUtil.getConnection();
 			// String query="select * from billing where
 			// TO_CHAR(billing_date=?,'YYYY-MM-DD') between TO_CHAR(SYSDATE,'YYYY-MM-DD')";
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing where ?<=billing_date order by bill_id desc";
-			  preparedStatement = con.prepareStatement(query);
+			  preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setDate(1, java.sql.Date.valueOf(date));
-			ResultSet resultSet = preparedStatement.executeQuery();
+			 resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				SeekerDetails seeker = null;
-				seeker = seekerDao.FindSeekerId(resultSet.getInt(3));
-				RequestDAOlmpl requestDao = new RequestDAOlmpl();
-				RequestModel model = requestDao.RequestObject(seeker.getPhoneNumber());
+				
+				
+				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));				
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seeker, resultSet.getInt(3), resultSet.getInt(4),
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
 						resultSet.getDate(5).toLocalDate());
 				billingList.add(billing);
 			}
@@ -185,7 +192,7 @@ public class BillingDAOlmpl implements BillingDAO {
 		}
         finally {
         	
-        	ConnectionUtil.closePreparedStatement(preparedStatement, con);
+        	ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
         }
 		return billingList;
 	}

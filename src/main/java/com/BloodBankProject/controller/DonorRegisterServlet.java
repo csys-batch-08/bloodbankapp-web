@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,42 +18,16 @@ import com.bloodbank.DaoImpl.DonorDAOImpl;
 import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.Donor;
 
-/**
- * Servlet implementation class Register
- */
 @WebServlet("/Register")
 public class DonorRegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public DonorRegisterServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastName");
-		// String email = request.getParameter("email");
+		
 		String address = request.getParameter("address");
 		Long phoneNumber = Long.parseLong(request.getParameter("number"));
 		Long aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
@@ -65,23 +40,25 @@ public class DonorRegisterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		DonorDAOImpl donorDao = new DonorDAOImpl();
-		Donor donor1 = donorDao.validAadharcardNumber(aadharcard);
+		
+		PrintWriter writer = response.getWriter();
+		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
+		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
+		
 		try {
-			if (donor1 == null) {
+			if (donor == null) {
 
-				Donor donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
+			 donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
 
-				int check = donorDao.insertDonor(donor);
+				
 
-				if (check > 0) {
+				if (donorDAOImpl.insertDonor(donor) > 0) {
 
-					PrintWriter pw = response.getWriter();
-					pw.println("<script type=\"text/javascript\">");
-					pw.println("alert('Register success');");
-					pw.println("location='DonorLogin.jsp';");
-					pw.println("</script>");
+					
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('Register success');");
+					writer.println("location='DonorLogin.jsp';");
+					writer.println("</script>");
 					// response.sendRedirect("DonorLogin.jsp");
 
 				}
@@ -94,10 +71,12 @@ public class DonorRegisterServlet extends HttpServlet {
 
 		} catch (ExeceptionHandle e) {
 
-			HttpSession session = request.getSession();
-			session.setAttribute("aadharcardNumber", e.AadharcardNumber());
+		
+			request.setAttribute("aadharcardNumber", e.AadharcardNumber());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("DonorRegister.jsp");
+			dispatcher.forward(request, response);
 
-			response.sendRedirect("DonorRegister.jsp");
+			
 		}
 
 	}

@@ -93,9 +93,9 @@ body {
 		<div class="content">
 
 			<h1 style="text-align: center;">Admin Work</h1>
-			<a href="ShowStock.jsp"> ShowStock</a> <a href="ShowbillingAdmin.jsp">
-				ShowBilling</a> <a href="ShowRequest.jsp"> ShowRequest </a> <a
-				href="AdminShowBooking.jsp">Booking</a>
+			<a href="ShowStakServlet"> ShowStock</a> <a href="ShowBillingAdminServlet">
+				ShowBilling</a> <a href="AdminShowRequestServelt"> ShowRequest </a> <a
+				href="AdminShowBookingServlet">Booking</a>
 		</div>
 		<div class="backBtn">
 			<a href="index.jsp">back</a>

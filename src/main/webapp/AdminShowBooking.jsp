@@ -4,6 +4,7 @@
 <%@page import="com.bloodbank.DaoImpl.BookingDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,30 +94,23 @@ tbody {
 				<th><strong>BLOOD COLLECT CHOICE</strong></th>
 
 			</tr>
-
-			<%
-			BookingDAOlmpl Dao = new BookingDAOlmpl();
-
-			List<BookingModel> bookingList = Dao.ShowBookingAdmin();
-
-			for (int i = 0; i < bookingList.size(); i++) {
-
-				BookingModel booking = bookingList.get(i);
-			%>
-			<tr>
-				<td><%=booking.getDonor().getAadharcard()%></td>
-				<td><%=booking.getAddress()%></td>
-				<td><%=booking.getAppdate()%></td>
-				<td><%=booking.getBloodType()%></td>
-				<td><%=booking.getBloodCollectChoice()%></td>
-
-			</tr>
-			<%
-			}
-			%>
+			<c:forEach items="${requestScope.bookingList }" var="List">
+                 <tr>
+                 <td>${List.donor.aadharcard }</td>
+               <td>${List.address }</td>
+               <td>${List.address }</td>
+               <td>${List.bloodType }</td>
+               <td>${List.bloodCollectChoice }</td>
+                 
+                 
+                 
+                 </tr>
+                 
+                 </c:forEach>
+			
 		</table>
 		<div class="backBtn">
-			<a href="AdminShowBookingHome.jsp">Home collection</a> 
+			<a href="AdminShowBookingHomeServlet">Home collection</a> 
 			<a href="AdminWork.jsp">back</a>
 		</div>
 	</div>

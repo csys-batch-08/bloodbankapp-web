@@ -86,14 +86,14 @@ body {
 		<ul>
 			
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="LogoutDonor.jsp">Logout</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="d-flex book align-items-center">
 		<div class="col-sm-5"></div>
 		<div class="bookinner col-sm-3" onmouseover="check()">
 
-			<form action="BloodBookingServlet" method="post">
+			<form action="BloodBookingServlet">
 
 				<h1>BOOKING</h1>
 				<div>
