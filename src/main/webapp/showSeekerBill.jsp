@@ -1,15 +1,14 @@
-<%@page import="com.bloodbank.model.BookingModel"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bloodbank.DaoImpl.BookingDAOlmpl"%>
-<%@page import="com.bloodbank.model.Donor"%>
+<%@page import="com.bloodbank.DaoImpl.BillingDAOlmpl"%>
+<%@page import="com.bloodbank.model.BillingModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Show Booking</title>
+<title>Seeker Bill</title>
 <style type="text/css">
 body {
 	height: 100vh;
@@ -83,40 +82,38 @@ tbody {
 </style>
 </head>
 <body>
-
 	<div class="adminCard">
-		<table class="center">
-
+		<table>
+			
 			<tr>
-				<th><strong>AADHARCARD</strong></th>
-				<th><strong>ADDRESS</strong></th>
-				<th><strong>BOOK DATE</strong></th>
-				<th><strong>BLOOD TYPE</strong></th>
-				<th><strong>BLOOD COLLECT CHOICE</strong></th>
-
+				<th><strong>BLOODTYPE</strong></th>
+				<th><strong>SEEKER NAME</strong></th>
+				<th><strong>SEEKER PHONENUMBER</strong></th>
+				<th><strong>QUANTITY</strong></th>
+				<th><strong>PRICE</strong></th>
+				<th><strong>Date</strong></th>
 			</tr>
-			<c:forEach items="${requestScope.bookingList }" var="List">
+			
+			<c:forEach items="${requestScope.billingList }" var="billingList">
 			<tr>
-			 <td>${List.donor.aadharcard }</td>
-               <td>${List.address }</td>
-               <td>${List.appdate }</td>
-               <td>${List.bloodType }</td>
-               <td>${List.bloodCollectChoice }</td>
+			<td>${billingList.bloodType}</td>
+					<td>${billingList.seeker.firstName}</td>
+					<td>${billingList.seeker.phoneNumber}</td>
+					<td>${billingList.unit}</td>
+					<td>${billingList.totalprice}</td>
+					<td>${billingList.billDate}</td>
 			
 			
 			</tr>
-</c:forEach>
+			</c:forEach>
+			
 			
 		</table>
-		<br>
-		<br>
 
 		<div class="backBtn">
-			<a href="BookingIndex.jsp">back</a>
-		</div>
+			<a href="index.jsp">Back</a>
 
-		</form>
-	</div>
-	</div>
+		</div>
+		</div>
 </body>
 </html>

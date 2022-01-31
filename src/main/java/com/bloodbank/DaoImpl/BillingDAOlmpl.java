@@ -1,6 +1,5 @@
 package com.bloodbank.DaoImpl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,30 +18,25 @@ import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
-
 public class BillingDAOlmpl implements BillingDAO {
 
-	public int insertBilling(BillingModel  billingModel) {
+	public int insertBilling(BillingModel billingModel) {
 		int returnNumber = 0;
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		Connection connection=null;
-		PreparedStatement  preparedStatement=null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
-			
-//			RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
-//			RequestModel requestModel = requestDAOlmpl.RequestObject(billingModel.getSeeker().getPhoneNumber());
 
 			connection = connectionUtil.getConnection();
 			String query = "insert into billing (blood_type,seeker_id,quantity,price) values(?,?,?,?)";
 			String commit = "commit";
-			
+
 			SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 			int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
-			
-			
-			  preparedStatement = connection.prepareStatement(query);
-			  
+
+			preparedStatement = connection.prepareStatement(query);
+
 			preparedStatement.setString(1, billingModel.getBloodType());
 			preparedStatement.setInt(2, seekerId);
 			preparedStatement.setInt(3, billingModel.getUnit());
@@ -51,149 +45,129 @@ public class BillingDAOlmpl implements BillingDAO {
 			preparedStatement.executeQuery(commit);
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException a) {
+
+			a.printStackTrace();
 		}
 
-		
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 		}
 		return returnNumber;
 
 	}
 
-	public List<BillingModel> biilingShow(BillingModel  billingModel) {
+	public List<BillingModel> biilingShow(BillingModel billingModel) {
 
-		List<BillingModel> billingList = new ArrayList<BillingModel>();
+		List<BillingModel> billingList = new ArrayList();
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
-		Connection connection=null;
-		ResultSet resultSet=null;
-		PreparedStatement preparedStatement=null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
 		int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
 		try {
-		    connection = connectionUtil.getConnection();
+			connection = connectionUtil.getConnection();
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE  from billing where SEEKER_ID=? order by bill_id desc";
-		     preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, seekerId);
-			 resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
 				SeekerDetails seekerDetails = null;
-				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
 
-//				RequestDAOlmpl requestDao = new RequestDAOlmpl();
-//				RequestModel model = requestDao.RequestObject(bill.getSeeker().getPhoneNumber());
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
+						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
-						resultSet.getDate(5).toLocalDate());
-				
 				billingList.add(billing);
 			}
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
 
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 		return billingList;
 	}
 
 	public List<BillingModel> biilingShowAdmin() {
 
-		List<BillingModel> billingList = new ArrayList<BillingModel>();
+		List<BillingModel> billingList = new ArrayList();
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
-		
-		Connection connection=null;
-		Statement  statement=null;
-		ResultSet resultSet=null;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing order by bill_id desc ";
-			  statement = connection.createStatement();
+			statement = connection.createStatement();
 
-			 resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 
 				SeekerDetails seekerDetails = null;
-				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));
-				
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
-						resultSet.getDate(5).toLocalDate());
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
+						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
 				billingList.add(billing);
 			}
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} finally {
+
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
 		}
-      finally {
-    	  
-    	  ConnectionUtil.closeStatement(statement, connection,resultSet);
-      }
 		return billingList;
 	}
 
 	public List<BillingModel> biilingShowAdminDate(LocalDate date) {
 
-		List<BillingModel> billingList = new ArrayList<BillingModel>();
-
-		// SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyy");
+		List<BillingModel> billingList = new ArrayList();
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
-		PreparedStatement  preparedStatement=null;
-		Connection connection=null;
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
 		SeekerDetails seekerDetails = null;
-		ResultSet resultSet=null;
+		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			// String query="select * from billing where
-			// TO_CHAR(billing_date=?,'YYYY-MM-DD') between TO_CHAR(SYSDATE,'YYYY-MM-DD')";
 			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing where ?<=billing_date order by bill_id desc";
-			  preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setDate(1, java.sql.Date.valueOf(date));
-			 resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				
-				
-				seekerDetails = seekerDAOlmpl.FindSeekerId(resultSet.getInt(3));				
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3), resultSet.getInt(4),
-						resultSet.getDate(5).toLocalDate());
+				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
+						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
 				billingList.add(billing);
 			}
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		} finally {
+
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
-        finally {
-        	
-        	ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
-        }
 		return billingList;
 	}
 }

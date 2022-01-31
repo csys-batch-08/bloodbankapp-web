@@ -13,24 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.bloodbank.DaoImpl.BookingDAOlmpl;
 import com.bloodbank.model.BookingModel;
 
-/**
- * Servlet implementation class AdminShowBookingHomeServlet
- */
 @WebServlet("/AdminShowBookingHomeServlet")
 public class AdminShowBookingHomeServlet extends HttpServlet {
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
 
-		List<BookingModel> bookingList = bookingDAOlmpl.HomeCollection();
+		List<BookingModel> bookingList = bookingDAOlmpl.homeCollection();
 		request.setAttribute("bookingList", bookingList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("AdminShowBookingHome.jsp");
-        dispatcher.forward(request, response);
-		
-	}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("adminShowBookingHome.jsp");
+		dispatcher.forward(request, response);
 
+	}
 
 }

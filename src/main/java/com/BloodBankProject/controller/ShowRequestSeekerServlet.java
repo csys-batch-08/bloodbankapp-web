@@ -1,6 +1,7 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,18 +19,25 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/ShowRequestSeekerServlet")
 public class ShowRequestSeekerServlet extends HttpServlet {
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
-	
+	   PrintWriter writer=response.getWriter();
 		HttpSession session = request.getSession();
 		SeekerDetails seeker = (SeekerDetails) session.getAttribute("seeker");
-		List<RequestModel> requestList =requestDAOlmpl.ShowRequestSeeker(seeker.getPhoneNumber());
+		List<RequestModel> requestList =requestDAOlmpl.showRequestSeeker(seeker.getPhoneNumber());
+		if(requestList.isEmpty()){
+			writer.println("<script type=\"text/javascript\">");
+			writer.println("alert('there is No request since you are a New comer ');");
+			writer.println("location='bloodBookingProcess.jsp';");
+			writer.println("</script>");
+		}else {
 		request.setAttribute("requestList", requestList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowRequestSeeker.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("showSeekerRequest.jsp");
 		dispatcher.forward(request, response);
-		
+		}
 		
 		
 	}

@@ -119,7 +119,7 @@ table, th {
 			<a href="RequestShowAndDeleteServlet">Request Pending </a>
 		</div>
 		<div class="backBtn">
-			<a href="AdminWork.jsp">Back </a>
+			<a href="adminWork.jsp">Back </a>
 		</div>
 	</div>
 

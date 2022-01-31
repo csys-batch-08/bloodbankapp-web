@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Seeker Login</title>
@@ -125,8 +125,8 @@ p {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
+			<li><a href="donorIndex.jsp">Donor</a></li>
+			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="index.jsp">Home</a></li>
 		</ul>
 	</nav>
@@ -135,7 +135,7 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="SeekerLoginServlet"
+			<form action="SeekerLoginServlet"  method="post" 
 				style="text-align: center;">
 
 
@@ -160,7 +160,7 @@ p {
 					<button>Submit</button>
 
 					<button>
-						<a href="Forgotpassword.jsp">Forgot password</a>
+						<a href="forgotPassword.jsp">Forgot password</a>
 					</button>
 
 				</div>

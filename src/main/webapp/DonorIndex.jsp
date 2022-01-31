@@ -55,8 +55,8 @@ overflow: hidden;
 
 	<nav class="header seakerindex">
 		<ul>
-			<li><a href="DonorLogin.jsp">Login</a></li>
-			<li><a href="DonorRegister.jsp">Register</a></li>
+			<li><a href="donorLogin.jsp">Login</a></li>
+			<li><a href="donorRegister.jsp">Register</a></li>
 		</ul>
 	</nav>
 	

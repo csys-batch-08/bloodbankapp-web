@@ -9,22 +9,20 @@ import com.bloodbank.model.Donor;
 
 public interface BookingDAO {
 
-	public int  booking(BookingModel book);
-	
-	 public int updateBooking(BookingModel book);
-	
-	
-	 public int deleteBooking(Long aadharcard);
-	
-	 public List<BookingModel> HomeCollection();
-	
-	 public LocalDate dateCheck(Donor donor);
-	
-	 public int updateDateForDonor(BookingModel book);
-	 public List<BookingModel> ShowBookingAdmin();
-	
-	 public List<BookingModel> ShowBookingDonor(Donor donor);
-	
-	
-	
+	public int booking(BookingModel book);
+
+	public int updateBooking(BookingModel book);
+
+	public int deleteBooking(Long aadharcard);
+
+	public List<BookingModel> homeCollection();
+
+	public LocalDate dateCheck(Donor donor);
+
+	public int updateDateForDonor(BookingModel book);
+
+	public List<BookingModel> showBookingAdmin();
+
+	public List<BookingModel> showBookingDonor(Donor donor);
+
 }

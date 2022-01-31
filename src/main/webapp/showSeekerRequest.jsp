@@ -1,14 +1,15 @@
+<%@page import="com.bloodbank.model.SeekerDetails"%>
+<%@page import="com.bloodbank.model.RequestModel"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bloodbank.DaoImpl.BillingDAOlmpl"%>
-<%@page import="com.bloodbank.model.BillingModel"%>
+<%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Seeker Bill</title>
+<title>Show Request Seeker</title>
 <style type="text/css">
 body {
 	height: 100vh;
@@ -78,42 +79,55 @@ tbody {
 	margin-top: 10px;
 	font-size: 19px;
 	padding: 5px 20px;
+	
 }
 </style>
 </head>
 <body>
+
+   
+       
 	<div class="adminCard">
+  
+       
+     
 		<table>
-			
+
 			<tr>
-				<th><strong>BLOODTYPE</strong></th>
-				<th><strong>SEEKER NAME</strong></th>
-				<th><strong>SEEKER PHONENUMBER</strong></th>
-				<th><strong>QUANTITY</strong></th>
-				<th><strong>PRICE</strong></th>
-				<th><strong>Date</strong></th>
+				<th>HOSPITAL NAME</th>
+				<th>BLOOD TYPE</th>
+				<th>UNIT</th>
+				<th>BLOOD COLLECTER NAME</th>
+				<th>PHONE NUMBER</th>
+				<th>AADHARCARD NUMBER</th>
+				<th>DATE</th>
+				<th>STATUS</th>
 			</tr>
 			
-			<c:forEach items="${requestScope.billingList }" var="billingList">
-			<tr>
-			<td>${billingList.bloodType}</td>
-					<td>${billingList.seeker.firstName}</td>
-					<td>${billingList.seeker.phoneNumber}</td>
-					<td>${billingList.unit}</td>
-					<td>${billingList.totalprice}</td>
-					<td>${billingList.billDate}</td>
-			
-			
-			</tr>
-			</c:forEach>
-			
-			
+			<c:forEach items="${requestScope.requestList }" var="List">
+              <tr>
+              <td>${List.hospitalName}</td>
+              <td>${List.bloodType}</td>
+              <td>${List.unit}</td>
+              <td>${List.bloodCollectorName}</td>
+              <td>${List.phoneNumber}</td>
+              <td>${List.aadharcard}</td>
+              <td>${List.requestDate}</td>
+              <td>${List.status}</td>       
+              
+            
+              </tr>
+              </c:forEach>
+            
 		</table>
+		<br>
 
 		<div class="backBtn">
-			<a href="index.jsp">Back</a>
-
+			<a href="requestCancel.jsp">REQUEST CANCEL </a>
+		</div>	<div class="backBtn">			
+			<a href="requestIndex.jsp">back</a>
+		
 		</div>
-		</div>
+	</div>
 </body>
 </html>

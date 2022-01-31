@@ -15,22 +15,19 @@ import com.bloodbank.model.RequestModel;
 
 public class BloodStackDAOlmpl implements BloodStackDAO {
 
-
-	public int updateStack(BloodStack  bloodStack) {
+	public int updateStack(BloodStack bloodStack) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int returnNumber = 0;
-		Connection connection =null;
-		PreparedStatement  preparedStatement=null;
-		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
 		try {
 			connection = connectionUtil.getConnection();
 
 			int quantity = checkOfQuantity(bloodStack.getBloodType().toLowerCase());
 
-			// System.out.println(stack.getBloodType()+""+quantity);
-
 			String query = "update blood_stack set quantity=? where blood_type=?";
-		     preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query);
 			String commit = "commit";
 			preparedStatement.setInt(1, quantity + bloodStack.getQuantity());
 			preparedStatement.setString(2, bloodStack.getBloodType());
@@ -40,13 +37,13 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
- 
+
 		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 		}
 		return returnNumber;
 	}
@@ -54,23 +51,18 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 	public List<BloodStack> showStack() {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		BloodStack bloodStack = null;
-		List<BloodStack> stockDetails = new ArrayList<BloodStack>();
-		Connection connection=null;
-		ResultSet resultSet=null;
-	    Statement statement=null;
-		
+		List<BloodStack> stockDetails = new ArrayList();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
 		try {
-			
+
 			String query = "select BLOOD_TYPE,QUANTITY,UNIT_PRICE from blood_stack";
-			try {
-				connection=connectionUtil.getConnection();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			connection = connectionUtil.getConnection();
 			statement = connection.createStatement();
-			// pstmt.setString(1, stack.getBloodType());
-			 resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
 
@@ -80,47 +72,47 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
-		}
-		finally {
-			ConnectionUtil.closeStatement(statement, connection,resultSet);
+		} catch (ClassNotFoundException e1) {
+
+			e1.printStackTrace();
+		} finally {
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
 		}
 		return stockDetails;
 	}
 
-	
 	public int checkOfQuantity(String bloodtype) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		
+
 		int returnNumber = 0;
-		Connection connection =null;
-		PreparedStatement  preparedStatement=null;
-		ResultSet resultSet=null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try {
 
 			connection = connectionUtil.getConnection();
 			String query = "select QUANTITY from  blood_stack where blood_type=?";
-		    preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, bloodtype);
-			 resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
 				returnNumber = resultSet.getInt(1);
 
 			}
 
-			//System.out.println(returnNumber);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
 		}
-		// System.out.println(n+"QUANTITY"+bloodtype);
-		finally{
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
+
+		finally {
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 		return returnNumber;
 	}
@@ -128,13 +120,13 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 	public int updateStackReduce(String bloodType, int unit) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int returnNumber = 0;
-		Connection connection=null;
-		PreparedStatement preparedStatement=null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
 
 			String query = "update blood_stack set quantity=? where blood_type=?";
-			 preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(query);
 			String commit = "commit";
 			int totalUnit = checkOfQuantity(bloodType) - unit;
 			preparedStatement.setInt(1, totalUnit);
@@ -145,105 +137,47 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 
-		
 		finally {
-         ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 		}
 		return returnNumber;
 	}
 
 	public double findPrice(String bloodType) {
 		double returnNumber = 0;
-		ResultSet resultSet=null;
+		ResultSet resultSet = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		Connection connection=null;
-		PreparedStatement preparedStatement=null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
 			String query = "select UNIT_PRICE from blood_stack where blood_type=?";
-			 preparedStatement = connection.prepareStatement(query);
-			//System.out.println(bloodType);
+			preparedStatement = connection.prepareStatement(query);
+
 			preparedStatement.setString(1, bloodType);
-			 resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				//System.out.println(rs.getInt(1));
+
 				returnNumber = resultSet.getDouble(1);
 
 			}
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		} finally {
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
-   finally {
-	   ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
-	   }
 		return returnNumber;
 	}
-
-//	public List<BloodStack> HomeCollection(){
-//		
-//		List<BloodStack>bloodList=new ArrayList<BloodStack>();
-//		ConnectionUtil connection=new ConnectionUtil();
-//		BloodStack stack=null;
-//		String query="select donor_details.first_name,booking.address from donor_details inner join booking on donor_details.adharcard=booking.adharcard\r\n"
-//				+ "where BLOOD_COLLECT_CHOICE='home'";
-//		try {
-//			Connection con=connection.getConnection();
-//			
-//			Statement stmt=con.createStatement();
-//		ResultSet rs= stmt.executeQuery(query);
-//		while(rs.next()) {
-//			
-//			
-//			
-//		}
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		
-//		
-//		return bloodList;
-//		
-//	}
-
-//public BloodStack FindBlood(String type) {
-//	
-//	ConnectionUtil connection=new ConnectionUtil();
-//	try {
-//		Connection con=connection.getConnection();
-//		String query="select * from blood_stack where blood_type=?";
-//		PreparedStatement pstmt=con.prepareStatement(query);
-//		pstmt.setString(1,type );
-//		ResultSet rs=.executeQuery();
-//		
-//		
-//	} catch (ClassNotFoundException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	} catch (SQLException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	
-
-//	return null;
-//	
-//}
 
 }

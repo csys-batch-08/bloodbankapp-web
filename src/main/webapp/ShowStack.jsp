@@ -91,7 +91,7 @@ table, th {
 		</table>
 
 		<div class="backBtn">
-			<a href="AdminWork.jsp">Back </a>
+			<a href="adminWork.jsp">Back </a>
 		</div>
 	</div>
 </body>

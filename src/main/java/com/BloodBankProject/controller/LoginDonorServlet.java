@@ -19,16 +19,16 @@ import com.bloodbank.model.Donor;
 @WebServlet("/login")
 public class LoginDonorServlet extends HttpServlet {
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		PrintWriter writer = response.getWriter();
 		
 		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
 		HttpSession session = request.getSession();
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
-		// System.out.println(aadharcard);
-		// Donor donor =new Donor();
+		
 		
 		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
 		
@@ -37,15 +37,14 @@ public class LoginDonorServlet extends HttpServlet {
 
 			if (donor != null) {
 				
-				// System.out.println("dfghjnmk,l");
+				
 			
 				session.setAttribute("Donor", donor);
 
-				// System.out.println(donor.getAddress()+"longin");
-
+				
 				writer.println("<script type=\"text/javascript\">");
 				writer.println("alert('Login success');");
-				writer.println("location='PhysicalCheck.jsp';");
+				writer.println("location='donorCheckUp.jsp';");
 				writer.println("</script>");
 
 			} else {
@@ -56,8 +55,8 @@ public class LoginDonorServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			
-			request.setAttribute("DonorError", e.DonorMessage());
-			RequestDispatcher dispatcher=request.getRequestDispatcher("DonorLogin.jsp");
+			request.setAttribute("DonorError", e.donorMessage());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("donorLogin.jsp");
 			dispatcher.forward(request, response);
 		}
 

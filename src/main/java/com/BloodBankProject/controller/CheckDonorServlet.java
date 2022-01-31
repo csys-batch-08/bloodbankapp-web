@@ -19,16 +19,28 @@ import com.bloodbank.model.Donor;
 
 @WebServlet("/CheckDonorServlet")
 public class CheckDonorServlet extends HttpServlet {
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int height = Integer.parseInt(request.getParameter("Height"));
-		int weight = Integer.parseInt(request.getParameter("weight"));
-		int temp = Integer.parseInt(request.getParameter("temperature"));
-		// String value=request.getParameter("health");
-		int pressure = Integer.parseInt(request.getParameter("pressure"));
-		int pluse = Integer.parseInt(request.getParameter("pulse"));
-		PrintWriter  writer = response.getWriter();
+		int temp = 0;
+		int pressure = 0;
+		int pluse = 0;
+		int height = 0;
+		int weight = 0;
+		try {
+			height = Integer.parseInt(request.getParameter("Height"));
+			weight = Integer.parseInt(request.getParameter("weight"));
+			temp = Integer.parseInt(request.getParameter("temperature"));
+
+			pressure = Integer.parseInt(request.getParameter("pressure"));
+			pluse = Integer.parseInt(request.getParameter("pulse"));
+		} catch (NumberFormatException e) {
+
+			e.printStackTrace();
+		}
+
+		PrintWriter writer = response.getWriter();
 
 		if (temp <= 100 && temp >= 80) {
 
@@ -36,28 +48,38 @@ public class CheckDonorServlet extends HttpServlet {
 
 				if (pluse <= 100 && pluse >= 50) {
 
-					// PrintWriter pw=response.getWriter();
-
 					writer.println("<script type=\"text/javascript\">");
 					writer.println("alert('you are eligible to blood donate');");
-					writer.println("location='BookingIndex.jsp';");
+					writer.println("location='bloodBookingProcess.jsp';");
 					writer.println("</script>");
 
-					// response.sendRedirect("BookingIndex.jsp");
-
 				} else {
-					// pw.write("you not eligible");
-					response.sendRedirect("NotQualification.jsp");
+
+					try {
+						response.sendRedirect("donorNotQualified.jsp");
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
 				}
 
 			} else {
-				// pw.write("you not eligible");
-				response.sendRedirect("NotQualification.jsp");
+
+				try {
+					response.sendRedirect("donorNotQualified.jsp");
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
 			}
 
 		} else {
-			response.sendRedirect("NotQualified.jsp");
-			// pw.write("you not eligible");
+			try {
+				response.sendRedirect("donorNotQualified.jsp");
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 

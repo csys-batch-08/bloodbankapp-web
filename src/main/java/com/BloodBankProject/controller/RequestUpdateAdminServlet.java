@@ -22,21 +22,22 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/RequestUpdateAdminServlet")
 public class RequestUpdateAdminServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
 		String bloodtype=request.getParameter("bloodtype");
 		RequestDAOlmpl requestModelDao = new RequestDAOlmpl();
-		RequestModel requestModel = requestModelDao.RequestObject(phoneNumber);
+		RequestModel requestModel = requestModelDao.requestObject(phoneNumber);
 		
 		String status = "approved";
 
-		RequestModel requestMoel = new RequestModel(requestModel.getHospitalName(), bloodtype,
+	          requestModel = new RequestModel(requestModel.getHospitalName(), bloodtype,
 				requestModel.getUnit(), requestModel.getBloodCollectorName(), requestModel.getPhoneNumber(),
 				requestModel.getAadharcard(), requestModel.getRequestDate(), status);
 		
         RequestDAOlmpl requestDAOlmpl=new RequestDAOlmpl();
-       requestDAOlmpl.RequestUpdate(requestModel);
+       requestDAOlmpl.requestUpdate(requestModel);
     	
 		BloodStackDAOlmpl stackDAOlmpl = new BloodStackDAOlmpl();
 
@@ -44,9 +45,9 @@ public class RequestUpdateAdminServlet extends HttpServlet {
        
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		
-		SeekerDetails seekerDetails = seekerDAOlmpl.FindSeekerObjectId(phoneNumber);
+		SeekerDetails seekerDetails = seekerDAOlmpl.findSeekerObjectId(phoneNumber);
           
-		BillingModel BillingModel = new BillingModel(requestModel.getBloodType(), seekerDetails, requestModel.getUnit(), unitPrice,
+		BillingModel billingModel = new BillingModel(requestModel.getBloodType(), seekerDetails, requestModel.getUnit(), unitPrice,
 				null);
 
 		
@@ -55,7 +56,7 @@ public class RequestUpdateAdminServlet extends HttpServlet {
 
 	
 
-		if ( billingDAOlmpl.insertBilling(BillingModel) > 0) {
+		if ( billingDAOlmpl.insertBilling(billingModel) > 0) {
 
 		
 

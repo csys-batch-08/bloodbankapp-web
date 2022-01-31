@@ -28,7 +28,8 @@ import com.bloodbank.model.Donor;
 @WebServlet("/BloodBookingServlet")
 public class BloodBookingServlet extends HttpServlet {
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		LocalDate date = null;
@@ -36,139 +37,112 @@ public class BloodBookingServlet extends HttpServlet {
 
 		String choice = request.getParameter("Choice");
 
-		BookingDAOlmpl  bookingDAOlmpl = new BookingDAOlmpl();
-		PrintWriter  writer = response.getWriter();
+		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
+		PrintWriter writer = response.getWriter();
 		try {
 			date = LocalDate.parse(request.getParameter("bookingDate"));
 
-			HttpSession  session = request.getSession();
+			HttpSession session = request.getSession();
 
 			Donor donor = (Donor) session.getAttribute("Donor");
 
-			AdminDAOlmpl   adminDAOlmpl = new AdminDAOlmpl();
-               // check the date for Donor validation
+			AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
+			// check the date for Donor validation
 			LocalDate date1 = bookingDAOlmpl.dateCheck(donor);
 
-			
-                   //check the amount in ADMIN wallet to above 300 to Allowed
-		
-			//Donor once Donated to come next Donate check the last Donating Date to  90day  after  come to allow
+			// check the amount in ADMIN wallet to above 300 to Allowed
 
-			if (date1 != null && date.isAfter(date1) && adminDAOlmpl.CheckWallet() > 300) {
-				
-				
-				
-				//User select by Center Address is Null  On time work this condition
+			// Donor once Donated to come next Donate check the last Donating Date to 90day
+			// after come to allow
+
+			if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {
+
+				// User select by Center Address is Null On time work this condition
 				if (address.isEmpty()) {
 
 					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
-					BookingModel bookingModel  = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
 					session.setAttribute("bookingDate", bookingModel);
 
-					
-
-					if (bookingDAOlmpl.booking(bookingModel)> 0) {
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
 						writer.println("<script type=\"text/javascript\">");
 						writer.println("alert('Booking Successfully');");
 						writer.println("location='BookingProcess.jsp';");
 						writer.println("</script>");
-						
+
 					}
 
 				}
 
 				else {
 
-					//User select by Home  On time work this condition
+					// User select by Home On time work this condition
 
-					BookingModel bookingModel  = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
 					session.setAttribute("bookingDate", bookingModel);
-					
 
 					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
 						writer.println("<script type=\"text/javascript\">");
 						writer.println("alert('Booking Successfully');");
-						writer.println("location='BookingProcess.jsp';");
+						writer.println("location='bloodBookingIndex.jsp';");
 						writer.println("</script>");
-						// response.sendRedirect("");
-						// System.out.println("Hello Peter");
-						// response.sendRedirect("BookingProcess.jsp");
-
+						
 					}
 
 				}
 			}
-			 //check the amount in ADMIN wallet to above 300 to Allowed
-			
-			else if (date1 == null && adminDAOlmpl.CheckWallet() > 300) {
-				
-				//User select by Center Address is Null  On time work this condition
-				
+			// check the amount in ADMIN wallet to above 300 to Allowed
+
+			else if (date1 == null && adminDAOlmpl.checkWallet() > 300) {
+
+				// User select by Center Address is Null On time work this condition
+
 				if (address.isEmpty()) {
 
 					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
 
-					BookingModel  bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
 					session.setAttribute("bookingDate", bookingModel);
 
 					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-						
-
 						writer.println("<script type=\"text/javascript\">");
 						writer.println("alert('Booking Successfully');");
-						writer.println("location='BookingProcess.jsp';");
+						writer.println("location='bloodBookingIndex.jsp';");
 						writer.println("</script>");
-
-						// System.out.println("Hello Peter");
-
-						// response.sendRedirect("BookingProcess.jsp");
 
 					}
 
 				} else {
-					//User select by Home  On time work this condition
+					// User select by Home On time work this condition
 
 					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
 					session.setAttribute("bookingDate", bookingModel);
-					
-					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-						
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
 						writer.println("<script type=\"text/javascript\">");
 						writer.println("alert('Booking Successfully');");
-						writer.println("location='BookingProcess.jsp';");
+						writer.println("location='bloodBookingIndex.jsp';");
 						writer.println("</script>");
-						//System.out.println("Hello Peter 2");
-						// response.sendRedirect("BookingProcess.jsp");
 
 					}
 
 				}
 
-				
-				//User Not Qualified by Blood Donate to Exit
 			} else {
 
-				
-				
-			
-
 				writer.println("<script type=\"text/javascript\">");
-				writer.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
-				writer.println("location='NotQualified.jsp';");
+				writer.println(
+						"alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
+				writer.println("location='donorNotQualified.jsp';");
 				writer.println("</script>");
-				
-				
-				// System.out.println("Joh Wick");
-				// response.sendRedirect("BookingProcess.jsp");
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

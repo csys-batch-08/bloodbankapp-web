@@ -11,13 +11,13 @@ public interface SeekerDAO  {
 	
 	public SeekerDetails seekerObject(String password, Long phoneNumber);
 	
-	public SeekerDetails FindSeekerId(int seekerId);
+	public SeekerDetails findSeekerId(int seekerId);
 	
-	public int ForgotPassword(Long phoneNumber ,String password); 
+	public int forgotPassword(Long phoneNumber ,String password); 
 	
-	public SeekerDetails FindSeekerObjectId(long phoneNumber);
+	public SeekerDetails findSeekerObjectId(long phoneNumber);
 	
-	
+	public Long phoneNumberValid(long phoneNumber);
 	
 	
 	

@@ -17,6 +17,7 @@ import com.bloodbank.model.BloodStack;
 @WebServlet("/ShowStakServlet")
 public class ShowStackServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -29,7 +30,7 @@ public class ShowStackServlet extends HttpServlet {
 		
 		request.setAttribute("stockList", stockDetails);
 		
-		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowStack.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("showStack.jsp");
 		dispatcher.forward(request, response);
 	
 	}

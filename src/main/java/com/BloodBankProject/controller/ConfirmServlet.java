@@ -26,6 +26,7 @@ import com.bloodbank.model.Donor;
 @WebServlet("/ConfirmServlet")
 public class ConfirmServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -43,25 +44,19 @@ public class ConfirmServlet extends HttpServlet {
 		BloodDetailsModel bloodDetails = new BloodDetailsModel(donor, unit, donor.getBloodType(), price);
 		BloodDetailsDAOlmpl  bloodDetailsDAOlmpl = new BloodDetailsDAOlmpl();
 
-		// htp.setAttribute("currentModel", model);
-
 		if (bloodDetailsDAOlmpl.insertBloodDetails(bloodDetails) > 0) {
 
 			BloodStackDAOlmpl bloodStackDAOlmpl = new BloodStackDAOlmpl();
 
-			BloodStack stack = new BloodStack(bloodDetails.getUnit(), bloodDetails.getBloodType(), 0);
+			BloodStack bloodStack = new BloodStack(bloodDetails.getUnit(), bloodDetails.getBloodType(), 0);
 
-			int num = bloodStackDAOlmpl.updateStack(stack);
-
-			if (num > 0) {
+			if (bloodStackDAOlmpl.updateStack(bloodStack) > 0) {
 
 				adminDAOlmpl.updateWallet();
 				
-				BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
-
-				List<BookingModel> bookingList = bookingDAOlmpl.ShowBookingDonor(donor);
-				request.setAttribute("bookingList", bookingList);
-				RequestDispatcher  dispatcher=request.getRequestDispatcher("ShowBooking.jsp");
+				List<BloodDetailsModel> detailsList  = bloodDetailsDAOlmpl.showBloodDetails(donor);
+				request.setAttribute("detailsList", detailsList);
+				RequestDispatcher  dispatcher=request.getRequestDispatcher("showDonorBloodDetails.jsp");
 				dispatcher.forward(request, response);
 				
 

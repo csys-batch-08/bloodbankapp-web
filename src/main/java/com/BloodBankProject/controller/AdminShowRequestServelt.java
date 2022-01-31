@@ -16,15 +16,16 @@ import com.bloodbank.model.RequestModel;
 @WebServlet("/AdminShowRequestServelt")
 public class AdminShowRequestServelt extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
-		List<RequestModel> requestList = requestDAOlmpl.ShowRequest();
+		List<RequestModel> requestList = requestDAOlmpl.showRequest();
 
 		request.setAttribute("requestList", requestList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowRequest.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("showRequestAdmin.jsp");
 		dispatcher.forward(request, response);
 		
 	}

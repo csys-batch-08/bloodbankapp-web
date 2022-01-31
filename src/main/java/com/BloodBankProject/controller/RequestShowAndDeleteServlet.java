@@ -16,15 +16,16 @@ import com.bloodbank.model.RequestModel;
 @WebServlet("/RequestShowAndDeleteServlet")
 public class RequestShowAndDeleteServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 	
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
-		List<RequestModel> requestList = requestDAOlmpl.RequestUpdateAndDelete();
+		List<RequestModel> requestList = requestDAOlmpl.requestUpdateAndDelete();
 		 request.setAttribute("requestList",requestList );
-		RequestDispatcher dispatcher=request.getRequestDispatcher("RequestShowAndDeleteAdmin.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("requestShowAndDeleteAdmin.jsp");
 	   dispatcher.forward(request, response);
 	    
 	

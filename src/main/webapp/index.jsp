@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1" >
+ <meta name="bloodbank" content="bloodbank web app">
+ 
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="css/Style.css">
 <style>
@@ -25,13 +27,13 @@ nav.header {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="AdminLogin.jsp">Admin</a></li>
+			<li><a href="donorIndex.jsp">Donor</a></li>
+			<li><a href="seekerIndex.jsp">Seeker</a></li>
+			<li><a href="adminLogin.jsp">Admin</a></li>
 		</ul>
 	</nav>
 	<div class="homeContent">
-		<img src="Images/002.jpg" calss="img-fluid">
+		<img src="Images/002.jpg" calss="img-fluid" alt="img">
 	</div>
 
 

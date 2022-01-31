@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Check-up</title>
+<title>Forgot Password</title>
 <link rel="stylesheet" type="text/css" href="css/Style.css">
-<style>
-nav.header {
-	background: #160101;
-}
+<style type="text/css">
 
 a {
 	text-decoration: none
 }
 
+nav.header {
+	background: #160101;
+}
 .loginForm form h1 {
 	margin: 0px 0px 20px;
 	color: white;
@@ -37,7 +38,6 @@ body {
 	background-size: cover;
 	background-position: bottom;
 	margin: 0px;
-	overflow: hidden;
 }
 
 .loginForm form {
@@ -54,7 +54,7 @@ body {
 	justify-content: end;
 }
 
-.formcontrol input {
+.formcontrol input, textarea {
 	border: none;
 	width: 90%;
 	padding: 10px;
@@ -63,7 +63,7 @@ body {
 	color: black;
 	font-weight: bold;
 	box-shadow: 0px 0px 8px 0px #d1d1d1;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .formbtn button, .formbtn input {
@@ -120,17 +120,15 @@ p {
 	width: 50%;
 }
 </style>
-
 </head>
 <body>
 
-	<nav class="header seakerindex">
+<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			
+			<li><a href="DonorIndex.jsp">Donor</a></li>
 			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="DonorLogoutServlet">Logout</a></li>
-		
+			<li><a href="index.jsp">Home</a></li>
 		</ul>
 	</nav>
 
@@ -138,60 +136,57 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
+			<form action="Forgotpassword">
+				<h1 style="text-align: center;">Forgot Password</h1>
 
-			<form action="CheckDonorServlet" style="text-align: center;"
-				>
 
-
-				<h1>CHECK-UP</h1>
 				<div class="formcontrol">
-					<input type="text " id="Height" name="Height" required="required"
-						autofocus="autofocus" pattern="[0-9]{2,}"
-						placeholder="Enter the Height" title="it should be in number"><br>
+					<input type="text" id="number" name="number" required
+						pattern="[0-9]{10}" placeholder="Enter the PhoneNumber"
+						title=" mininum 10characters"><br>
 					<br>
+
 				</div>
 				<div class="formcontrol">
-
-					<input type="text " id="weight" name="weight" required="required"
-						pattern="[0-9]{2,}" placeholder="Enter the weight"
-						title="it should be in number"><br>
+					<input type="password" id="PASSWORD" name="PASSWORD" required
+						placeholder="Enter the Password"
+						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
+						title=" mininum 8characters may includes @#$%&*_?/ "><br>
 					<br>
-					<div class="formcontrol">
-						<input type="text " id="temperature" name="temperature"
-							required="required" pattern="[0-9]{2,}"
-							placeholder="Enter the Temperature"
-							title="it should be in number"><br>
-						<br>
-					</div>
-					<div class="formcontrol">
-						<!-- <label for="health">To you have any health isssue</label><br><br>
-<input type=radio  value="yes" name="health" required="required">yes
-<input type="radio"   value="no" name="health" required="required"  >no<br><br> -->
 
-					</div>
-					<div class="formcontrol">
-						<input type="text " id="pressure" name="pressure"
-							required="required" pattern="[0-9]{2,}"
-							placeholder="Enter the blood pressure"
-							title="it should be in number"><br>
-						<br>
-					</div>
-					<div class="formcontrol">
-						<input type="text " id="pulse" name="pulse" required="required"
-							pattern="[0-9]{2,}" placeholder="Enter the pulse"
-							title="it should be in number"><br>
-						<br>
+				</div>
+				<div class="formcontrol">
+					<input type="password" id="CONFIRM" name="CONFIRM" required
+						placeholder="Enter the Confirm Password"
+						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
+						title=" mininum 8characters may includes @#$%&*_?/ "><br>
+					<br>
 
-					</div>
-					<div class="formbtn">
-						<input id="submit" type="submit"> <input id="reset"
-							type="reset">
-					</div>
+				</div>
+
+
+
+				<div class="formbtn">
+					<input type="submit" value="submit"> <input type="reset"
+						value="reset">
+				</div>
+
+
+				
+<c:if test="${requestScope.PasswordError!=null }">
+				<p class="text-primary">${PasswordError}</p>
+				</c:if>
+
+
+				
+<c:if test="${requestScope.numbererror!=null }">
+				<p class="text-primary">${numbererror}</p>
+				</c:if>
+
+
 			</form>
 		</div>
 	</div>
-
-
 
 </body>
 </html>

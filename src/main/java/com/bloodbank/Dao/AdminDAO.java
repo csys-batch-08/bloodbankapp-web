@@ -8,7 +8,7 @@ public interface AdminDAO {
 	public  AdminModel  verificationAdmin(AdminModel aModel);	
 	public AdminModel updateWallet();	
 	public int seekerPayment(double totalPrice) ;
-	public Double CheckWallet();
+	public Double checkWallet();
 	
 	
 	

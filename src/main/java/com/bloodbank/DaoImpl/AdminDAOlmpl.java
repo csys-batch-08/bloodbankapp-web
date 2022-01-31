@@ -34,9 +34,9 @@ public class AdminDAOlmpl implements AdminDAO {
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
 		} finally {
 			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet );
 		}
@@ -46,7 +46,7 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	public AdminModel updateWallet() {
 
-		AdminModel adminModel = null;
+		AdminModel adminModel = new AdminModel();
 		Statement statement = null;
 		Connection connection = null;
 		ResultSet resultSet=null;
@@ -58,28 +58,24 @@ public class AdminDAOlmpl implements AdminDAO {
 			statement = connection.createStatement();
 			 resultSet = statement.executeQuery(query1);
 
-			while (resultSet.next()) {
+			if (resultSet.next()) {
 				adminModel = new AdminModel(resultSet.getString(1), resultSet.getString(2), resultSet.getDouble(3));
 			}
-			// System.out.println(id);
-			double walletTotal = adminModel.getWallet() - 300;
+		double walletTotal = adminModel.getWallet() - 300;
 
-			// System.out.println(walletTotal);
+			
 			String query = "update admin set wallet=? where email=?";
-			// String commit="commit";
+		    String commit="commit";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setDouble(1, walletTotal);
 			preparedStatement.setString(2, adminModel.getEmail());
 			preparedStatement.executeUpdate();
-			// pstmt.executeQuery(commit);
+			preparedStatement.executeQuery(commit);
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 
 		finally {
 			ConnectionUtil.closeStatement(statement, connection,resultSet);
@@ -113,11 +109,11 @@ public class AdminDAOlmpl implements AdminDAO {
 			preparedStatement.executeQuery(commit);
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
 		} finally {
 
 			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
@@ -128,7 +124,7 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	}
 
-	public Double CheckWallet() {
+	public Double checkWallet() {
 		double wallet = 0;
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -148,11 +144,11 @@ public class AdminDAOlmpl implements AdminDAO {
 			}
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
 		} finally {
 
 			ConnectionUtil.closeStatement(statement, connection,resultSet);

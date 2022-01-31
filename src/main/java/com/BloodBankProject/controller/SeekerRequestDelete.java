@@ -16,25 +16,26 @@ import com.bloodbank.exception.ExeceptionHandle;
 @WebServlet("/SeekerRequestDelete")
 public class SeekerRequestDelete extends HttpServlet {
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
 		HttpSession session = request.getSession();
 		PrintWriter writer = response.getWriter();
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 		
-		if(requestDAOlmpl.AadharcardValid(aadharcard)!=null) {
+		if(requestDAOlmpl.aadharcardValid(aadharcard)!=null) {
 		
 		
 		
 	
-		if(requestDAOlmpl.StatusCheck(aadharcard).equals("approved")) {
+		if(requestDAOlmpl.statusCheck(aadharcard).equals("approved")) {
      
 			
 
 			writer.println("<script type=\"text/javascript\">");
 			writer.println("alert('can t delete the request it is approved');");
-			writer.println("location='ShowRequestSeeker.jsp';");
+			writer.println("location='showSeekerRequest.jsp';");
 			writer.println("</script>");
                 
 			
@@ -52,7 +53,7 @@ public class SeekerRequestDelete extends HttpServlet {
 
 			writer.println("<script type=\"text/javascript\">");
 			writer.println("alert('Request cancel');");
-			writer.println("location='RequestIndex.jsp';");
+			writer.println("location='requestIndex.jsp';");
 			writer.println("</script>");
 
 			
@@ -67,7 +68,7 @@ public class SeekerRequestDelete extends HttpServlet {
 
 			writer.println("<script type=\"text/javascript\">");
 			writer.println("alert('invalid Aadharcard ');");
-			writer.println("location='RequestCancel.jsp';");
+			writer.println("location='requestCancel.jsp';");
 			writer.println("</script>");
 			
 		}

@@ -10,7 +10,7 @@ public interface BloodDetailsDAO {
 	
 	
 	public int insertBloodDetails(BloodDetailsModel details);
-	public List<BloodDetailsModel > ShowBloodDetails(Donor donor );
+	public List<BloodDetailsModel > showBloodDetails(Donor donor );
 	
 	
 	

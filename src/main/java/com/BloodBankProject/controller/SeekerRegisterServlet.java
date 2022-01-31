@@ -18,37 +18,38 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/SeekerRigester")
 public class SeekerRegisterServlet extends HttpServlet {
 	
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastName");
 		String address = request.getParameter("address");
 		Long phoneNumber = Long.parseLong(request.getParameter("number"));
-		Long PATIENT = Long.parseLong(request.getParameter("PATIENT"));
-		String HOSPITAL = request.getParameter("HOSPITAL");
+		Long patient = Long.parseLong(request.getParameter("PATIENT"));
+		String hospital = request.getParameter("HOSPITAL");
 		String bloodtype = request.getParameter("bloodtype");
 		String password = request.getParameter("PASSWORD");
 
-		SeekerDetails seekerDetails = new SeekerDetails(firstname, lastname, address, phoneNumber, password, PATIENT, HOSPITAL,
+		SeekerDetails seekerDetails = new SeekerDetails(firstname, lastname, address, phoneNumber, password, patient, hospital,
 				bloodtype);
-		// System.out.println("Seeker register"+seeker);
+		
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		PrintWriter writer = response.getWriter();
 		
 		
 		try {
-			if (seekerDAOlmpl.PhoneNumberValid(phoneNumber) == null) {
-				// Dao.insertSeekerDetails(seeker);
+			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) == null) {
+				
 				if (seekerDAOlmpl.insertSeekerDetails(seekerDetails) > 0) {
 
 				
 
 					writer.println("<script type=\"text/javascript\">");
 					writer.println("alert('Register success');");
-					writer.println("location='SeekerLogin.jsp';");
+					writer.println("location='seekerLogin.jsp';");
 					writer.println("</script>");
-					// response.sendRedirect("SeekerLogin.jsp");
+					
 
 				}
 			} else {
@@ -59,8 +60,8 @@ public class SeekerRegisterServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			
-			request.setAttribute("phoneNumber", e.PhoneNumber());
-           RequestDispatcher dispatcher=request.getRequestDispatcher("Seeker.jsp");
+			request.setAttribute("phoneNumber", e.phoneNumber());
+           RequestDispatcher dispatcher=request.getRequestDispatcher("seekerRegister.jsp");
            dispatcher.forward(request, response);
 			
 		}

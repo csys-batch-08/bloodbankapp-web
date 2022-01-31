@@ -20,14 +20,15 @@ import com.bloodbank.model.Donor;
 
 @WebServlet("/Register")
 public class DonorRegisterServlet extends HttpServlet {
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastName");
-		
+
 		String address = request.getParameter("address");
 		Long phoneNumber = Long.parseLong(request.getParameter("number"));
 		Long aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
@@ -37,29 +38,25 @@ public class DonorRegisterServlet extends HttpServlet {
 
 			date = sdf.parse(request.getParameter("bio"));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
-		
+
 		PrintWriter writer = response.getWriter();
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
 		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
-		
+
 		try {
 			if (donor == null) {
 
-			 donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
-
-				
+				donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
 
 				if (donorDAOImpl.insertDonor(donor) > 0) {
 
-					
 					writer.println("<script type=\"text/javascript\">");
 					writer.println("alert('Register success');");
-					writer.println("location='DonorLogin.jsp';");
+					writer.println("location='donorLogin.jsp';");
 					writer.println("</script>");
-					// response.sendRedirect("DonorLogin.jsp");
 
 				}
 
@@ -71,12 +68,10 @@ public class DonorRegisterServlet extends HttpServlet {
 
 		} catch (ExeceptionHandle e) {
 
-		
-			request.setAttribute("aadharcardNumber", e.AadharcardNumber());
-			RequestDispatcher dispatcher=request.getRequestDispatcher("DonorRegister.jsp");
+			request.setAttribute("aadharcardNumber", e.aadharcardNumber());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");
 			dispatcher.forward(request, response);
 
-			
 		}
 
 	}

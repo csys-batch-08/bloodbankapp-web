@@ -27,6 +27,7 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/SeekerRequestServlet")
 public class SeekerRequestServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -38,13 +39,12 @@ public class SeekerRequestServlet extends HttpServlet {
 
 		int unit = Integer.parseInt(request.getParameter("UNIT"));
 		Date date = null;
-		// System.out.println(aadharcard);
-	//	try {
+	
 
 			try {
 				date = sdf.parse(request.getParameter("currentdate"));
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 
@@ -53,13 +53,9 @@ public class SeekerRequestServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			SeekerDetails seekerDetails = (SeekerDetails) session.getAttribute("seeker");
 
-			// System.out.println(date);
-			// System.out.println(request.getParameter("currentdate"));
-
+		
 			BloodStackDAOlmpl stackDAOlmpl = new BloodStackDAOlmpl();
-
-		//	if (Dao.AadharcardValid(aadharcard) == null) {
-				
+	
 
 				if (stackDAOlmpl.checkOfQuantity(bloodtype) > unit) {
 
@@ -71,12 +67,10 @@ public class SeekerRequestServlet extends HttpServlet {
 					session.setAttribute("requestModel", requestModel);
 
 					
-					// System.out.println(n+"insert request");
+					
 					if (requestDAOlmpl.insertRequest(requestModel) > 0) {
 
-						// System.out.println("request insert");
-
-						// System.out.println("unit check");
+						
 						RequestDispatcher rd = request.getRequestDispatcher("BillingSeekerServlet");
 						rd.forward(request, response);
 
@@ -89,32 +83,17 @@ public class SeekerRequestServlet extends HttpServlet {
 
 					session.setAttribute("requestModel", requestModel);
 
-					// RequestDAOlmpl Dao=new RequestDAOlmpl();
-
 					if (requestDAOlmpl.insertRequest(requestModel) > 0) {
 						
 						writer.println("<script type=\"text/javascript\">");
 						writer.println("alert('your request accepted and status is pending');");
-						writer.println("location='RequestIndex.jsp';");
+						writer.println("location='requestIndex.jsp';");
 						writer.println("</script>");
-						// response.sendRedirect("RequestIndex.jsp");
+					
 
 					}
 
 				}
-
-//			} else {
-//
-//				throw new ExeceptionHandle();
-//
-//			}
-//		} catch (ExeceptionHandle e) {
-//
-//			HttpSession session = request.getSession();
-//			session.setAttribute("Aadharcard", e.AadharcardNumber());
-//			response.sendRedirect("requestSeeker.jsp");
-//
-		//}
 
 	}
 

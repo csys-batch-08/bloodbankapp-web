@@ -21,7 +21,7 @@ public class RequestDeleteAdminServlet extends HttpServlet {
 		RequestDAOlmpl  requestDAOlmpl = new RequestDAOlmpl();
 		
 		PrintWriter writer = response.getWriter();
-		String status=requestDAOlmpl.StatusCheck(aadharcard);
+		String status=requestDAOlmpl.statusCheck(aadharcard);
 		if(status.equals("approved")){
 			
 			

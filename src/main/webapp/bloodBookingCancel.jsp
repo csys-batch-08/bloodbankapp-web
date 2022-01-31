@@ -82,7 +82,7 @@ nav.header {
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
+			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
 		</nav>
@@ -90,7 +90,7 @@ nav.header {
 		<div class="col-sm-4"></div>
 		<div class="bookinner col-sm-4">
 
-			<form action="BookingCancelServlet" >
+			<form action="BookingCancelServlet"  method="post"  >
 
 
 				<h2>BOOKING CANCEL</h2>

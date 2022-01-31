@@ -1,13 +1,13 @@
-<%@page import="com.bloodbank.model.Donor"%>
-
-<%@page import="com.bloodbank.model.SeekerDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Booking index</title>
+<title>Booking Process</title>
+
+
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -24,19 +24,25 @@
 	margin: 0;
 }
 
-a {
-	text-decoration: none
+.problem {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav.header {
+	background: #160101;
+	width: 100%;
 }
 
 body {
 	background-image: url("Images//002.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	overflow: hidden;
-	background-position: top;
 }
 
-.bookinner a {
+.bookinner a, input {
 	background: black;
 	text-decoration: none;
 	padding: 10px 20px;
@@ -49,16 +55,12 @@ nav {
 	margin-right: 20%;
 }
 
-.problem {
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-nav.header {
-	background: #160101;
-	width: 100%;
+.submitBtn {
+	position: relative;
+	bottom: 16px;
+	width: 177px;
+	height: 42px;
+	padding: 5px;
 }
 </style>
 </head>
@@ -67,20 +69,20 @@ nav.header {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-		
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
+			
+			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="problem">
 		<nav>
-			<div class="bookinner">
-				<h1 class="text-center">BOOKING</h1>
-				<a href="Booking.jsp">BOOK</a> <a href="ShowDonorBookingServlet">SHOW
-					BOOKED</a>
+			<div class="bookinner">				
+                <a class="BookingChange" href="ConfirmServlet">CONFIRM</a><br/><br/>
+				<a class="BookingChange" href="bloodBookingCancel.jsp">BOOKING CANCEL</a>
+
 			</div>
 		</nav>
-
 	</div>
+
 </body>
 </html>

@@ -6,24 +6,22 @@ import com.bloodbank.model.RequestModel;
 
 public interface RequestDAO {
 
-	
 	public int insertRequest(RequestModel request);
-	
+
 	public int deleteRequest(Long aadharcardNumber);
-	
-	public List<RequestModel> ShowRequest();
-	
-	public String StatusCheck(Long aadharcard);
-	
-	public List<RequestModel> ShowRequestSeeker(Long phoneNumber);
-	
-	public RequestModel RequestObject(Long phoneNumber);
-	
-	public int RequestUpdate(RequestModel  requestModel);
-	
-	public Long AadharcardValid(Long aadharcard);
-	
-	public List<RequestModel> RequestUpdateAndDelete();
-	
-	
+
+	public List<RequestModel> showRequest();
+
+	public String statusCheck(Long aadharcard);
+
+	public List<RequestModel> showRequestSeeker(Long phoneNumber);
+
+	public RequestModel requestObject(Long phoneNumber);
+
+	public int requestUpdate(RequestModel requestModel);
+
+	public Long aadharcardValid(Long aadharcard);
+
+	public List<RequestModel> requestUpdateAndDelete();
+
 }

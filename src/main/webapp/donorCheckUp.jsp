@@ -1,20 +1,19 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Donor Login</title>
+<title>Check-up</title>
 <link rel="stylesheet" type="text/css" href="css/Style.css">
 <style>
-a {
-	text-decoration: none
+nav.header {
+	background: #160101;
 }
 
-p {
-	margin-bottom: 0px;
+a {
+	text-decoration: none
 }
 
 .loginForm form h1 {
@@ -38,6 +37,7 @@ body {
 	background-size: cover;
 	background-position: bottom;
 	margin: 0px;
+	overflow: hidden;
 }
 
 .loginForm form {
@@ -45,7 +45,7 @@ body {
 }
 
 .loginForm {
-	width: 50%;
+	width: 58%;
 	padding: 0px;
 	margin: auto;
 	height: 100vh;
@@ -56,12 +56,14 @@ body {
 
 .formcontrol input {
 	border: none;
+	width: 90%;
 	padding: 10px;
 	background: #ffffff;
 	border-radius: 3px;
 	color: black;
 	font-weight: bold;
 	box-shadow: 0px 0px 8px 0px #d1d1d1;
+	margin-bottom: 10px;
 }
 
 .formbtn button, .formbtn input {
@@ -81,6 +83,7 @@ body {
 	background: black;
 	color: white;
 	border-radius: 3px;
+	margin-right: 5px;
 	padding: 10px 20px;
 	font-weight: bold;
 	box-shadow: 0px 0px 3px 0px #606060;
@@ -88,7 +91,11 @@ body {
 
 .formbtn {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+}
+
+p {
+	margin-bottom: 0px;
 }
 
 .formcard {
@@ -108,54 +115,80 @@ body {
 
 .cardContent {
 	background: linear-gradient(141deg, black 50%, white 50%);
-	padding: 30px;
+	padding: 11Spx;
 	border-radius: 6px;
+	width: 50%;
 }
 </style>
+
 </head>
 <body>
-
-
-
 
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="donorRegister.jsp">Register</a></li>
+			
 			<li><a href="seekerIndex.jsp">Seeker</a></li>
-			<li><a href="index.jsp">Home</a></li>
+			<li><a href="DonorLogoutServlet">Logout</a></li>
+		
 		</ul>
 	</nav>
 
 
 
 	<div class="loginForm">
-
 		<div class="cardContent">
 
-			<form action="login"  method="post" >
-				<h1>login</h1>
+			<form action="CheckDonorServlet"  method="post" style="text-align: center;"
+				>
+
+
+				<h1>CHECK-UP</h1>
 				<div class="formcontrol">
-					<input type="text" id="aadharcard" name="aadharcard" autofocus
-						required="required" pattern="[0-9]{12}"
-						placeholder="Enter the Aadharcard Number"
-						title="enter the valid Aadharcard number"><br/>
+					<input type="text " id="Height" name="Height" required="required"
+						autofocus="autofocus" pattern="[0-9]{2,}"
+						placeholder="Enter the Height" title="it should be in number"><br/>
 					<br/>
-
 				</div>
+				<div class="formcontrol">
 
-				<div class="formbtn">
-					<input type="submit" value="login">
+					<input type="text " id="weight" name="weight" required="required"
+						pattern="[0-9]{2,}" placeholder="Enter the weight"
+						title="it should be in number"><br/>
+					<br/>
+					<div class="formcontrol">
+						<input type="text " id="temperature" name="temperature"
+							required="required" pattern="[0-9]{2,}"
+							placeholder="Enter the Temperature"
+							title="it should be in number"><br/>
+						<br/>
+					</div>
+					<div class="formcontrol">
+						
+					</div>
+					<div class="formcontrol">
+						<input type="text " id="pressure" name="pressure"
+							required="required" pattern="[0-9]{2,}"
+							placeholder="Enter the blood pressure"
+							title="it should be in number"><br/>
+						<br/>
+					</div>
+					<div class="formcontrol">
+						<input type="text " id="pulse" name="pulse" required="required"
+							pattern="[0-9]{2,}" placeholder="Enter the pulse"
+							title="it should be in number"><br/>
+						<br/>
 
-				</div>
-				
-<c:if test="${requestScope.DonorError!=null }">
-				<p class="text-primary">${DonorError}</p>
-				</c:if>
-
+					</div>
+					<div class="formbtn">
+						<input id="submit" type="submit"> <input id="reset"
+							type="reset">
+					</div>
 			</form>
 		</div>
 	</div>
+
+
 
 </body>
 </html>

@@ -168,7 +168,7 @@ tbody {
 			</div>
 		</div>
 		<div class="backBtn">
-			<a href="AdminWork.jsp">back</a>
+			<a href="adminWork.jsp">back</a>
 		</div>
 	</div>
 

@@ -16,22 +16,21 @@ import com.bloodbank.exception.ExeceptionHandle;
 @WebServlet("/Forgotpassword")
 public class Forgotpassword extends HttpServlet {
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// System.out.println("welcome gowtham");
-
+		
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 		String password1 = request.getParameter("CONFIRM");
 		String password2 = request.getParameter("PASSWORD");
 
-		Long PhoneNumber = Long.parseLong(request.getParameter("number"));
+		Long phoneNumber = Long.parseLong(request.getParameter("number"));
 
-		// System.out.println(PhoneNumber+"gowtham");
 
 		try {
 
-			if (seekerDAOlmpl.PhoneNumberValid(PhoneNumber) != null) {
+			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) != null) {
 
 				try {
 
@@ -39,9 +38,9 @@ public class Forgotpassword extends HttpServlet {
 
 						// Long phoneNumber= (Long) request.getAttribute("SeekerPhoneNumber");
 
-						seekerDAOlmpl.ForgotPassword(PhoneNumber, password2);
+						seekerDAOlmpl.forgotPassword(phoneNumber, password2);
 
-						response.sendRedirect("SeekerLogin.jsp");
+						response.sendRedirect("seekerLogin.jsp");
 
 					} else {
 						throw new ExeceptionHandle();
@@ -49,8 +48,8 @@ public class Forgotpassword extends HttpServlet {
 					}
 				} catch (ExeceptionHandle e) {
 
-					request.setAttribute("PasswordError", e.ForgotPassword());
-					RequestDispatcher dispatcher = request.getRequestDispatcher("Forgotpassword.jsp");
+					request.setAttribute("PasswordError", e.forgotPassword());
+					RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
 					dispatcher.forward(request, response);
 
 				}
@@ -62,8 +61,8 @@ public class Forgotpassword extends HttpServlet {
 			}
 		} catch (ExeceptionHandle e) {
 
-			request.setAttribute("numbererror", e.SeekerPhoneNumberFind());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Forgotpassword.jsp");
+			request.setAttribute("numbererror", e.seekerPhoneNumberFind());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
 			dispatcher.forward(request, response);
 
 		}

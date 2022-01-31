@@ -15,26 +15,21 @@ import com.bloodbank.model.BookingModel;
 
 @WebServlet("/AdminShowBookingServlet")
 public class AdminShowBookingServlet extends HttpServlet {
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
 
-		List<BookingModel> bookingList = bookingDAOlmpl.ShowBookingAdmin();
+		List<BookingModel> bookingList = bookingDAOlmpl.showBookingAdmin();
 
 		request.setAttribute("bookingList", bookingList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("AdminShowBooking.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("adminShowBooking.jsp");
 		dispatcher.forward(request, response);
-		
-		
-		
-		
-		
-	}
 
-	
-	
+	}
 
 }

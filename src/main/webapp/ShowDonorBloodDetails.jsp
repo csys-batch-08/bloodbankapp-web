@@ -97,13 +97,13 @@ tbody {
 				<th><strong>BLOOD COLLECT CHOICE</strong></th>
 
 			</tr>
-			<c:forEach items="${requestScope.DetailsList }" var="List">
+			<c:forEach items="${requestScope.detailsList }" var="List">
 			<tr>
 			 <td>${List.donor.aadharcard }</td>
-               <td>${List.address }</td>
-               <td>${List.appdate }</td>
+               <td>${List.donor.address }</td>
+               <td>${List.unit }</td>
                <td>${List.bloodType }</td>
-               <td>${List.bloodCollectChoice }</td>
+               <td>${List.price }</td>
 			
 			
 			</tr>

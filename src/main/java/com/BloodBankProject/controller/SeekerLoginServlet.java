@@ -17,10 +17,10 @@ import com.bloodbank.model.SeekerDetails;
 
 @WebServlet("/SeekerLoginServlet")
 public class SeekerLoginServlet extends HttpServlet {
-	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session=request.getSession(); 
 		PrintWriter writer = response.getWriter();
 
@@ -29,7 +29,7 @@ public class SeekerLoginServlet extends HttpServlet {
 		
 		session.setAttribute("SeekerPhoneNumber", phoneNumber);
 		
-		SeekerDetails seekerDetails = new SeekerDetails();
+		SeekerDetails seekerDetails = null;
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 
 		seekerDetails = seekerDAOlmpl.seekerObject(password, phoneNumber);
@@ -41,7 +41,7 @@ public class SeekerLoginServlet extends HttpServlet {
 
 				writer.println("<script type=\"text/javascript\">");
 				writer.println("alert('Login success');");
-				writer.println("location='RequestIndex.jsp';");
+				writer.println("location='requestIndex.jsp';");
 				writer.println("</script>");
 
 			} else {
@@ -52,8 +52,8 @@ public class SeekerLoginServlet extends HttpServlet {
 
 		} catch (ExeceptionHandle e) {
 
-			request.setAttribute("SeekerError", e.SeekerMessage());
-			RequestDispatcher dispatcher=request.getRequestDispatcher("SeekerLogin.jsp");
+			request.setAttribute("SeekerError", e.seekerMessage());
+			RequestDispatcher dispatcher=request.getRequestDispatcher("seekerLogin.jsp");
             dispatcher.forward(request, response);
 			
 

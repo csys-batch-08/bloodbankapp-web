@@ -127,7 +127,7 @@ p {
 
 
 
-			<form action="Register">
+			<form action="Register"  method="post" >
 				<h1>Register</h1>
 				<div class="formcontrol">
 

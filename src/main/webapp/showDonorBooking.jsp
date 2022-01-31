@@ -1,7 +1,7 @@
-<%@page import="com.bloodbank.model.SeekerDetails"%>
-<%@page import="com.bloodbank.model.RequestModel"%>
+<%@page import="com.bloodbank.model.BookingModel"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
+<%@page import="com.bloodbank.DaoImpl.BookingDAOlmpl"%>
+<%@page import="com.bloodbank.model.Donor"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Show Request Seeker</title>
+<title>Show Booking</title>
 <style type="text/css">
 body {
 	height: 100vh;
@@ -79,55 +79,44 @@ tbody {
 	margin-top: 10px;
 	font-size: 19px;
 	padding: 5px 20px;
-	
 }
 </style>
 </head>
 <body>
 
-   
-       
 	<div class="adminCard">
-  
-       
-     
-		<table>
+		<table class="center">
 
 			<tr>
-				<th>HOSPITAL NAME</th>
-				<th>BLOOD TYPE</th>
-				<th>UNIT</th>
-				<th>BLOOD COLLECTER NAME</th>
-				<th>PHONE NUMBER</th>
-				<th>AADHARCARD NUMBER</th>
-				<th>DATE</th>
-				<th>STATUS</th>
+				<th><strong>AADHARCARD</strong></th>
+				<th><strong>ADDRESS</strong></th>
+				<th><strong>BOOK DATE</strong></th>
+				<th><strong>BLOOD TYPE</strong></th>
+				<th><strong>BLOOD COLLECT CHOICE</strong></th>
+
 			</tr>
+			<c:forEach items="${requestScope.bookingList }" var="List">
+			<tr>
+			 <td>${List.donor.aadharcard }</td>
+               <td>${List.address }</td>
+               <td>${List.appdate }</td>
+               <td>${List.bloodType }</td>
+               <td>${List.bloodCollectChoice }</td>
 			
-			<c:forEach items="${requestScope.requestList }" var="List">
-              <tr>
-              <td>${List.hospitalName}</td>
-              <td>${List.bloodType}</td>
-              <td>${List.unit}</td>
-              <td>${List.bloodCollectorName}</td>
-              <td>${List.phoneNumber}</td>
-              <td>${List.aadharcard}</td>
-              <td>${List.requestDate}</td>
-              <td>${List.status}</td>       
-              
-            
-              </tr>
-              </c:forEach>
-            
+			
+			</tr>
+</c:forEach>
+			
 		</table>
+		<br>
 		<br>
 
 		<div class="backBtn">
-			<a href="RequestCancel.jsp">REQUEST CANCEL </a>
-		</div>	<div class="backBtn">			
-			<a href="RequestIndex.jsp">back</a>
-		
+			<a href="bloodBookingProcess.jsp">back</a>
 		</div>
+
+		</form>
+	</div>
 	</div>
 </body>
 </html>

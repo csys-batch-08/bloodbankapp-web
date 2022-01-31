@@ -16,8 +16,9 @@ import com.bloodbank.model.BillingModel;
 @WebServlet("/ShowBillingAdminServlet")
 public class ShowBillingAdminServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
@@ -25,7 +26,7 @@ public class ShowBillingAdminServlet extends HttpServlet {
 
 		List<BillingModel> billingList = billingDAOlmpl.biilingShowAdmin();
 		request.setAttribute("billingList", billingList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowbillingAdmin.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("showBillAdminjsp.jsp");
 		dispatcher.forward(request, response);
 
 	}

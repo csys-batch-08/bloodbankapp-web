@@ -3,7 +3,7 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Forgot Password</title>
@@ -126,8 +126,8 @@ p {
 <nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
+			<li><a href="donorIndex.jsp">Donor</a></li>
+			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="index.jsp">Home</a></li>
 		</ul>
 	</nav>
@@ -136,31 +136,31 @@ p {
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="Forgotpassword">
+			<form action="Forgotpassword"  method="post" >
 				<h1 style="text-align: center;">Forgot Password</h1>
 
 
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[0-9]{10}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters"><br>
-					<br>
+						title=" mininum 10characters"><br/>
+					<br/>
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="PASSWORD" name="PASSWORD" required
 						placeholder="Enter the Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br>
-					<br>
+						title=" mininum 8characters may includes @#$%&*_?/ "><br/>
+					<br/>
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="CONFIRM" name="CONFIRM" required
 						placeholder="Enter the Confirm Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br>
-					<br>
+						title=" mininum 8characters may includes @#$%&*_?/ "><br/>
+					<br/>
 
 				</div>
 

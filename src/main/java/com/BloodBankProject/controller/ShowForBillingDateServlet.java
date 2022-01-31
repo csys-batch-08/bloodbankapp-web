@@ -21,22 +21,21 @@ import com.bloodbank.model.BillingModel;
 @WebServlet("/ShowForBillingDateServlet")
 public class ShowForBillingDateServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		
 		LocalDate date = null;
 
-		// date=sdf.parse(request.getParameter("date"));
+		
 		date = LocalDate.parse(request.getParameter("date"));
 
-		// System.out.println(date);
 	
-
 		BillingDAOlmpl billingDAOlmpl = new BillingDAOlmpl();
 		
 		List<BillingModel> billingList = billingDAOlmpl.biilingShowAdminDate(date);
 		request.setAttribute("billingList", billingList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("ShowForBillingDate.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("showBillDateAdmin.jsp");
 	     dispatcher.forward(request, response);
 		
 

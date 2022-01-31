@@ -111,7 +111,7 @@ tbody {
 		</table>
 		<div class="backBtn">
 			<a href="AdminShowBookingHomeServlet">Home collection</a> 
-			<a href="AdminWork.jsp">back</a>
+			<a href="adminWork.jsp">back</a>
 		</div>
 	</div>
 </body>

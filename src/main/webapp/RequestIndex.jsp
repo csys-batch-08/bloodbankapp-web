@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Request index</title>
@@ -65,7 +65,7 @@ nav.header {
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
+			<li><a href="donorIndex.jsp">Donor</a></li>
 			<li><a href="SeekerLogoutServlet">Logout</a></li>
 			
 		</ul>

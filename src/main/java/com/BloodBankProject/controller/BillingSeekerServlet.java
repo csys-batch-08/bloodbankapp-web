@@ -23,6 +23,7 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/BillingSeekerServlet")
 public class BillingSeekerServlet extends HttpServlet {
 	
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -38,7 +39,7 @@ public class BillingSeekerServlet extends HttpServlet {
 		
 		double unitPrice = bloodStackDAOlmpl.findPrice(requestModel.getBloodType()) * requestModel.getUnit();
               // Request model object to get the blood type and unit ofm blood
-		BillingModel BillingModel = new BillingModel(requestModel.getBloodType(), seekerDetails, requestModel.getUnit(),
+		BillingModel billingModel = new BillingModel(requestModel.getBloodType(), seekerDetails, requestModel.getUnit(),
 				unitPrice, null);
 
 		
@@ -48,7 +49,7 @@ public class BillingSeekerServlet extends HttpServlet {
              //insert the billing table
 		
 
-		if (billingDAOlmpl.insertBilling(BillingModel) > 0) {
+		if (billingDAOlmpl.insertBilling(billingModel) > 0) {
 			
                      //Stack table reduce the blood quantity  			
 
@@ -58,11 +59,11 @@ public class BillingSeekerServlet extends HttpServlet {
 				
 				if (adminDAOlmpl.seekerPayment(unitPrice) > 0) {					
 					
-					List<BillingModel> billingList = billingDAOlmpl.biilingShow(BillingModel);
+					List<BillingModel> billingList = billingDAOlmpl.biilingShow(billingModel);
 
 					request.setAttribute("billingList", billingList);
 
-					RequestDispatcher dispatcher=request.getRequestDispatcher("seekerbill.jsp");
+					RequestDispatcher dispatcher=request.getRequestDispatcher("showSeekerBill.jsp");
 					dispatcher.forward(request, response);	
 				
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>SeekerIndex</title>
@@ -56,8 +56,8 @@ body {
 <body>
 	<nav class="header seakerindex">
 		<ul>
-			<li><a href="SeekerLogin.jsp">Login</a></li>
-			<li><a href="Seeker.jsp">Register</a></li>
+			<li><a href="seekerLogin.jsp">Login</a></li>
+			<li><a href="seekerRegister.jsp">Register</a></li>
 		</ul>
 	</nav>
 	<div class="homeContent">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -97,7 +97,7 @@ nav.header {
 <nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			<li><a href="DonorIndex.jsp">Donor</a></li>
+			<li><a href="donorIndex.jsp">Donor</a></li>
 			<li><a href="SeekerLogoutServlet">Logout</a></li>
 			
 		</ul>
@@ -107,7 +107,7 @@ nav.header {
 		<div class="col-sm-4"></div>
 		<div class="bookinner col-sm-4">
 
-			<form action="SeekerRequestDelete" >
+			<form action="SeekerRequestDelete"  method="post" >
 
 
 				<h2>REQUEST CANCEL</h2>
