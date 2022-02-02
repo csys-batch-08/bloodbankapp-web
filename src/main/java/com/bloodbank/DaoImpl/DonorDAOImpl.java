@@ -13,6 +13,16 @@ import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.Donor;
 
 public class DonorDAOImpl implements DonorDAO {
+	
+	static final String FIRSTNAME="first_name";
+	static final String LASTNAME="last_name";
+	static final String ADDRESS="address";
+	static final String AADHARCARDNUMBER="aadharcard_number";
+	static final String PHONENUMBER="phone_number";
+	static final String DONORBIO="donor_bio";
+	static final String BLOODTYPE="blood_type";
+	
+	
 	public int insertDonor(Donor donor) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int tempNumber = 0;
@@ -55,13 +65,13 @@ public class DonorDAOImpl implements DonorDAO {
 		try {
 
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details where aadharcard=?";
+			String query = "select first_name,last_name,address,aadharcard_number,phone_number,donor_bio,blood_type from donor_details where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, aadharcard);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getLong(4), resultSet.getLong(5), resultSet.getDate(6), resultSet.getString(7));
+				donor = new Donor(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME), resultSet.getString(ADDRESS),
+						resultSet.getLong(AADHARCARDNUMBER), resultSet.getLong(PHONENUMBER), resultSet.getDate(DONORBIO), resultSet.getString(BLOODTYPE));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -87,7 +97,7 @@ public class DonorDAOImpl implements DonorDAO {
 		try {
 			connection = connectionUtil.getConnection();
 			String commit = "commit";
-			String query = "update donor_details set address=?,age=?,phone=? where aadharcard=?";
+			String query = "update donor_details set address=?,donor_bio=?,phone_number=? where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, donor.getAddress());
 			preparedStatement.setDate(2, new java.sql.Date(donor.getDonorDate().getTime()));
@@ -110,21 +120,21 @@ public class DonorDAOImpl implements DonorDAO {
 	public List<Donor> showDonor() {
 		List<Donor> donorList = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		donorList = new ArrayList<Donor>();
+		donorList = new ArrayList();
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details";
+			String query = "select first_name,last_name,address,aadharcard_number,phone_number,donor_bio,blood_type from donor_details";
 
 			preparedStatement = connection.prepareStatement(query);
 
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				Donor donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getLong(4), resultSet.getLong(5), resultSet.getDate(6), resultSet.getString(7));
+				Donor donor = new Donor(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME), resultSet.getString(ADDRESS),
+						resultSet.getLong(AADHARCARDNUMBER), resultSet.getLong(PHONENUMBER), resultSet.getDate(DONORBIO), resultSet.getString(BLOODTYPE));
 				donorList.add(donor);
 
 			}
@@ -151,7 +161,7 @@ public class DonorDAOImpl implements DonorDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select AADHARCARD from donor_details where PHONE=? and FIRST_NAME=? and LAST_NAME=?";
+			String query = "select aadharcard_number from donor_details where phone_number=? and first_name=? and last_name=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, donor.getNumber());
@@ -186,13 +196,13 @@ public class DonorDAOImpl implements DonorDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,AADHARCARD,PHONE,DONOR_DATE,BLOOD_TYPE from donor_details where aadharcard=?";
+			String query = "select first_name,last_name,address,aadharcard_number,phone_number,donor_bio,blood_type from donor_details where aadharcard=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, aadharcardNumber);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				donor = new Donor(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getLong(4), resultSet.getLong(5), resultSet.getDate(6), resultSet.getString(7));
+				donor = new Donor(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME), resultSet.getString(ADDRESS),
+						resultSet.getLong(AADHARCARDNUMBER), resultSet.getLong(PHONENUMBER), resultSet.getDate(DONORBIO), resultSet.getString(BLOODTYPE));
 			}
 
 		} catch (ClassNotFoundException e) {

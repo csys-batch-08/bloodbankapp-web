@@ -30,11 +30,13 @@ public class ShowDonorBookingServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingDonor(donor);
 		if (bookingList.isEmpty()) {
-
+			
 			writer.println("<script type=\"text/javascript\">");
 			writer.println("alert('You are a New Comer');");
 			writer.println("location='bloodBookingProcess.jsp';");
 			writer.println("</script>");
+			
+			
 		} else {
 			request.setAttribute("bookingList", bookingList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("showDonorBooking.jsp");

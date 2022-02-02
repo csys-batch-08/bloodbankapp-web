@@ -1,0 +1,62 @@
+@charset "ISO-8859-1";
+nav.header {
+	background: #160101;
+}
+
+a {
+	text-decoration: none
+}
+
+.book {
+	height: 100vh;
+	justify-content: center;
+}
+
+.book form h1 {
+	margin: 0px 0px 20px;
+	color: white;
+}
+
+.book form {
+	text-align: center;
+	padding: 25px;
+}
+
+.inputtype input, textarea, select {
+	border: none;
+	padding: 10px;
+	background: #ffffff;
+	border-radius: 3px;
+	color: black;
+	font-weight: bold;
+	box-shadow: 0px 0px 8px 0px #d1d1d1;
+	margin-bottom: 10px;
+}
+
+.submit button, .submit input {
+	border: none;
+	padding: 10px;
+	text-decoration: none;
+	background: black;
+	color: white;
+	border-radius: 3px;
+	margin-right: 5px;
+	padding: 10px 20px;
+	font-weight: bold;
+	box-shadow: 0px 0px 3px 0px #606060;
+}
+
+.bookinner {
+	background: linear-gradient(141deg, black 50%, white 50%);
+	padding: 11Spx;
+	border-radius: 6px;
+}
+
+body {
+	background-image: url(../images/background.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	margin: 0px;
+	overflow: hidden;
+}

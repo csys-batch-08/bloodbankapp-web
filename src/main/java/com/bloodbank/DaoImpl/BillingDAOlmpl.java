@@ -19,17 +19,23 @@ import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
 public class BillingDAOlmpl implements BillingDAO {
-
+	static final String BLOODTYPE="blood_type";
+	static final String SEEKERID="seeker_id";
+	static final String QUANTITY="quantity";
+	static final String QUANTITYPRICE="quantity_price";
+	static final String BILLINGDATE="billing_date";
+	
+	
 	public int insertBilling(BillingModel billingModel) {
+		
 		int returnNumber = 0;
-
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
 
 			connection = connectionUtil.getConnection();
-			String query = "insert into billing (blood_type,seeker_id,quantity,price) values(?,?,?,?)";
+			String query = "insert into seeker_blood_bill (blood_type,seeker_id,quantity,quantity_price) values(?,?,?,?)";
 			String commit = "commit";
 
 			SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
@@ -40,7 +46,7 @@ public class BillingDAOlmpl implements BillingDAO {
 			preparedStatement.setString(1, billingModel.getBloodType());
 			preparedStatement.setInt(2, seekerId);
 			preparedStatement.setInt(3, billingModel.getUnit());
-			preparedStatement.setDouble(4, billingModel.getTotalprice());
+			preparedStatement.setDouble(4, billingModel.getTotalprice());			
 			returnNumber = preparedStatement.executeUpdate();
 			preparedStatement.executeQuery(commit);
 
@@ -70,17 +76,21 @@ public class BillingDAOlmpl implements BillingDAO {
 		int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE  from billing where SEEKER_ID=? order by bill_id desc";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill where seeker_id=? order by bill_id desc";
 			preparedStatement = connection.prepareStatement(query);
+			
+			
+			
 			preparedStatement.setInt(1, seekerId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
 				SeekerDetails seekerDetails = null;
-				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(SEEKERID));
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
-						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
+				BillingModel billing = new BillingModel(resultSet.getString(BLOODTYPE), seekerDetails,
+						resultSet.getInt(QUANTITY), resultSet.getInt(QUANTITYPRICE),
+						resultSet.getDate(BILLINGDATE).toLocalDate());
 
 				billingList.add(billing);
 			}
@@ -108,17 +118,18 @@ public class BillingDAOlmpl implements BillingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing order by bill_id desc ";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill order by bill_id desc ";
 			statement = connection.createStatement();
 
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 
 				SeekerDetails seekerDetails = null;
-				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(SEEKERID));
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
-						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
+				BillingModel billing = new BillingModel(resultSet.getString(BLOODTYPE), seekerDetails,
+						resultSet.getInt(QUANTITY), resultSet.getInt(QUANTITYPRICE),
+						resultSet.getDate(BILLINGDATE).toLocalDate());
 				billingList.add(billing);
 			}
 
@@ -144,17 +155,18 @@ public class BillingDAOlmpl implements BillingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select BLOOD_TYPE,SEEKER_ID,QUANTITY,PRICE,BILLING_DATE from billing where ?<=billing_date order by bill_id desc";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill where ?<=billing_date order by bill_id desc";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setDate(1, java.sql.Date.valueOf(date));
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(3));
+				seekerDetails = seekerDAOlmpl.findSeekerId(resultSet.getInt(SEEKERID));
 
-				BillingModel billing = new BillingModel(resultSet.getString(1), seekerDetails, resultSet.getInt(3),
-						resultSet.getInt(4), resultSet.getDate(5).toLocalDate());
+				BillingModel billing = new BillingModel(resultSet.getString(BLOODTYPE), seekerDetails,
+						resultSet.getInt(QUANTITY), resultSet.getInt(QUANTITYPRICE),
+						resultSet.getDate(BILLINGDATE).toLocalDate());
 				billingList.add(billing);
 			}
 

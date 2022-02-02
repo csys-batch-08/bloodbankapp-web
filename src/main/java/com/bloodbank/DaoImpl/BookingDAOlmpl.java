@@ -17,12 +17,18 @@ import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
 public class BookingDAOlmpl implements BookingDAO {
+	
+	static final String AADHARCARDNUMBER="aadharcard_number";
+	static final String ADDRESS="address";
+	static final String BOOKDATE="book_date";
+	static final String BLOODTYPE="blood_type";
+	static final String DONORCHOICE="blood_collect_choice";
 
 	public int booking(BookingModel bookingModel) {
 		int tempNumber = 0;
 
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		String query = "insert into booking (aadharcard,address,book_date,blood_type,blood_collect_choice) values(?,?,?,?,?)";
+		String query = "insert into donor_booking (aadharcard_number,address,book_date,blood_type,blood_collect_choice) values(?,?,?,?,?)";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -58,7 +64,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "update booking set address=?,book_date=?,blood_collect_choice=? where aadharcard=?";
+			String query = "update donor_booking set address=?,book_date=?,blood_collect_choice=? where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setString(1, bookingModel.getAddress());
@@ -92,7 +98,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		try {
 			connection = connectionUtil.getConnection();
 			String commit = "commit";
-			String query = "delete from booking where aadharcard=?";
+			String query = "delete from donor_booking where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, aadharcard);
@@ -117,23 +123,23 @@ public class BookingDAOlmpl implements BookingDAO {
 	public List<BookingModel> homeCollection() {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		List<BookingModel> booking = new ArrayList<BookingModel>();
+		List<BookingModel> booking = new ArrayList();
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 
 			connection = connectionUtil.getConnection();
-			String query = "select  AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking where BLOOD_COLLECT_CHOICE ='home'";
+			String query = "select  aadharcard_number,address,book_date,blood_type,blood_collect_choice from donor_booking where BLOOD_COLLECT_CHOICE ='home'";
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				DonorDAOImpl donor = new DonorDAOImpl();
 
-				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(1));
+				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(AADHARCARDNUMBER));
 
-				bookingModel = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(),
-						resultSet.getString(4), resultSet.getString(5));
+				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
+						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 			}
@@ -161,7 +167,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select book_date+90 from booking where aadharcard=?";
+			String query = "select book_date+90 as date from donor_booking where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, donor.getAadharcard());
@@ -170,7 +176,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 			while (resultSet.next()) {
 
-				date = resultSet.getDate(1).toLocalDate();
+				date = resultSet.getDate("book_date+90").toLocalDate();
 
 			}
 
@@ -196,7 +202,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		try {
 			connection = connectionUtil.getConnection();
 			String commit = "commit";
-			String query = "update booking set book_date=? where aadharcard=?";
+			String query = "update donor_booking set book_date=? where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setDate(1, java.sql.Date.valueOf(bookingModel.getAppdate()));
 			preparedStatement.setLong(2, bookingModel.getDonor().getAadharcard());
@@ -220,21 +226,21 @@ public class BookingDAOlmpl implements BookingDAO {
 	public List<BookingModel> showBookingDonor(Donor donor) {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		List<BookingModel> booking = new ArrayList<BookingModel>();
+		List<BookingModel> booking = new ArrayList();
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
 		try {
 
 			connection = connectionUtil.getConnection();
-			String query = "select  AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking where aadharcard=?";
+			String query = "select  aadharcard_number,address,book_date,blood_type,blood_collect_choice from donor_booking where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, donor.getAadharcard());
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				bookingModel = new BookingModel(donor, resultSet.getString(2), resultSet.getDate(3).toLocalDate(),
-						resultSet.getString(4), resultSet.getString(5));
+				bookingModel = new BookingModel(donor, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
+						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 
@@ -258,23 +264,23 @@ public class BookingDAOlmpl implements BookingDAO {
 	public List<BookingModel> showBookingAdmin() {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
-		List<BookingModel> booking = new ArrayList<BookingModel>();
+		List<BookingModel> booking = new ArrayList();
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 
 			connection = connectionUtil.getConnection();
-			String query = "select AADHARCARD,ADDRESS,BOOK_DATE,BLOOD_TYPE,BLOOD_COLLECT_CHOICE from booking ";
+			String query = "select aadharcard_number,address,book_date,blood_type,blood_collect_choice from donor_booking ";
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				DonorDAOImpl donor = new DonorDAOImpl();
 
-				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(1));
+				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(AADHARCARDNUMBER));
 
-				bookingModel = new BookingModel(donor1, resultSet.getString(2), resultSet.getDate(3).toLocalDate(),
-						resultSet.getString(4), resultSet.getString(5));
+				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
+						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 

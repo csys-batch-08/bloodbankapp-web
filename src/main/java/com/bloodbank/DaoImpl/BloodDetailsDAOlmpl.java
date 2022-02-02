@@ -13,7 +13,10 @@ import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.Donor;
 
 public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
-
+	static final String BLOODTYPE ="blood_type";
+	static final String BLOODUNIT ="blood_unit";
+	static final String BLOODUNITPRICE ="blood_unit_price";
+	
 	public int insertBloodDetails(BloodDetailsModel detailsModel) {
 		int tempNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -22,13 +25,13 @@ public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 		try {
 			connection = connectionUtil.getConnection();
 
-			String query = "insert into blood_details(blood_type,aadharcard,unit,price) values(?,?,?,?)";
+			String query = "insert into blood_details(blood_type,aadharcard_number,blood_unit,blood_unit_price) values(?,?,?,?)";
 			preparedStatement = connection.prepareStatement(query);
 			String commit = "commit";
 			preparedStatement.setString(1, detailsModel.getBloodType());
 			preparedStatement.setLong(2, detailsModel.getDonor().getAadharcard());
 			preparedStatement.setInt(3, detailsModel.getUnit());
-			preparedStatement.setInt(4, detailsModel.getPrice());
+			preparedStatement.setDouble(4, detailsModel.getBloodPrice());
 			tempNumber = preparedStatement.executeUpdate();
 			preparedStatement.executeQuery(commit);
 
@@ -58,14 +61,14 @@ public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select BLOOD_TYPE,AADHARCARD,UNIT,PRICE from blood_details where aadharcard=?";
+			String query = "select blood_type,aadharcard_number,blood_unit,blood_unit_price from blood_details where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, donor.getAadharcard());
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				detailsModel = new BloodDetailsModel(donor, resultSet.getInt(3), resultSet.getString(1),
-						resultSet.getInt(4));
+				detailsModel = new BloodDetailsModel(donor, resultSet.getInt(BLOODUNIT), resultSet.getString(BLOODTYPE),
+						resultSet.getDouble(BLOODUNITPRICE));
 
 				showList.add(detailsModel);
 			}

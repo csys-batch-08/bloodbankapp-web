@@ -98,7 +98,7 @@ public class SeekerDetails {
 
 	public SeekerDetails() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public SeekerDetails(String firstName, String lastName, String address, Long phoneNumber, String password,

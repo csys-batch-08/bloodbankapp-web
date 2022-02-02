@@ -87,7 +87,7 @@ public class BillingModel {
 
 	public BillingModel() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

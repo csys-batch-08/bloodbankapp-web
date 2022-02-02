@@ -28,11 +28,13 @@ import com.bloodbank.model.SeekerDetails;
 public class SeekerRequestServlet extends HttpServlet {
 	
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String collectorName = request.getParameter("NAME");
+		String firstName = request.getParameter("FIRSTNAME");
+		String lastName = request.getParameter("LASTNAME");
+		String collectorName=firstName+lastName;
 		Long aadharcard = Long.parseLong(request.getParameter("number"));
 		String hospitalName = request.getParameter("HOSPITAL");
 		String bloodtype = request.getParameter("bloodtype");

@@ -10,7 +10,7 @@ public class AdminModel {
 
 	public AdminModel() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public AdminModel(String email, String password, double wallet) {

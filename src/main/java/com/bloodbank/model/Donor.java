@@ -109,7 +109,7 @@ public class Donor {
 
 	public Donor() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

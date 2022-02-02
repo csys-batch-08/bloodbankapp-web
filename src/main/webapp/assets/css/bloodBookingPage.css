@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.problem {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav.header {
+	background: #160101;
+	width: 100%;
+}
+
+body {
+	background-image: url("../images//002.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.bookinner a, input {
+	background: black;
+	text-decoration: none;
+	padding: 10px 20px;
+	color: white;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+nav {
+	margin-right: 20%;
+}
+
+.submitBtn {
+	position: relative;
+	bottom: 16px;
+	width: 177px;
+	height: 42px;
+	padding: 5px;
+}

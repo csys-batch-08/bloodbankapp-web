@@ -12,7 +12,7 @@ public interface BloodStackDAO {
 	public int updateStackReduce(String bloodType,int unit);
 	public int checkOfQuantity(String bloodtype);
 	public List<BloodStack> showStack();
-	
+	public int bloodPriceChange(String bloodtype,double bloodPrice);
 	
 	
 	

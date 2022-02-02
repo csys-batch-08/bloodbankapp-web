@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+#not {
+	background-color: tomato;
+	color: white;
+}
+
+.alertMassage {
+	background: linear-gradient(141deg, black 50%, white 50%);
+}
+
+.alertMassage {
+	background: orange;
+	color: white;
+	font-weight: bold;
+}
+
+.bodycontent {
+	justify-content: center;
+	height: 100vh;
+}
+
+.bodycontent p {
+	font-family: cursive;
+}
+nav.header {
+	background: #160101;
+}

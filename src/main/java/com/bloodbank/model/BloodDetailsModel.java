@@ -6,45 +6,35 @@ public class BloodDetailsModel {
 	private Donor donor;
 	private int unit;
 	private String bloodType;
-	private int price;
-
+	private double bloodPrice;
 	public Donor getDonor() {
 		return donor;
 	}
-
 	public void setDonor(Donor donor) {
 		this.donor = donor;
 	}
-
 	public int getUnit() {
 		return unit;
 	}
-
 	public void setUnit(int unit) {
 		this.unit = unit;
 	}
-
 	public String getBloodType() {
 		return bloodType;
 	}
-
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
-
-	public int getPrice() {
-		return price;
+	public double getBloodPrice() {
+		return bloodPrice;
 	}
-
-	public void setPrice(int price) {
-		this.price = price;
+	public void setBloodPrice(double bloodPrice) {
+		this.bloodPrice = bloodPrice;
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(bloodType, donor, price, unit);
+		return Objects.hash(bloodPrice, bloodType, donor, unit);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,27 +44,27 @@ public class BloodDetailsModel {
 		if (getClass() != obj.getClass())
 			return false;
 		BloodDetailsModel other = (BloodDetailsModel) obj;
-		return Objects.equals(bloodType, other.bloodType) && Objects.equals(donor, other.donor) && price == other.price
+		return Double.doubleToLongBits(bloodPrice) == Double.doubleToLongBits(other.bloodPrice)
+				&& Objects.equals(bloodType, other.bloodType) && Objects.equals(donor, other.donor)
 				&& unit == other.unit;
 	}
-
 	@Override
 	public String toString() {
-		return "BloodDetailsModel [donor=" + donor + ", unit=" + unit + ", bloodType=" + bloodType + ", price=" + price
-				+ "]";
+		return "BloodDetailsModel [donor=" + donor + ", unit=" + unit + ", bloodType=" + bloodType + ", bloodPrice="
+				+ bloodPrice + "]";
 	}
-
-	public BloodDetailsModel(Donor donor, int unit, String bloodType, int price) {
+	public BloodDetailsModel(Donor donor, int unit, String bloodType, double bloodPrice) {
 		super();
 		this.donor = donor;
 		this.unit = unit;
 		this.bloodType = bloodType;
-		this.price = price;
+		this.bloodPrice = bloodPrice;
 	}
-
 	public BloodDetailsModel() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
+
+	
 
 }

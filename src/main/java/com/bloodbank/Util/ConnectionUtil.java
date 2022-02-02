@@ -30,7 +30,7 @@ public  static void closePreparedStatement(PreparedStatement preparedStatement,C
 	}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 	
@@ -51,7 +51,7 @@ public  static void closePreparedStatement(PreparedStatement preparedStatement,C
 	}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 

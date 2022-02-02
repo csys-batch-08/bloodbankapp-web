@@ -1,12 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>AdminWork</title>
-
-<style>
+@charset "ISO-8859-1";
 body {
 	height: 100vh;
 	margin: 0px;
@@ -82,25 +74,3 @@ body {
 	font-size: 15px;
 	padding: 5px 0px;
 }
-</style>
-</head>
-<body>
-
-	<div class="adminCard">
-		<div class="adminImage">
-			<img src="Images/004.png">
-		</div>
-		<div class="content">
-
-			<h1 style="text-align: center;">Admin Work</h1>
-			<a href="ShowStakServlet"> ShowStock</a> <a href="ShowBillingAdminServlet">
-				ShowBilling</a> <a href="AdminShowRequestServelt"> ShowRequest </a> <a
-				href="AdminShowBookingServlet">Booking</a>
-		</div>
-		<div class="backBtn">
-			<a href="index.jsp">back</a>
-		</div>
-	</div>
-
-</body>
-</html>

@@ -12,33 +12,40 @@ import com.bloodbank.model.AdminModel;
 
 public class AdminDAOlmpl implements AdminDAO {
 
+	static final String EMAIL="email";
+	static final String PASSWORD="password";
+	static final String WALLET="wallet";
+
+
+	
 	public AdminModel verificationAdmin(AdminModel adminModel) {
 		AdminModel adminModel2 = null;
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
-		ResultSet resultSet=null;
+		ResultSet resultSet = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		try {
 			connection = connectionUtil.getConnection();
 
-			String query = "select EMAIL ,PASSWORD,WALLET  from admin where email=? and password=?";
+			String query = "select email,password,wallet  from admin where email=? and password=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, adminModel.getEmail());
 			preparedStatement.setString(2, adminModel.getPassword());
-			 resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				adminModel2 = new AdminModel(resultSet.getString(1), resultSet.getString(2), resultSet.getDouble(3));
+				adminModel2 = new AdminModel(resultSet.getString(EMAIL), resultSet.getString(PASSWORD),
+						resultSet.getDouble(WALLET));
 			}
 
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
 		} catch (SQLException e1) {
-			
+
 			e1.printStackTrace();
 		} finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet );
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 
 		return adminModel2;
@@ -49,23 +56,23 @@ public class AdminDAOlmpl implements AdminDAO {
 		AdminModel adminModel = new AdminModel();
 		Statement statement = null;
 		Connection connection = null;
-		ResultSet resultSet=null;
+		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		try {
 			connection = connectionUtil.getConnection();
-			String query1 = "select EMAIL ,PASSWORD,WALLET from admin";
+			String query1 = "select email ,password,wallet from admin";
 			statement = connection.createStatement();
-			 resultSet = statement.executeQuery(query1);
+			resultSet = statement.executeQuery(query1);
 
 			if (resultSet.next()) {
-				adminModel = new AdminModel(resultSet.getString(1), resultSet.getString(2), resultSet.getDouble(3));
+				adminModel = new AdminModel(resultSet.getString(EMAIL), resultSet.getString(PASSWORD),
+						resultSet.getDouble(WALLET));
 			}
-		double walletTotal = adminModel.getWallet() - 300;
+			double walletTotal = adminModel.getWallet() - 300;
 
-			
 			String query = "update admin set wallet=? where email=?";
-		    String commit="commit";
+			String commit = "commit";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setDouble(1, walletTotal);
 			preparedStatement.setString(2, adminModel.getEmail());
@@ -73,13 +80,13 @@ public class AdminDAOlmpl implements AdminDAO {
 			preparedStatement.executeQuery(commit);
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
-		} 
+		}
 
 		finally {
-			ConnectionUtil.closeStatement(statement, connection,resultSet);
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,resultSet);
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, resultSet);
 		}
 		return adminModel;
 
@@ -109,14 +116,14 @@ public class AdminDAOlmpl implements AdminDAO {
 			preparedStatement.executeQuery(commit);
 
 		} catch (ClassNotFoundException e) {
-			
+
 			e.printStackTrace();
 		} catch (SQLException e1) {
-			
+
 			e1.printStackTrace();
 		} finally {
 
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection,null);
+			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 
 		}
 
@@ -130,28 +137,28 @@ public class AdminDAOlmpl implements AdminDAO {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Connection connection = null;
 		Statement statement = null;
-		ResultSet resultSet=null;
+		ResultSet resultSet = null;
 		try {
 
 			connection = connectionUtil.getConnection();
 			String query = "select wallet from admin";
 			statement = connection.createStatement();
-			 resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 
-				wallet = resultSet.getDouble(1);
+				wallet = resultSet.getDouble(WALLET);
 
 			}
 
 		} catch (ClassNotFoundException e) {
-			
+
 			e.printStackTrace();
 		} catch (SQLException e1) {
-			
+
 			e1.printStackTrace();
 		} finally {
 
-			ConnectionUtil.closeStatement(statement, connection,resultSet);
+			ConnectionUtil.closeStatement(statement, connection, resultSet);
 
 		}
 

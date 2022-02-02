@@ -88,7 +88,7 @@ public class BookingModel {
 
 	public BookingModel() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

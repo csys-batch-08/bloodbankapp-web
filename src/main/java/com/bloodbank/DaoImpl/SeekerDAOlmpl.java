@@ -11,7 +11,16 @@ import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.SeekerDetails;
 
 public class SeekerDAOlmpl implements SeekerDAO {
-
+	static final String FIRSTNAME="first_name";
+	static final String LASTNAME="last_name";
+	static final String ADDRESS="address";
+	static final String PHONENUMBER="phone_number";
+	static final String PASSWORD="password";
+	static final String PATIENTID="patient_id";
+	static final String HOSPITALNAME="hospital_name";
+	static final String BLOODTYPE="blood_type";
+	
+	
 	public int insertSeekerDetails(SeekerDetails seekerDetails) {
 		int returnNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -59,13 +68,13 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		int seekerId = 0;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select ID  from seeker_details where PHONE_NUMBER=? ";
+			String query = "select id  from seeker_details where phone_number=? ";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, seekerDetails.getPhoneNumber());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				seekerId = resultSet.getInt(1);
+				seekerId = resultSet.getInt("ID");
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -91,16 +100,16 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,PHONE_NUMBER,PASSWORD,PATIENT_ID,HOSPITAL_NAME,BLOOD_TYPE  from seeker_details where PASSWORD=? and PHONE_NUMBER=? ";
+			String query = "select first_name,last_name,address,phone_number,password,patient_id,hospital_name,blood_type  from seeker_details where password=? and phone_number=? ";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, password);
 			preparedStatement.setLong(2, phoneNumber);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				seekerDetails = new SeekerDetails(resultSet.getString(1), resultSet.getString(2),
-						resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5), resultSet.getLong(6),
-						resultSet.getString(7), resultSet.getString(8));
+				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
+						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -127,13 +136,13 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		Statement statement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,PHONE_NUMBER,PASSWORD,PATIENT_ID,HOSPITAL_NAME,BLOOD_TYPE  from seeker_details";
+			String query = "select first_name,last_name,address,phone_number,password,patient_id,hospital_name,blood_type  from seeker_details";
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
-				seekerDetails = new SeekerDetails(resultSet.getString(1), resultSet.getString(2),
-						resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5), resultSet.getLong(6),
-						resultSet.getString(7), resultSet.getString(8));
+				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
+						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
 			}
 		} catch (ClassNotFoundException e) {
 
@@ -160,15 +169,15 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select FIRST_NAME,LAST_NAME,ADDRESS,PHONE_NUMBER,PASSWORD,PATIENT_ID,HOSPITAL_NAME,BLOOD_TYPE from seeker_details where PHONE_NUMBER =?";
+			String query = "select first_name,last_name,address,phone_number,password,patient_id,hospital_name,blood_type from seeker_details where phone_number =?";
 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, phoneNumber);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				seekerDetails = new SeekerDetails(resultSet.getString(1), resultSet.getString(2),
-						resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5), resultSet.getLong(6),
-						resultSet.getString(7), resultSet.getString(8));
+				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
+						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
 			}
 		} catch (ClassNotFoundException e) {
 
@@ -194,7 +203,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select PHONE_NUMBER from seeker_details where PHONE_NUMBER =?";
+			String query = "select phone_number from seeker_details where phone_number =?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setLong(1, phoneNumber);
 			resultset = preparedStatement.executeQuery();
@@ -225,7 +234,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		try {
 			connection = connectionUtil.getConnection();
 
-			String query = "update  seeker_details  set PASSWORD=?  where PHONE_NUMBER=?";
+			String query = "update  seeker_details  set password=?  where phone_number=?";
 
 			preparedStatement = connection.prepareStatement(query);
 
