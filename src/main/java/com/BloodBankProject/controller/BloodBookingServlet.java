@@ -2,11 +2,8 @@ package com.BloodBankProject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.zone.ZoneRulesException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,17 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bloodbank.DaoImpl.AdminDAOlmpl;
-import com.bloodbank.DaoImpl.BloodDetailsDAOlmpl;
-import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
 import com.bloodbank.DaoImpl.BookingDAOlmpl;
-import com.bloodbank.DaoImpl.DonorDAOImpl;
-import com.bloodbank.model.BloodDetailsModel;
-import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
 @WebServlet("/BloodBookingServlet")
-public class BloodBookingServlet extends HttpServlet {
+public class BloodBookingServlet extends HttpServlet implements Serializable {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,7 +30,14 @@ public class BloodBookingServlet extends HttpServlet {
 		String choice = request.getParameter("Choice");
 
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
-		PrintWriter writer = response.getWriter();
+
+		PrintWriter writer = null;
+		try {
+			writer = response.getWriter();
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		}
 		try {
 			date = LocalDate.parse(request.getParameter("bookingDate"));
 
@@ -88,7 +87,7 @@ public class BloodBookingServlet extends HttpServlet {
 						writer.println("alert('Booking Successfully');");
 						writer.println("location='bloodBookingIndex.jsp';");
 						writer.println("</script>");
-						
+
 					}
 
 				}
