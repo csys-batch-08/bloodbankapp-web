@@ -16,7 +16,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/seekerIndex.css">
- </head>
+</head>
 <body>
 	<nav class="header seakerindex">
 		<ul>
@@ -25,7 +25,7 @@
 		</ul>
 	</nav>
 	<div class="homeContent">
-		<img src="assets/images/002.jpg"  alt="heartimage" >
+		<img src="assets/images/002.jpg" alt="heartimage">
 	</div>
 </body>
 </html>

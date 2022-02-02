@@ -16,14 +16,14 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/bookingPage.css">
- 
+
 </head>
 <body>
 
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-			
+
 			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
@@ -32,7 +32,7 @@
 		<div class="col-sm-5"></div>
 		<div class="bookinner col-sm-3" onmouseover="check()">
 
-			<form action="BloodBookingServlet "  method="post" >
+			<form action="BloodBookingServlet " method="post">
 
 				<h1>BOOKING</h1>
 				<div>

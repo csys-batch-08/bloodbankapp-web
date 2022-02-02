@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 
 <title>AdminLogin</title>
-<link rel="stylesheet" type="text/css" href="assets/css/form.css"> 
+<link rel="stylesheet" type="text/css" href="assets/css/form.css">
 </head>
 <body>
 	<div class="loginForm">
@@ -18,7 +18,7 @@
 				<div class="formcontrol">
 					<input type="email" id="email" name="email" required="required"
 						placeholder="Enter the Email">
-					</div>
+				</div>
 				<div class="formcontrol">
 					<input type="password" id="password" name="password"
 						required="required" placeholder="Enter the password"

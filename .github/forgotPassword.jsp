@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -9,7 +9,6 @@
 <title>Forgot Password</title>
 <link rel="stylesheet" type="text/css" href="css/Style.css">
 <style type="text/css">
-
 a {
 	text-decoration: none
 }
@@ -17,6 +16,7 @@ a {
 nav.header {
 	background: #160101;
 }
+
 .loginForm form h1 {
 	margin: 0px 0px 20px;
 	color: white;
@@ -123,7 +123,7 @@ p {
 </head>
 <body>
 
-<nav class="header seakerindex">
+	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="DonorIndex.jsp">Donor</a></li>
@@ -143,8 +143,7 @@ p {
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[0-9]{10}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters"><br>
-					<br>
+						title=" mininum 10characters"><br> <br>
 
 				</div>
 				<div class="formcontrol">
@@ -172,15 +171,15 @@ p {
 				</div>
 
 
-				
-<c:if test="${requestScope.PasswordError!=null }">
-				<p class="text-primary">${PasswordError}</p>
+
+				<c:if test="${requestScope.PasswordError!=null }">
+					<p class="text-primary">${PasswordError}</p>
 				</c:if>
 
 
-				
-<c:if test="${requestScope.numbererror!=null }">
-				<p class="text-primary">${numbererror}</p>
+
+				<c:if test="${requestScope.numbererror!=null }">
+					<p class="text-primary">${numbererror}</p>
 				</c:if>
 
 

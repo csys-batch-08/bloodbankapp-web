@@ -4,8 +4,8 @@
 <%@page import="com.bloodbank.model.Donor"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,24 +28,21 @@
 
 			</tr>
 			<c:forEach items="${requestScope.bookingList }" var="List">
-			<tr>
-			 <td>${List.donor.aadharcard }</td>
-               <td>${List.address }</td>
-               <td>
-					<fmt:parseDate value="${List.appdate }" pattern="yyyy-MM-dd" var="appdate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${appdate}"/>
-               </td>
-               <td>${List.bloodType }</td>
-               <td>${List.bloodCollectChoice }</td>
-			
-			
-			</tr>
-</c:forEach>
-			
+				<tr>
+					<td>${List.donor.aadharcard }</td>
+					<td>${List.address }</td>
+					<td><fmt:parseDate value="${List.appdate }"
+							pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
+							pattern="dd/MM/yyyy" value="${appdate}" /></td>
+					<td>${List.bloodType }</td>
+					<td>${List.bloodCollectChoice }</td>
+
+
+				</tr>
+			</c:forEach>
+
 		</table>
-		<br>
-		<br>
+		<br> <br>
 
 		<div class="backBtn">
 			<a href="bloodBookingProcess.jsp">back</a>

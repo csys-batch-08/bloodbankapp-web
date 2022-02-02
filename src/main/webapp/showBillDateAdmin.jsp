@@ -6,10 +6,10 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="adminCard">
-		<table >
+		<table>
 			<tr>
 				<th><strong>BLOODTYPE</strong></th>
 				<th><strong>SEEKER NAME</strong></th>
@@ -31,23 +31,21 @@
 
 
 
-           <c:forEach items="${requestScope.billingList}" var="billingList">
-                
-			<tr> 
-			
-			<td>${billingList.bloodType}</td>
+			<c:forEach items="${requestScope.billingList}" var="billingList">
+
+				<tr>
+
+					<td>${billingList.bloodType}</td>
 					<td>${billingList.seeker.firstName}</td>
 					<td>${billingList.seeker.phoneNumber}</td>
 					<td>${billingList.unit}</td>
 					<td>${billingList.totalprice}</td>
-					<td>
-					<fmt:parseDate value="${billingList.billDate}" pattern="yyyy-MM-dd" var="billDate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${billDate}"/>
-					</td>
-			</tr>
+					<td><fmt:parseDate value="${billingList.billDate}"
+							pattern="yyyy-MM-dd" var="billDate" type="date" /> <fmt:formatDate
+							pattern="dd/MM/yyyy" value="${billDate}" /></td>
+				</tr>
 			</c:forEach>
-			
+
 		</table>
 
 		<div class="backBtn">

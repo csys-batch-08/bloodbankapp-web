@@ -9,27 +9,29 @@
 }
 
 .homeContent p {
-    position: absolute;
-    top: 322px;
-    width: 379px;
-    right: 24px;
-    font-size: 20px;
-    font-family: cursive;
-    font-weight: bold;
-    color: black;
-    content: 0;
-    z-index: 9;
+	position: absolute;
+	top: 322px;
+	width: 379px;
+	right: 24px;
+	font-size: 20px;
+	font-family: cursive;
+	font-weight: bold;
+	color: black;
+	content: 0;
+	z-index: 9;
 }
-.homeContent {
-    padding: 0px;
-    text-align: justify;
-    position: relative;
-    line-height: 2;
-}
-.homeContent img{
-width: 100%;
 
+.homeContent {
+	padding: 0px;
+	text-align: justify;
+	position: relative;
+	line-height: 2;
 }
-body{
-overflow: hidden;
+
+.homeContent img {
+	width: 100%;
+}
+
+body {
+	overflow: hidden;
 }

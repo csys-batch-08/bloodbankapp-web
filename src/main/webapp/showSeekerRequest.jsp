@@ -4,8 +4,8 @@
 <%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +16,12 @@
 </head>
 <body>
 
-   
-       
+
+
 	<div class="adminCard">
-  
-       
-     
+
+
+
 		<table>
 
 			<tr>
@@ -34,36 +34,36 @@
 				<th>DATE</th>
 				<th>STATUS</th>
 			</tr>
-			
+
 			<c:forEach items="${requestScope.requestList }" var="List">
-              <tr>
-              <td>${List.hospitalName}</td>
-              <td>${List.bloodType}</td>
-              <td>${List.unit}</td>
-              <td>${List.bloodCollectorName}</td>
-              <td>${List.phoneNumber}</td>
-              <td>${List.aadharcard}</td>
-              <td>
-					<fmt:parseDate value="${List.requestDate}" pattern="yyyy-MM-dd" var="requestDate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${requestDate}"/>  </td>
-              
-            
-              
-              <td>${List.status}</td>       
-              
-            
-              </tr>
-              </c:forEach>
-            
+				<tr>
+					<td>${List.hospitalName}</td>
+					<td>${List.bloodType}</td>
+					<td>${List.unit}</td>
+					<td>${List.bloodCollectorName}</td>
+					<td>${List.phoneNumber}</td>
+					<td>${List.aadharcard}</td>
+					<td><fmt:parseDate value="${List.requestDate}"
+							pattern="yyyy-MM-dd" var="requestDate" type="date" /> <fmt:formatDate
+							pattern="dd/MM/yyyy" value="${requestDate}" /></td>
+
+
+
+					<td>${List.status}</td>
+
+
+				</tr>
+			</c:forEach>
+
 		</table>
 		<br>
 
 		<div class="backBtn">
 			<a href="requestCancel.jsp">REQUEST CANCEL </a>
-		</div>	<div class="backBtn">			
+		</div>
+		<div class="backBtn">
 			<a href="requestIndex.jsp">back</a>
-		
+
 		</div>
 	</div>
 </body>

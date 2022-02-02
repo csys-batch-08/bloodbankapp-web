@@ -7,7 +7,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Register</title>
-<link rel="stylesheet" type="text/css" href="assets/css/seekerRegister.css"> 
+<link rel="stylesheet" type="text/css"
+	href="assets/css/seekerRegister.css">
 </head>
 <body>
 	<div class="loginForm">
@@ -22,8 +23,8 @@
 						title="mininum 3 character"><br /> <br />
 				</div>
 				<div class="formcontrol">
-					<input type="text" id="lastName" name="lastName" required="required"
-						placeholder="lastName" pattern="[A-Za-z]+"
+					<input type="text" id="lastName" name="lastName"
+						required="required" placeholder="lastName" pattern="[A-Za-z]+"
 						title=" must enter the last name"><br /> <br />
 				</div>
 				<div class="formcontrol">

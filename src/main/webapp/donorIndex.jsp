@@ -26,12 +26,13 @@
 			<li><a href="donorRegister.jsp">Register</a></li>
 		</ul>
 	</nav>
-	
-			
+
+
 	<div class="homeContent">
-	  <img alt="nothing " src="assets/images/005.gif">
-	
-		 <P>  If you're a blood donor, you're a hero to someone, somewhere, who received your gracious gift of life.</P>
-			</div>
+		<img alt="nothing " src="assets/images/005.gif">
+
+		<P>If you're a blood donor, you're a hero to someone, somewhere,
+			who received your gracious gift of life.</P>
+	</div>
 </body>
 </html>

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Seeker Login</title>
 
-<link rel="stylesheet" type="text/css" href="assets/css/navbar.css"> 
+<link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/formformat.css">
 
 </head>
@@ -26,7 +26,7 @@
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="SeekerLoginServlet"  method="post" 
+			<form action="SeekerLoginServlet" method="post"
 				style="text-align: center;">
 
 
@@ -55,12 +55,12 @@
 					</button>
 
 				</div>
-				
-              <c:if test="${requestScope.SeekerError!=null }">
-				<p class="text-primary">${SeekerError}</p>
+
+				<c:if test="${requestScope.SeekerError!=null }">
+					<p class="text-primary">${SeekerError}</p>
 				</c:if>
 
-								
+
 
 
 			</form>

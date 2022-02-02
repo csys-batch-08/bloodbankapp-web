@@ -14,7 +14,8 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="assets/css/requestSeeker.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/requestSeeker.css">
 </head>
 <body>
 	<nav class="header seakerindex">
@@ -26,21 +27,21 @@
 		</ul>
 	</nav>
 	<div class="loginForm">
-	
+
 		<div class="cardContent">
 
-			<form action="SeekerRequestServlet" method="post" >
+			<form action="SeekerRequestServlet" method="post">
 				<h1>Request</h1>
 				<div class="formcontrol">
 
-					<input type="text" id="NAME" name="FIRSTNAME" required="required" autofocus="autofocus"
-						pattern="[A-Za-z]{3,}" title="enter the Name"
-						placeholder=" Enter the Fisrt Name">
+					<input type="text" id="NAME" name="FIRSTNAME" required="required"
+						autofocus="autofocus" pattern="[A-Za-z]{3,}"
+						title="enter the Name" placeholder=" Enter the Fisrt Name">
 				</div>
 				<div class="formcontrol">
 
-					<input type="text" id="NAME" name="LASTNAME" required="required" autofocus="autofocus"
-						pattern="[A-Za-z]+" title="enter the Name"
+					<input type="text" id="NAME" name="LASTNAME" required="required"
+						autofocus="autofocus" pattern="[A-Za-z]+" title="enter the Name"
 						placeholder=" Enter the Last Name">
 				</div>
 
@@ -61,8 +62,8 @@
 				</div>
 
 				<div class="formcontrol">
-					<p class="text-secondary" style="font-family: fantasy;"> Request Date 
-						</p>
+					<p class="text-secondary" style="font-family: fantasy;">
+						Request Date</p>
 					<input type="date" id="Date" name="currentdate" required="required"
 						placeholder="Date">
 				</div>
@@ -98,13 +99,12 @@
 
 
 					<button type="reset">Reset</button>
-				</div>			
-			
+				</div>
 		</div>
 
 		</form>
 	</div>
-	
+
 </body>
 
 

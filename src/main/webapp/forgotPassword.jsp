@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -11,12 +11,11 @@
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
 
 <style type="text/css">
-
 </style>
 </head>
 <body>
 
-<nav class="header seakerindex">
+	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="donorIndex.jsp">Donor</a></li>
@@ -29,31 +28,30 @@
 
 	<div class="loginForm">
 		<div class="cardContent">
-			<form action="Forgotpassword"  method="post" >
+			<form action="Forgotpassword" method="post">
 				<h1 style="text-align: center;">Forgot Password</h1>
 
 
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[0-9]{10}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters"><br/>
-					<br/>
+						title=" mininum 10characters"><br /> <br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="PASSWORD" name="PASSWORD" required
 						placeholder="Enter the Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br/>
-					<br/>
+						title=" mininum 8characters may includes @#$%&*_?/ "><br />
+					<br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="CONFIRM" name="CONFIRM" required
 						placeholder="Enter the Confirm Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br/>
-					<br/>
+						title=" mininum 8characters may includes @#$%&*_?/ "><br />
+					<br />
 
 				</div>
 
@@ -65,15 +63,15 @@
 				</div>
 
 
-				
-<c:if test="${requestScope.PasswordError!=null }">
-				<p class="text-primary">${PasswordError}</p>
+
+				<c:if test="${requestScope.PasswordError!=null }">
+					<p class="text-primary">${PasswordError}</p>
 				</c:if>
 
 
-				
-<c:if test="${requestScope.numbererror!=null }">
-				<p class="text-primary">${numbererror}</p>
+
+				<c:if test="${requestScope.numbererror!=null }">
+					<p class="text-primary">${numbererror}</p>
 				</c:if>
 
 

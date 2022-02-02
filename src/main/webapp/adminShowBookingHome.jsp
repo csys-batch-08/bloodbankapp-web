@@ -12,8 +12,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AdminShowBookingHome</title>
-<link rel="stylesheet" type="text/css"
-	href="assets/css/tableformat.css">
+<link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
 
 </head>
 <body>
@@ -32,11 +31,9 @@
 				<tr>
 					<td>${List.donor.aadharcard }</td>
 					<td>${List.address }</td>
-					<td>
-					<fmt:parseDate value="${List.appdate }" pattern="yyyy-MM-dd" var="appdate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${appdate}"/>  
-					</td>
+					<td><fmt:parseDate value="${List.appdate }"
+							pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
+							pattern="dd/MM/yyyy" value="${appdate}" /></td>
 					<td>${List.bloodType }</td>
 					<td>${List.bloodCollectChoice }</td>
 

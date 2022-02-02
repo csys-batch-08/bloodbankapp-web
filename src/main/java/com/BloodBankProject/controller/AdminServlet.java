@@ -10,26 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.bloodbank.DaoImpl.AdminDAOlmpl;
 import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.AdminModel;
 
 @WebServlet("/AdminController")
 public class AdminServlet extends HttpServlet {
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		PrintWriter  writer = response.getWriter();
-	
+
+		PrintWriter writer = response.getWriter();
+
 		String username = request.getParameter("email");
 		String password = request.getParameter("password");
-		AdminModel  adminModel = new AdminModel(username, password, 0);
-		AdminDAOlmpl  adminDAOlmpl = new AdminDAOlmpl();
+		AdminModel adminModel = new AdminModel(username, password, 0);
+		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
 		try {
-		
+
 			if (adminDAOlmpl.verificationAdmin(adminModel) != null) {
 
 				writer.println("<script type=\"text/javascript\">");
@@ -44,16 +43,14 @@ public class AdminServlet extends HttpServlet {
 			}
 		} catch (ExeceptionHandle e) {
 
-		
 			try {
 				request.setAttribute("error", e.adminMessage());
-				RequestDispatcher dispatcher=request.getRequestDispatcher("adminLogin.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp");
 				dispatcher.forward(request, response);
 			} catch (ServletException | IOException e1) {
-			
+
 				e1.printStackTrace();
 			}
-			
 
 		}
 

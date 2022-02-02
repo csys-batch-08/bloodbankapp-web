@@ -8,7 +8,8 @@
 <meta charset="ISO-8859-1">
 <title>Donor Login</title>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="assets/css/donorLoginpage.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/donorLoginpage.css">
 
 </head>
 <body>
@@ -31,14 +32,13 @@
 
 		<div class="cardContent">
 
-			<form action="login"  method="post" >
+			<form action="login" method="post">
 				<h1>login</h1>
 				<div class="formcontrol">
 					<input type="text" id="aadharcard" name="aadharcard" autofocus
 						required="required" pattern="[0-9]{12}"
 						placeholder="Enter the Aadharcard Number"
-						title="enter the valid Aadharcard number"><br/>
-					<br/>
+						title="enter the valid Aadharcard number"><br /> <br />
 
 				</div>
 
@@ -46,9 +46,9 @@
 					<input type="submit" value="login">
 
 				</div>
-				
-<c:if test="${requestScope.DonorError!=null }">
-				<p class="text-primary">${DonorError}</p>
+
+				<c:if test="${requestScope.DonorError!=null }">
+					<p class="text-primary">${DonorError}</p>
 				</c:if>
 
 			</form>

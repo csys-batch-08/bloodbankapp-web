@@ -1,4 +1,5 @@
 @charset "ISO-8859-1";
+
 #not {
 	background-color: tomato;
 	color: white;
@@ -22,6 +23,7 @@
 .bodycontent p {
 	font-family: cursive;
 }
+
 nav.header {
 	background: #160101;
 }

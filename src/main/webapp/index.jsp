@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="ISO-8859-1" >
- <meta name="bloodbank" content="bloodbank web app">
- 
+<meta charset="ISO-8859-1">
+<meta name="bloodbank" content="bloodbank web app">
+
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/Main.css">

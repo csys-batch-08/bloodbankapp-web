@@ -18,14 +18,15 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="assets/css/requestIndex.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/requestIndex.css">
 </head>
 <body>
 
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-		
+
 			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>
@@ -34,8 +35,8 @@
 		<nav>
 			<div class="bookinner">
 				<h1 class="text-center">BOOKING</h1>
-				<a href="bloodBooking.jsp">BOOK</a> <a href="ShowDonorBookingServlet">SHOW
-					BOOKED</a>
+				<a href="bloodBooking.jsp">BOOK</a> <a
+					href="ShowDonorBookingServlet">SHOW BOOKED</a>
 			</div>
 		</nav>
 

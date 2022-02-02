@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="assets/css/donorRegister.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/donorRegister.css">
 
 </head>
 
@@ -21,7 +22,7 @@
 
 
 
-			<form action="Register"  method="post" >
+			<form action="Register" method="post">
 				<h1>Register</h1>
 				<div class="formcontrol">
 
@@ -75,10 +76,10 @@
 						<option value="bombay">bombay</option>
 					</datalist>
 
-					
-             <c:if test="${requestScope.aadharcardNumber!=null }">
-				<p class="text-primary">${aadharcardNumber}</p>
-				</c:if>
+
+					<c:if test="${requestScope.aadharcardNumber!=null }">
+						<p class="text-primary">${aadharcardNumber}</p>
+					</c:if>
 
 				</div>
 				<div class="formbtn">

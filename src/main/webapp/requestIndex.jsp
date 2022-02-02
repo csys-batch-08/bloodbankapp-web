@@ -16,7 +16,8 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="assets/css/requestIndex.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/requestIndex.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
 		<ul>
 			<li><a href="donorIndex.jsp">Donor</a></li>
 			<li><a href="SeekerLogoutServlet">Logout</a></li>
-			
+
 		</ul>
 	</nav>
 	<div class="problem">

@@ -1,4 +1,5 @@
 @charset "ISO-8859-1";
+
 a {
 	text-decoration: none
 }
@@ -21,6 +22,7 @@ label {
 	width: 130px;
 	display: inline-block;
 }
+
 body {
 	background-image: url(../images/background.jpg);
 	background-repeat: no-repeat;
@@ -28,6 +30,7 @@ body {
 	background-position: bottom;
 	margin: 0px;
 }
+
 .loginForm form {
 	text-align: center;
 }

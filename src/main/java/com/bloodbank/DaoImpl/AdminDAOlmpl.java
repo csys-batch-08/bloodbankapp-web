@@ -12,12 +12,11 @@ import com.bloodbank.model.AdminModel;
 
 public class AdminDAOlmpl implements AdminDAO {
 
-	static final String EMAIL="email";
-	static final String PASSWORD="password";
-	static final String WALLET="wallet";
+	static final String EMAIL = "email";
+	static final String PASSWORD = "password";
+	static final String WALLET = "wallet";
 
-
-	
+	@Override
 	public AdminModel verificationAdmin(AdminModel adminModel) {
 		AdminModel adminModel2 = null;
 		PreparedStatement preparedStatement = null;
@@ -51,6 +50,7 @@ public class AdminDAOlmpl implements AdminDAO {
 		return adminModel2;
 	}
 
+	@Override
 	public AdminModel updateWallet() {
 
 		AdminModel adminModel = new AdminModel();
@@ -92,6 +92,7 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	}
 
+	@Override
 	public int seekerPayment(double totalPrice) {
 
 		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
@@ -131,6 +132,7 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	}
 
+	@Override
 	public Double checkWallet() {
 		double wallet = 0;
 

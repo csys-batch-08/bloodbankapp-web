@@ -12,8 +12,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css"
-	href="assets/css/tableformat.css">
+<link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
 </head>
 <body>
 
@@ -41,10 +40,9 @@
 					<td>${List.bloodCollectorName}</td>
 					<td>${List.phoneNumber}</td>
 					<td>${List.aadharcard}</td>
-					<td>
-					<fmt:parseDate value="${List.requestDate}" pattern="yyyy-MM-dd" var="requestDate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${requestDate}"/>  </td>
+					<td><fmt:parseDate value="${List.requestDate}"
+							pattern="yyyy-MM-dd" var="requestDate" type="date" /> <fmt:formatDate
+							pattern="dd/MM/yyyy" value="${requestDate}" /></td>
 					<td>${List.status}</td>
 				<tr>
 			</c:forEach>

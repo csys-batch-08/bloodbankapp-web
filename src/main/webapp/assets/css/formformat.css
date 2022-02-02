@@ -22,7 +22,7 @@ label {
 	width: 130px;
 	display: inline-block;
 }
- 
+
 body {
 	background-image: url(../images/background.jpg);
 	background-repeat: no-repeat;
@@ -30,7 +30,7 @@ body {
 	background-position: bottom;
 	margin: 0px;
 	overflow: hidden;
-} 
+}
 
 .loginForm form {
 	text-align: center;
@@ -45,6 +45,7 @@ body {
 	align-items: center;
 	justify-content: end;
 }
+
 .formcontrol input, textarea {
 	border: none;
 	width: 90%;
@@ -56,6 +57,7 @@ body {
 	box-shadow: 0px 0px 8px 0px #d1d1d1;
 	margin-bottom: 0px;
 }
+
 .formcontrol input {
 	border: none;
 	padding: 10px;

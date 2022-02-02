@@ -1,22 +1,28 @@
 @charset "ISO-8859-1";
+
 nav.header {
 	background: #160101;
 }
+
 a {
 	text-decoration: none
 }
+
 .loginForm form h1 {
 	margin: 0px 0px 20px;
 	color: white;
 }
+
 .loginForm form {
 	text-align: center;
 	padding: 25px;
 }
+
 label {
 	width: 130px;
 	display: inline-block;
 }
+
 body {
 	background-image: url(../images/background.jpg);
 	background-repeat: no-repeat;
@@ -25,9 +31,11 @@ body {
 	margin: 0px;
 	overflow: hidden;
 }
+
 .loginForm form {
 	text-align: center;
 }
+
 .loginForm {
 	width: 58%;
 	padding: 0px;
@@ -37,6 +45,7 @@ body {
 	align-items: center;
 	justify-content: end;
 }
+
 .formcontrol input {
 	border: none;
 	width: 90%;

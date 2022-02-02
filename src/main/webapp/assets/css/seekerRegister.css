@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
- body {
+
+body {
 	background-image: url(../images/background.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -7,6 +8,7 @@
 	margin: 0px;
 	overflow: hidden;
 }
+
 .loginForm {
 	width: 58%;
 	padding: 0px;
@@ -17,7 +19,6 @@
 	justify-content: end;
 }
 
- 
 a {
 	text-decoration: none
 }
@@ -40,7 +41,6 @@ label {
 .loginForm form {
 	text-align: center;
 }
-
 
 .formcontrol input, textarea {
 	border: none;
@@ -106,4 +106,4 @@ p {
 	padding: 11Spx;
 	border-radius: 6px;
 	width: 50%;
-} 
+}

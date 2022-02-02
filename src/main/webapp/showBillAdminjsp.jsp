@@ -44,12 +44,10 @@
 							<td>${billingList.seeker.phoneNumber}</td>
 							<td>${billingList.unit}</td>
 							<td>${billingList.totalprice}</td>
-							
-							<td>
-					<fmt:parseDate value="${billingList.billDate}" pattern="yyyy-MM-dd" var="billDate" type="date"/>   
-      
-                     <fmt:formatDate pattern="dd/MM/yyyy" value="${billDate}"/>
-					</td>
+
+							<td><fmt:parseDate value="${billingList.billDate}"
+									pattern="yyyy-MM-dd" var="billDate" type="date" /> <fmt:formatDate
+									pattern="dd/MM/yyyy" value="${billDate}" /></td>
 
 						</tr>
 					</c:forEach>
@@ -60,7 +58,7 @@
 
 				</table>
 			</div>
-			
+
 			<div class="content">
 				<form action="ShowForBillingDateServlet" method="post"
 					style="text-align: center;">
