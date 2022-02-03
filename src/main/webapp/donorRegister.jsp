@@ -13,11 +13,18 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
 	href="assets/css/donorRegister.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<div class="loginForm">
+	<script>
+$(document).ready(function(){
+  $("p").click(function(){
+    $(this).hide();
+  });
+});
+</script>
+<div class="loginForm">
 		<div class="cardContent">
 
 
@@ -33,7 +40,7 @@
 				<div class="formcontrol">
 					<input type="text" id="lastName" name="lastName" required
 						placeholder="Enter the lastName" pattern="[A-Za-z]+"
-						title="must enter the last name">
+						title="enter the last name">
 
 				</div>
 				<div class="formcontrol">
@@ -56,7 +63,7 @@
 				</div>
 				<div class="formcontrol">
 					<input type="text" id="ADHARCARD" name="ADHARCARD" required
-						pattern="[123456789][0-9]{11}"
+						pattern="[456789][0-9]{11}"
 						placeholder="Enter the Aadharcard Number"
 						title="enter the valid Aadharcard number">
 				</div>

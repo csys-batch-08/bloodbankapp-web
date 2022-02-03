@@ -7,23 +7,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.bloodbank.Dao.BookingDAO;
-import com.bloodbank.Dao.DonorDAO;
 import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
 public class BookingDAOlmpl implements BookingDAO {
-	
-	static final String AADHARCARDNUMBER="aadharcard_number";
-	static final String ADDRESS="address";
-	static final String BOOKDATE="book_date";
-	static final String BLOODTYPE="blood_type";
-	static final String DONORCHOICE="blood_collect_choice";
 
+	static final String AADHARCARDNUMBER = "aadharcard_number";
+	static final String ADDRESS = "address";
+	static final String BOOKDATE = "book_date";
+	static final String BLOODTYPE = "blood_type";
+	static final String DONORCHOICE = "blood_collect_choice";
+
+	@Override
 	public int booking(BookingModel bookingModel) {
 		int tempNumber = 0;
 
@@ -57,6 +56,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	@Override
 	public int updateBooking(BookingModel bookingModel) {
 		int tempNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -88,6 +88,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	@Override
 	public int deleteBooking(Long aadharcard) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 
@@ -120,6 +121,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	@Override
 	public List<BookingModel> homeCollection() {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -138,8 +140,9 @@ public class BookingDAOlmpl implements BookingDAO {
 
 				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(AADHARCARDNUMBER));
 
-				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
-						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
+				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS),
+						resultSet.getDate(BOOKDATE).toLocalDate(), resultSet.getString(BLOODTYPE),
+						resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 			}
@@ -159,6 +162,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	@Override
 	public LocalDate dateCheck(Donor donor) {
 		LocalDate date = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -167,7 +171,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select book_date+90 as date from donor_booking where aadharcard_number=?";
+			String query = "select book_date+90  from donor_booking where aadharcard_number=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setLong(1, donor.getAadharcard());
@@ -176,7 +180,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 			while (resultSet.next()) {
 
-				date = resultSet.getDate("book_date+90").toLocalDate();
+				date = resultSet.getDate(1).toLocalDate();
 
 			}
 
@@ -194,6 +198,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		return date;
 	}
 
+	@Override
 	public int updateDateForDonor(BookingModel bookingModel) {
 		int returnNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -223,6 +228,7 @@ public class BookingDAOlmpl implements BookingDAO {
 		return returnNumber;
 	}
 
+	@Override
 	public List<BookingModel> showBookingDonor(Donor donor) {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -239,8 +245,9 @@ public class BookingDAOlmpl implements BookingDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				bookingModel = new BookingModel(donor, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
-						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
+				bookingModel = new BookingModel(donor, resultSet.getString(ADDRESS),
+						resultSet.getDate(BOOKDATE).toLocalDate(), resultSet.getString(BLOODTYPE),
+						resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 
@@ -261,6 +268,7 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	@Override
 	public List<BookingModel> showBookingAdmin() {
 		BookingModel bookingModel = null;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -279,8 +287,9 @@ public class BookingDAOlmpl implements BookingDAO {
 
 				Donor donor1 = donor.validAadharcardNumber(resultSet.getLong(AADHARCARDNUMBER));
 
-				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS), resultSet.getDate(BOOKDATE).toLocalDate(),
-						resultSet.getString(BLOODTYPE), resultSet.getString(DONORCHOICE));
+				bookingModel = new BookingModel(donor1, resultSet.getString(ADDRESS),
+						resultSet.getDate(BOOKDATE).toLocalDate(), resultSet.getString(BLOODTYPE),
+						resultSet.getString(DONORCHOICE));
 
 				booking.add(bookingModel);
 

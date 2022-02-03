@@ -8,8 +8,16 @@
 
 <title>AdminLogin</title>
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<script >
+$(document).ready(function(){
+  $("p").click(function(){
+    $(this).hide();
+  });
+});
+</script>
 	<div class="loginForm">
 		<div class="cardContent">
 			<form action="AdminController" method="post"
@@ -26,8 +34,8 @@
 						title=" mininum 8characters may includes @#$%&*_?/">
 				</div>
 				<div class="formbtn">
-					<input type="submit" value="login">&nbsp;&nbsp;&nbsp;
-					&nbsp; <input type="reset" value="reset">
+					<input type="submit" value="login">
+					 <input type="reset" value="reset">
 				</div>
 				<c:if test="${requestScope.error!=null }">
 					<p class="text-primary">${error}</p>

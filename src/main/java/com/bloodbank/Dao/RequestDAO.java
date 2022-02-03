@@ -8,11 +8,11 @@ public interface RequestDAO {
 
 	public int insertRequest(RequestModel request);
 
-	public int deleteRequest(Long aadharcardNumber);
+	public int deleteRequest(Long aadharcardNumber, String bloodType);
 
 	public List<RequestModel> showRequest();
 
-	public String statusCheck(Long aadharcard);
+	public String statusCheck(Long aadharcardNumber, String bloodType);
 
 	public List<RequestModel> showRequestSeeker(Long phoneNumber);
 

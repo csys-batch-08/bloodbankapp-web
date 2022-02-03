@@ -2,58 +2,68 @@ package com.bloodbank.exception;
 
 public class ExeceptionHandle extends Exception {
 
-	
+	static final String INVALIDAADHARNUMBER = "Invalid aadharcard Number";
 
-		static final String INVALIDAADHARNUMBER ="Invalid aadharcard Number" ;
-		
-  public String donorMessage() {
-			
-		return INVALIDAADHARNUMBER ;
+	public String donorMessage() {
+
+		return INVALIDAADHARNUMBER;
 	}
-  static final String  SEEKERMESSAGE="Invalid PhoneNumber and password" ;
-	
+
+	static final String SEEKERMESSAGE = "Invalid phonenumber and password";
+
 	public String seekerMessage() {
 
 		return SEEKERMESSAGE;
 	}
 
-	static final String  ADMINMESSAGE="*Invalid Email Id and password" ;
+	static final String ADMINMESSAGE = "*Invalid email id and password";
+
 	public String adminMessage() {
 
 		return ADMINMESSAGE;
 
 	}
-	static final String  FORGOTPASSWORD="*Two password  must same" ;
+
+	static final String FORGOTPASSWORD = "*Two password  must same";
+
 	public String forgotPassword() {
 
-		return FORGOTPASSWORD ;
+		return FORGOTPASSWORD;
 
 	}
-	static final String  PHONENUMBER="*Phone number already register" ;
+
+	static final String PHONENUMBER = "*The phone number already register";
 
 	public String phoneNumber() {
 
 		return PHONENUMBER;
 	}
-	static final String  AADHRCARDNUMBER="*Aadharcard Number already register" ;
+
+	static final String AADHRCARDNUMBER = "*The aadharcard number already register";
+
 	public String aadharcardNumber() {
 
-		return AADHRCARDNUMBER ;
+		return AADHRCARDNUMBER;
 	}
-	static final String  HOMECOLLECTION="No one choice the Home" ;
+
+	static final String HOMECOLLECTION = "No one choice the Home";
+
 	public String homeCollection() {
 
-		return HOMECOLLECTION ;
+		return HOMECOLLECTION;
 
 	}
 
-	static final String  SEEKERPHONENUMBER="this number not register" ;
+	static final String SEEKERPHONENUMBER = "this number not register";
+
 	public String seekerPhoneNumberFind() {
 
 		return SEEKERPHONENUMBER;
 
 	}
-	static final String  REQUESTDELETE=" can't delete the request it is approved" ;
+
+	static final String REQUESTDELETE = " can't delete the request it is approved";
+
 	public String requestDelete() {
 
 		return REQUESTDELETE;

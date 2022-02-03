@@ -23,9 +23,9 @@
 			<tr>
 				<th><strong>AADHARCARD</strong></th>
 				<th><strong>ADDRESS</strong></th>
-				<th><strong>BOOK DATE</strong></th>
+				<th><strong>UNIT</strong></th>
 				<th><strong>BLOOD TYPE</strong></th>
-				<th><strong>BLOOD COLLECT CHOICE</strong></th>
+				<th><strong>CASH</strong></th>
 
 			</tr>
 			<c:forEach items="${requestScope.detailsList }" var="List">

@@ -27,16 +27,17 @@ public class ShowDonorBookingServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Donor donor = (Donor) session.getAttribute("Donor");
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
+
 		PrintWriter writer = response.getWriter();
+
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingDonor(donor);
 		if (bookingList.isEmpty()) {
-			
+
 			writer.println("<script type=\"text/javascript\">");
 			writer.println("alert('You are a New Comer');");
 			writer.println("location='bloodBookingProcess.jsp';");
 			writer.println("</script>");
-			
-			
+
 		} else {
 			request.setAttribute("bookingList", bookingList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("showDonorBooking.jsp");

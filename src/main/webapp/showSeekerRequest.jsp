@@ -11,7 +11,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Show Request Seeker</title>
-<link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/tableandsubmit.css">
 
 </head>
 <body>
@@ -56,11 +57,38 @@
 			</c:forEach>
 
 		</table>
-		<br>
+		<div class="content">
+			<form action="SeekerRequestDelete" method="post"
+				style="text-align: center;">
 
-		<div class="backBtn">
-			<a href="requestCancel.jsp">REQUEST CANCEL </a>
+
+
+				<input list="blood type" id="bloodType" name="bloodtype"
+					required="required" autofocus="autofocus"
+					placeholder="Choose the Blood Type">
+
+				<datalist id="blood type">
+					<option value="a+">a+</option>
+					<option value="a-">a-</option>
+					<option value="b+">b+</option>
+					<option value="b-">b-</option>
+					<option value="ab+">ab+</option>
+					<option value="ab-">ab-</option>
+					<option value="o+">o+</option>
+					<option value="o-">o-</option>
+					<option value="bombay">bombay</option>
+				</datalist>
+
+
+				<input type="text" id="ADHARCARD" name="ADHARCARD" required
+					pattern="[456789][0-9]{11}"
+					placeholder="Enter the Aadharcard Number"
+					title="enter the valid Aadharcard number"> <input
+					type="submit" value="confirm" />
+			</form>
 		</div>
+
+
 		<div class="backBtn">
 			<a href="requestIndex.jsp">back</a>
 

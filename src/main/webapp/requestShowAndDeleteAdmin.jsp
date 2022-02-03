@@ -16,6 +16,7 @@
 
 </head>
 <body>
+
 	<div class="adminCard">
 		<table class="center">
 
@@ -28,8 +29,8 @@
 				<th>AADHARCARD NUMBER</th>
 				<th>DATE</th>
 				<th>STATUS</th>
-				<th>EDIT</th>
-				<th>DELETE</th>
+				<th>APPROVED</th>
+				<th>REMOVE</th>
 			</tr>
 
 			<c:forEach items="${requestScope.requestList }" var="List">
@@ -47,11 +48,10 @@
 
 
 					<td class="rowlink"><a
-						href="RequestUpdateAdminServlet?phoneNumber=${List.getPhoneNumber()}&bloodtype=${List.bloodType}">RequestUpdate
+						href="RequestUpdateAdminServlet?phoneNumber=${List.getPhoneNumber()}&bloodtype=${List.bloodType}">Approved        
 					</a></td>
 					<td class="rowlink"><a
-						href="RequestDeleteAdminServlet?Aadharcard=${List.getAadharcard()}&bloodtype=${List.bloodType}">request
-							Delete </a></td>
+						href="RequestDeleteAdminServlet?Aadharcard=${List.getAadharcard()}&bloodtype=${List.bloodType}">Remove</a></td>
 
 				</tr>
 			</c:forEach>

@@ -36,7 +36,7 @@
 		<nav>
 			<div class="bookinner">
 				<a class="BookingChange" href="ConfirmServlet">CONFIRM</a><br /> <br />
-				<a class="BookingChange" href="bloodBookingCancel.jsp">BOOKING
+				<a class="BookingChange" href="BookingCancelServlet">BOOKING
 					CANCEL</a>
 
 			</div>

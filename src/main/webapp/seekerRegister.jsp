@@ -9,8 +9,16 @@
 <title>Register</title>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/seekerRegister.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<script>
+$(document).ready(function(){
+  $("p").click(function(){
+    $(this).hide();
+  });
+});
+</script>
 	<div class="loginForm">
 		<div class="cardContent">
 			<form action="SeekerRigester" method="post">
