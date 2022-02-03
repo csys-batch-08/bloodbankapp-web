@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,31 @@
 <title>AdminWork</title>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/adminworkpagestyle.css">
+	
+	<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet'
+	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
+
+
 <body>
+<c:if test="${requestScope.Login!=null }">
+
+
+<script type="text/javascript">
+function alertName(){
+alert("Login Success");
+} 
+</script>
+
+
+</c:if>
 
 	<div class="adminCard">
 		<div class="adminImage">
-			<img src="asserts/images/004.png" alt="img">
+			<img src="assets/images/004.png" alt="img">
 		</div>
 		<div class="content">
 
@@ -28,4 +48,9 @@
 	</div>
 
 </body>
+<script type="text/javascript">
+
+
+
+</script>
 </html>

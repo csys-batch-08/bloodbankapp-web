@@ -76,7 +76,6 @@ body {
 	color: white;
 	border-radius: 3px;
 	margin-right: 5px;
-	padding: 10px 20px;
 	font-weight: bold;
 	box-shadow: 0px 0px 3px 0px #606060;
 }
@@ -107,7 +106,7 @@ p {
 
 .cardContent {
 	background: linear-gradient(141deg, black 50%, white 50%);
-	padding: 11Spx;
+	padding: 11px;
 	border-radius: 6px;
 	width: 50%;
 }

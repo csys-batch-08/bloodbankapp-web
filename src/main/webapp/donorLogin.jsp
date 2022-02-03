@@ -10,11 +10,39 @@
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css"
 	href="assets/css/donorLoginpage.css">
-
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet'
+	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 </head>
 <body>
 
+<c:if test="${Login!=null }">
 
+<script>
+
+function(){
+	  toastMixin.fire({
+	    animation: true,
+	    title: 'Signed in Successfully'
+	  });
+	  var toastMixin = Swal.mixin({
+		    toast: true,
+		    icon: 'success',
+		    title: 'General Title',
+		    animation: false,
+		    position: 'top-right',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: true,
+		    didOpen: (toast) => {
+		      toast.addEventListener('mouseenter', Swal.stopTimer)
+		      toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+	  </script>
+
+
+</c:if>
 
 
 	<nav class="header seakerindex">
