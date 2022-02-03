@@ -1,9 +1,10 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class RequestModel {
+public class RequestModel implements Serializable {
 
 	private String hospitalName;
 	private String bloodType;
@@ -122,7 +123,7 @@ public class RequestModel {
 
 	public RequestModel() {
 		super();
-		
+
 	}
 
 }

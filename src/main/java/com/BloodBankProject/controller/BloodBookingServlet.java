@@ -2,7 +2,6 @@ package com.BloodBankProject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -18,13 +17,14 @@ import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
 @WebServlet("/BloodBookingServlet")
-public class BloodBookingServlet extends HttpServlet implements Serializable {
+public class BloodBookingServlet extends HttpServlet {
+
+	static final String LOCALDATE = "bookingDate";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		LocalDate date = null;
 		String address = request.getParameter("address");
 
 		String choice = request.getParameter("Choice");
@@ -38,111 +38,120 @@ public class BloodBookingServlet extends HttpServlet implements Serializable {
 
 			e1.printStackTrace();
 		}
+
+		LocalDate date = null;
 		try {
-			date = LocalDate.parse(request.getParameter("bookingDate"));
+			date = LocalDate.parse(request.getParameter(LOCALDATE));
+		} catch (NullPointerException e) {
 
-			HttpSession session = request.getSession();
+			e.printStackTrace();
+		}
 
-			Donor donor = (Donor) session.getAttribute("Donor");
+		HttpSession session = request.getSession();
 
-			AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
-			// check the date for Donor validation
-			LocalDate date1 = bookingDAOlmpl.dateCheck(donor);
+		Donor donor = (Donor) session.getAttribute("Donor");
 
-			// check the amount in ADMIN wallet to above 300 to Allowed
+		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
+		// check the date for Donor validation
 
-			// Donor once Donated to come next Donate check the last Donating Date to 90day
-			// after come to allow
+		LocalDate date1 = null;
+		try {
+			date1 = bookingDAOlmpl.dateCheck(donor);
+		} catch (NullPointerException e) {
 
-			if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {
+			e.printStackTrace();
+		}
 
-				// User select by Center Address is Null On time work this condition
-				if (address.isEmpty()) {
+		// check the amount in ADMIN wallet to above 300 to Allowed
 
-					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
-					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-					session.setAttribute("bookingDate", bookingModel);
+		// Donor once Donated to come next Donate check the last Donating Date to 90day
+		// after come to allow
 
-					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+		if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {
 
-						writer.println("<script type=\"text/javascript\">");
-						writer.println("alert('Booking Successfully');");
-						writer.println("location='BookingProcess.jsp';");
-						writer.println("</script>");
+			// User select by Center Address is Null On time work this condition
+			if (address.isEmpty()) {
 
-					}
+				String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
+				BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
 
-				}
+				session.setAttribute(LOCALDATE, bookingModel);
 
-				else {
+				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					// User select by Home On time work this condition
-
-					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-					session.setAttribute("bookingDate", bookingModel);
-
-					if (bookingDAOlmpl.booking(bookingModel) > 0) {
-
-						writer.println("<script type=\"text/javascript\">");
-						writer.println("alert('Booking Successfully');");
-						writer.println("location='bloodBookingIndex.jsp';");
-						writer.println("</script>");
-
-					}
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('Booking Successfully');");
+					writer.println("location='BookingProcess.jsp';");
+					writer.println("</script>");
 
 				}
+
 			}
-			// check the amount in ADMIN wallet to above 300 to Allowed
 
-			else if (date1 == null && adminDAOlmpl.checkWallet() > 300) {
+			else {
 
-				// User select by Center Address is Null On time work this condition
+				// User select by Home On time work this condition
 
-				if (address.isEmpty()) {
+				BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+				session.setAttribute(LOCALDATE, bookingModel);
 
-					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
+				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-					session.setAttribute("bookingDate", bookingModel);
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('Booking Successfully');");
+					writer.println("location='bloodBookingIndex.jsp';");
+					writer.println("</script>");
 
-					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+				}
 
-						writer.println("<script type=\"text/javascript\">");
-						writer.println("alert('Booking Successfully');");
-						writer.println("location='bloodBookingIndex.jsp';");
-						writer.println("</script>");
+			}
+		}
+		// check the amount in ADMIN wallet to above 300 to Allowed
 
-					}
+		else if (date1 == null && adminDAOlmpl.checkWallet() > 300) {
 
-				} else {
-					// User select by Home On time work this condition
+			// User select by Center Address is Null On time work this condition
 
-					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-					session.setAttribute("bookingDate", bookingModel);
+			if (address.isEmpty()) {
 
-					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+				String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
 
-						writer.println("<script type=\"text/javascript\">");
-						writer.println("alert('Booking Successfully');");
-						writer.println("location='bloodBookingIndex.jsp';");
-						writer.println("</script>");
+				BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+				session.setAttribute(LOCALDATE, bookingModel);
 
-					}
+				if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('Booking Successfully');");
+					writer.println("location='bloodBookingIndex.jsp';");
+					writer.println("</script>");
 
 				}
 
 			} else {
+				// User select by Home On time work this condition
 
-				writer.println("<script type=\"text/javascript\">");
-				writer.println(
-						"alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
-				writer.println("location='donorNotQualified.jsp';");
-				writer.println("</script>");
+				BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+				session.setAttribute(LOCALDATE, bookingModel);
+
+				if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+					writer.println("<script type=\"text/javascript\">");
+					writer.println("alert('Booking Successfully');");
+					writer.println("location='bloodBookingIndex.jsp';");
+					writer.println("</script>");
+
+				}
 
 			}
-		} catch (Exception e) {
 
-			e.printStackTrace();
+		} else {
+
+			writer.println("<script type=\"text/javascript\">");
+			writer.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
+			writer.println("location='donorNotQualified.jsp';");
+			writer.println("</script>");
+
 		}
 
 	}

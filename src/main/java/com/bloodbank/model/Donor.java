@@ -1,9 +1,10 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Donor {
+public class Donor implements Serializable {
 
 	private String firstName;
 	private String lastName;
@@ -109,7 +110,7 @@ public class Donor {
 
 	public Donor() {
 		super();
-		
+
 	}
 
 }

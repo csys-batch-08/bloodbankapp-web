@@ -1,9 +1,10 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class BillingModel {
+public class BillingModel implements Serializable {
 	private String bloodType;
 	private SeekerDetails seeker;
 	private int unit;
@@ -87,7 +88,7 @@ public class BillingModel {
 
 	public BillingModel() {
 		super();
-		
+
 	}
 
 }

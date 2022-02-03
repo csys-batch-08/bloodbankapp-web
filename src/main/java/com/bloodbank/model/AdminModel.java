@@ -1,8 +1,9 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AdminModel {
+public class AdminModel implements Serializable {
 
 	private String email;
 	private String password;
@@ -10,7 +11,7 @@ public class AdminModel {
 
 	public AdminModel() {
 		super();
-	
+
 	}
 
 	public AdminModel(String email, String password, double wallet) {

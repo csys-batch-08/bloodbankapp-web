@@ -1,8 +1,9 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SeekerDetails {
+public class SeekerDetails implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -98,7 +99,7 @@ public class SeekerDetails {
 
 	public SeekerDetails() {
 		super();
-	
+
 	}
 
 	public SeekerDetails(String firstName, String lastName, String address, Long phoneNumber, String password,

@@ -1,10 +1,10 @@
 package com.bloodbank.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
-public class BookingModel {
+public class BookingModel implements Serializable {
 
 	private Donor donor;
 	private String address;
@@ -88,7 +88,7 @@ public class BookingModel {
 
 	public BookingModel() {
 		super();
-		
+
 	}
 
 }
