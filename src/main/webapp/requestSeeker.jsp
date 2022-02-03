@@ -100,9 +100,10 @@
 
 					<button type="reset">Reset</button>
 				</div>
+					</form>
 		</div>
 
-		</form>
+	
 	</div>
 
 </body>

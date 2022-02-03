@@ -17,7 +17,7 @@
 <body>
 
 	<div class="adminCard">
-		<table class="center">
+		<table >
 
 			<tr>
 				<th><strong>AADHARCARD</strong></th>
@@ -48,8 +48,8 @@
 			<a href="bloodBookingProcess.jsp">back</a>
 		</div>
 
-		</form>
+		
 	</div>
-	</div>
+	
 </body>
 </html>

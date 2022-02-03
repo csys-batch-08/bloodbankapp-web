@@ -22,7 +22,7 @@
 			<tr>
 				<th><strong>Blood Type</strong></th>
 				<th><strong>Quantity</strong></th>
-				<th><strong>PRICE</strong></th>
+				<th><strong>Price</strong></th>
 
 
 			</tr>
@@ -70,8 +70,8 @@
 
 				<input type="number" id="Price" value="Enter the Price" name="Price"
 					required="required" pattern="[1-9][0-9]+"
-					title="plese enter the valid number"> <input type="submit"
-					value="confirm">
+					title="plese enter the valid number"/> <input type="submit"
+					value="confirm"/>
 			</form>
 		</div>
 		<div class="backBtn">

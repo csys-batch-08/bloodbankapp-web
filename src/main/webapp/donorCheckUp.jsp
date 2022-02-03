@@ -67,6 +67,7 @@
 						<input id="submit" type="submit"> <input id="reset"
 							type="reset">
 					</div>
+					</div>
 			</form>
 		</div>
 	</div>
