@@ -10,15 +10,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Show Stock</title>
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet'
+	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/tableandsubmit.css">
 </head>
 
 <body>
+
+<script src="assets/javascript/popupMessage.js"></script>	
+	<c:if test="${param.priceChange!=null}">
+	<script type="text/javascript"> showMessage('productUpdated')</script>
+	</c:if>
+
+
+
 <div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
-		<table style="text-align: center;  " class="center">
+		<table style="text-align: center;" >
 			<tr>
 				<th><strong>Blood Type</strong></th>
 				<th><strong>Quantity</strong></th>
@@ -26,11 +39,11 @@
 
 
 			</tr>
-			<c:forEach items="${requestScope.stockList}" var="stockList">
+			<c:forEach items="${requestScope.stackDetails}" var="stackList">
 				<tr>
-					<td>${stockList.bloodType}</td>
-					<td>${stockList.quantity}</td>
-					<td>${stockList.bloodPrice}</td>
+					<td>${stackList.bloodType}</td>
+					<td>${stackList.quantity}</td>
+					<td>${stackList.bloodPrice}</td>
 
 
 
@@ -47,7 +60,7 @@
 		<div class="content">
 		      <h2 style="color: black;">  PRICE CHANGE </h2>
 		
-			<form action="BloodPriceChangeServlet" method="post"
+			<form action="BloodPriceChangeServlet"
 				style="text-align: center;">
 				
 				
@@ -74,8 +87,8 @@
 
 				<input type="number" id="Price" value="Enter the Price" name="Price"
 					required="required" pattern="[1-9][0-9]+"
-					title="plese enter the valid number"/ placeholder="Blood Price"> <input type="submit"
-					value="confirm"/>
+					title="plese enter the valid number" placeholder="Blood Price"> <input type="submit"
+					value="confirm" />
 			</form>
 			
 			</div>
@@ -85,7 +98,7 @@
 		
 		
 		<div class="backBtn">
-			<a href="adminWork.jsp">back</a>
+			<a href="adminWork.jsp"><label for="back">back</label></a>
 		</div>
 			
 		

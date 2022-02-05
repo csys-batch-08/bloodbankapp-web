@@ -1,7 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,15 +19,20 @@ public class SeekerLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session=request.getSession(); 
-		PrintWriter writer = response.getWriter();
+
+		HttpSession session = request.getSession();
 
 		String password = request.getParameter("PASSWORD");
-		Long phoneNumber = Long.parseLong(request.getParameter("number"));
-		
+		Long phoneNumber = null;
+		try {
+			phoneNumber = Long.parseLong(request.getParameter("number"));
+		} catch (NumberFormatException e1) {
+
+			e1.printStackTrace();
+		}
+
 		session.setAttribute("SeekerPhoneNumber", phoneNumber);
-		
+
 		SeekerDetails seekerDetails = null;
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 
@@ -39,10 +43,8 @@ public class SeekerLoginServlet extends HttpServlet {
 
 				session.setAttribute("seeker", seekerDetails);
 
-				writer.println("<script type=\"text/javascript\">");
-				writer.println("alert('Login success');");
-				writer.println("location='requestIndex.jsp';");
-				writer.println("</script>");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?loginStatus=sucess");
+				dispatcher.forward(request, response);
 
 			} else {
 
@@ -53,9 +55,8 @@ public class SeekerLoginServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("SeekerError", e.seekerMessage());
-			RequestDispatcher dispatcher=request.getRequestDispatcher("seekerLogin.jsp");
-            dispatcher.forward(request, response);
-			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("seekerLogin.jsp");
+			dispatcher.forward(request, response);
 
 		}
 

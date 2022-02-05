@@ -16,6 +16,8 @@ import com.bloodbank.model.AdminModel;
 @WebServlet("/AdminController")
 public class AdminServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,8 +30,8 @@ public class AdminServlet extends HttpServlet {
 		if (adminDAOlmpl.verificationAdmin(adminModel) != null) {
 
 			try {
-				request.setAttribute("Login", "Success");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("adminWork.jsp");
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("adminWork.jsp?loginStatus=sucess");
 				dispatcher.forward(request, response);
 
 			} catch (IOException | ServletException e) {

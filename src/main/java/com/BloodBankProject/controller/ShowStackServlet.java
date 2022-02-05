@@ -9,29 +9,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
 import com.bloodbank.model.BloodStack;
 
 @WebServlet("/ShowStakServlet")
 public class ShowStackServlet extends HttpServlet {
-	
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		
-		BloodStackDAOlmpl bloodStackDAOlmpl= new BloodStackDAOlmpl();
 
-	
-		List<BloodStack> stockDetails = bloodStackDAOlmpl.showStack();
-		
-		request.setAttribute("stockList", stockDetails);
-		
-		RequestDispatcher dispatcher=request.getRequestDispatcher("showStack.jsp");
-		dispatcher.forward(request, response);
-	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		BloodStackDAOlmpl bloodStackDAOlmpl = new BloodStackDAOlmpl();
+
+		List<BloodStack> stackDetails = bloodStackDAOlmpl.showStack();
+
+		if (request.getAttribute("priceChange") != null) {
+
+			request.setAttribute("stackDetails", stackDetails);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("showStack.jsp?priceChange=sucess");
+			dispatcher.forward(request, response);
+
+		} else {
+
+			try {
+				request.setAttribute("stackDetails", stackDetails);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("showStack.jsp");
+				dispatcher.forward(request, response);
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		}
 	}
 }

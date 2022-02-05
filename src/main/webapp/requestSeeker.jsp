@@ -95,10 +95,10 @@
 
 
 				<div class="formbtn">
-					<button type="submit" value="Submit"></button>
+					<button type="submit">Submit</button>
 
 
-					<button type="reset" value="Reset"></button>
+					<button type="reset" >Reset</button>
 				</div>
 					</form>
 		</div>

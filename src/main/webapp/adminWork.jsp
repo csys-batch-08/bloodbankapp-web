@@ -18,18 +18,10 @@
 
 
 <body>
-<c:if test="${requestScope.Login!=null }">
-
-
-<script type="text/javascript">
-function alertName(){
-alert("Login Success");
-} 
-</script>
-
-
-</c:if>
-
+<script src="assets/javascript/popupMessage.js"></script>
+<c:if test="${param.loginStatus!=null}">
+	<script type="text/javascript"> showMessage('loginSucess')</script>
+	</c:if>
 	<div class="adminCard">
 		<div class="adminImage">
 			<img src="assets/images/004.png" alt="img">

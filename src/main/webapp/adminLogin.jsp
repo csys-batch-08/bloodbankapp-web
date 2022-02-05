@@ -9,9 +9,11 @@
 <title>AdminLogin</title>
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </head>
 <body>
-<script >
+<script type="text/javascript">
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
