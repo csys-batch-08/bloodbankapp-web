@@ -20,7 +20,7 @@ nav.header ul {
 nav.header {
 	background: #160101;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-between !important;
 	align-items: center;
 }
 

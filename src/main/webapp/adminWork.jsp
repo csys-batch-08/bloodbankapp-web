@@ -43,7 +43,7 @@ alert("Login Success");
 				href="AdminShowBookingServlet">Booking</a>
 		</div>
 		<div class="backBtn">
-			<a href="index.jsp">back</a>
+			<a href="index.jsp">Back</a>
 		</div>
 	</div>
 

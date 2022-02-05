@@ -5,29 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.bloodbank.Dao.BillingDAO;
 import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BillingModel;
-import com.bloodbank.model.BookingModel;
-import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
 public class BillingDAOlmpl implements BillingDAO {
-	static final String BLOODTYPE="blood_type";
-	static final String SEEKERID="seeker_id";
-	static final String QUANTITY="quantity";
-	static final String QUANTITYPRICE="quantity_price";
-	static final String BILLINGDATE="billing_date";
-	
-	
+	static final String BLOODTYPE = "blood_type";
+	static final String SEEKERID = "seeker_id";
+	static final String QUANTITY = "quantity";
+	static final String QUANTITYPRICE = "quantity_price";
+	static final String BILLINGDATE = "billing_date";
+
+	@Override
 	public int insertBilling(BillingModel billingModel) {
-		
+
 		int returnNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Connection connection = null;
@@ -46,12 +42,14 @@ public class BillingDAOlmpl implements BillingDAO {
 			preparedStatement.setString(1, billingModel.getBloodType());
 			preparedStatement.setInt(2, seekerId);
 			preparedStatement.setInt(3, billingModel.getUnit());
-			preparedStatement.setDouble(4, billingModel.getTotalprice());			
+			preparedStatement.setDouble(4, billingModel.getTotalprice());
 			returnNumber = preparedStatement.executeUpdate();
 			preparedStatement.executeQuery(commit);
 
 		} catch (ClassNotFoundException e) {
+
 			e.printStackTrace();
+
 		} catch (SQLException a) {
 
 			a.printStackTrace();
@@ -64,6 +62,7 @@ public class BillingDAOlmpl implements BillingDAO {
 
 	}
 
+	@Override
 	public List<BillingModel> biilingShow(BillingModel billingModel) {
 
 		List<BillingModel> billingList = new ArrayList();
@@ -78,9 +77,7 @@ public class BillingDAOlmpl implements BillingDAO {
 			connection = connectionUtil.getConnection();
 			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill where seeker_id=? order by bill_id desc";
 			preparedStatement = connection.prepareStatement(query);
-			
-			
-			
+
 			preparedStatement.setInt(1, seekerId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -106,6 +103,7 @@ public class BillingDAOlmpl implements BillingDAO {
 		return billingList;
 	}
 
+	@Override
 	public List<BillingModel> biilingShowAdmin() {
 
 		List<BillingModel> billingList = new ArrayList();
@@ -143,6 +141,7 @@ public class BillingDAOlmpl implements BillingDAO {
 		return billingList;
 	}
 
+	@Override
 	public List<BillingModel> biilingShowAdminDate(LocalDate date) {
 
 		List<BillingModel> billingList = new ArrayList();

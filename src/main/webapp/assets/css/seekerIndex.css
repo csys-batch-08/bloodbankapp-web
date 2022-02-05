@@ -20,7 +20,12 @@
 	content: 0;
 	z-index: 9;
 }
-
+.blooddetails {
+    position: absolute;
+    width: 35%;
+    left: 5%;
+    top: 10%;
+}
 .homeContent {
 	padding: 0px;
 	text-align: justify;

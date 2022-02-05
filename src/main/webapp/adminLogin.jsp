@@ -34,8 +34,8 @@ $(document).ready(function(){
 						title=" mininum 8characters may includes @#$%&*_?/">
 				</div>
 				<div class="formbtn">
-					<input type="submit" value="login">
-					 <input type="reset" value="reset">
+					<input type="submit" value="Login">
+					 <input type="reset" value="Reset">
 				</div>
 				<c:if test="${requestScope.error!=null }">
 					<p class="text-primary">${error}</p>

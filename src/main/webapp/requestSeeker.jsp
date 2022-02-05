@@ -31,18 +31,18 @@
 		<div class="cardContent">
 
 			<form action="SeekerRequestServlet" method="post">
-				<h1>Request</h1>
+				<h1><label>Request</label></h1>
 				<div class="formcontrol">
 
 					<input type="text" id="NAME" name="FIRSTNAME" required="required"
 						autofocus="autofocus" pattern="[A-Za-z]{3,}"
-						title="enter the Name" placeholder=" Enter the Fisrt Name">
+						title="enter the Name" placeholder=" Enter the Fisrt Name"/>
 				</div>
 				<div class="formcontrol">
 
 					<input type="text" id="NAME" name="LASTNAME" required="required"
 						autofocus="autofocus" pattern="[A-Za-z]+" title="enter the Name"
-						placeholder=" Enter the Last Name">
+						placeholder=" Enter the Last Name" />
 				</div>
 
 
@@ -51,26 +51,26 @@
 					<input type="text" id="number" name="number" required
 						pattern="[987654321][0-9]{11}"
 						title="enter the valid Aadharcard number"
-						placeholder=" Enter the Aadharcard Number">
+						placeholder=" Enter the Aadharcard Number" />
 				</div>
 
 
 				<div class="formcontrol">
 					<input type="TEXT" id="HOSPITAL" name="HOSPITAL" required
 						pattern="[A-Za-z]{3,}" title="enter the valid hospital name"
-						placeholder=" Enter the hospital Name">
+						placeholder=" Enter the hospital Name" />
 				</div>
 
 				<div class="formcontrol">
 					<p class="text-secondary" style="font-family: fantasy;">
 						Request Date</p>
 					<input type="date" id="Date" name="currentdate" required="required"
-						placeholder="Date">
+						placeholder="Date" />
 				</div>
 
 				<div class="formcontrol">
 					<input list="blood type" id="bloodtype" name="bloodtype" required
-						placeholder="choose the Blood Type">
+						placeholder="choose the Blood Type" />
 				</div>
 				<datalist id="blood type">
 					<option value="a+">a+</option>
@@ -86,7 +86,7 @@
 
 				<div class="formcontrol">
 					<input type="NUMBER" ID="UNIT" NAME="UNIT" min="0" max="10"
-						required placeholder="Enter the Unit">
+						required placeholder="Enter the Unit" />
 
 
 				</div>
@@ -95,10 +95,10 @@
 
 
 				<div class="formbtn">
-					<button type="submit">Submit</button>
+					<button type="submit" value="Submit"></button>
 
 
-					<button type="reset">Reset</button>
+					<button type="reset" value="Reset"></button>
 				</div>
 					</form>
 		</div>

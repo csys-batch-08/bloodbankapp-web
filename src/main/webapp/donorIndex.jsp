@@ -21,6 +21,7 @@
 <body>
 
 	<nav class="header seakerindex">
+	<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="donorLogin.jsp">Login</a></li>
 			<li><a href="donorRegister.jsp">Register</a></li>

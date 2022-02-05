@@ -18,10 +18,9 @@
 <body>
 
 
-
-	<div class="adminCard">
-
-
+<div class="adminCard">
+		<div class="flexbox">
+			<div class="adminImage">
 
 		<table>
 
@@ -33,7 +32,7 @@
 				<th>PHONE NUMBER</th>
 				<th>AADHARCARD NUMBER</th>
 				<th>DATE</th>
-				<th>STATUS</th>
+				<th style="width:100px">STATUS</th>
 			</tr>
 
 			<c:forEach items="${requestScope.requestList }" var="List">
@@ -57,6 +56,8 @@
 			</c:forEach>
 
 		</table>
+		</div>
+		
 		<div class="content">
 			<form action="SeekerRequestDelete" method="post"
 				style="text-align: center;">
@@ -87,7 +88,7 @@
 					type="submit" value="confirm" />
 			</form>
 		</div>
-
+</div>
 
 		<div class="backBtn">
 			<a href="requestIndex.jsp">back</a>

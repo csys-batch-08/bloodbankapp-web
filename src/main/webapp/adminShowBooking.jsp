@@ -13,39 +13,56 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AdminShowBooking</title>
-<link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
+ <link rel="stylesheet" type="text/css" href="assets/css/tableformat.css"> 
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-	<div class="adminCard">
-		<table class="center">
-			<tr>
-				<th><strong>AADHARCARD</strong></th>
-				<th><strong>ADDRESS</strong></th>
-				<th><strong>BOOK DATE</strong></th>
-				<th><strong>BLOOD TYPE</strong></th>
-				<th><strong>BLOOD COLLECT CHOICE</strong></th>
-
-			</tr>
-			<c:forEach items="${requestScope.bookingList }" var="List">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#table_id').DataTable();
+		});
+	</script>
+	<div class="adminCard">	
+		<table  id="table_id" 	>
+			<thead>
 				<tr>
-					<td>${List.donor.aadharcard }</td>
-					<td>${List.address }</td>
-					<td><fmt:parseDate value="${List.appdate }"
-							pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
-							pattern="dd/MM/yyyy" value="${appdate}" /></td>
-					<td>${List.bloodType }</td>
-					<td>${List.bloodCollectChoice }</td>
-
-
+					<th id=""><strong>AADHARCARD</strong></th>
+					<th id=""><strong>ADDRESS</strong></th>
+					<th id=""><strong>BOOK DATE</strong></th>
+					<th id=""><strong>BLOOD TYPE</strong></th>
+					<th id=""><strong>BLOOD COLLECT CHOICE</strong></th>
 
 				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.bookingList }" var="List">
+					<tr>
+						<td>${List.donor.aadharcard }</td>
+						<td>${List.address }</td>
+						<td><fmt:parseDate value="${List.appdate }"
+								pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
+								pattern="dd/MM/yyyy" value="${appdate}" /></td>
+						<td>${List.bloodType }</td>
+						<td>${List.bloodCollectChoice }</td>
 
-			</c:forEach>
 
+
+					</tr>
+
+				</c:forEach>
+			</tbody>
 		</table>
 		<div class="backBtn">
-			<a href="AdminShowBookingHomeServlet">Home collection</a> <a
-				href="adminWork.jsp">back</a>
+			 <a href="adminWork.jsp">back</a>
 		</div>
 	</div>
 </body>

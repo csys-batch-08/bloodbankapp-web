@@ -10,15 +10,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Show Stock</title>
-<link rel="stylesheet" type="text/css" href="asserts/css/stack.css">
-
 <link rel="stylesheet" type="text/css"
 	href="assets/css/tableandsubmit.css">
 </head>
 
 <body>
-	<div class="adminCard">
-		<table style="text-align: center;" class="center">
+<div class="adminCard">
+		<div class="flexbox">
+			<div class="adminImage">
+		<table style="text-align: center;  " class="center">
 			<tr>
 				<th><strong>Blood Type</strong></th>
 				<th><strong>Quantity</strong></th>
@@ -40,14 +40,18 @@
 		</table>
 
 
-
+</div>
 
 
 
 		<div class="content">
+		      <h2 style="color: black;">  PRICE CHANGE </h2>
+		
 			<form action="BloodPriceChangeServlet" method="post"
 				style="text-align: center;">
-
+				
+				
+          
 
 
 				<input list="blood type" id="bloodType" name="bloodtype"
@@ -70,15 +74,26 @@
 
 				<input type="number" id="Price" value="Enter the Price" name="Price"
 					required="required" pattern="[1-9][0-9]+"
-					title="plese enter the valid number"/> <input type="submit"
+					title="plese enter the valid number"/ placeholder="Blood Price"> <input type="submit"
 					value="confirm"/>
 			</form>
+			
+			</div>
+			
 		</div>
+		
+		
+		
 		<div class="backBtn">
-			<a href="adminWork.jsp">Back </a>
+			<a href="adminWork.jsp">back</a>
 		</div>
+			
+		
 
 
 	</div>
+	
+	
+	
 </body>
 </html>
