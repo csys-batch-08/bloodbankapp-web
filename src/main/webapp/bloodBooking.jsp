@@ -38,11 +38,11 @@
 				<div>
 					<div class="inputtype">
 						<input type="date" id="bookingDate" name="bookingDate"
-							required="required" placeholder="">
+							required="required" placeholder="" />
 
 					</div>
 					<div class="inputtype">
-						<select name="Choice" id="Choice" value="center"
+						<select name="Choice" id="Choice" 
 							required="required">
 							<option disabled="disabled">Select any one</option>
 							<option value="center">center</option>

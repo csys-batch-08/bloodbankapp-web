@@ -23,7 +23,7 @@
 	<div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
-				<table style="text-align: center;" class="center">
+				<table style="text-align: center;" class="center"aria-describedby="seeker report">
 					<tr>
 						<th><strong>BLOODTYPE</strong></th>
 						<th><strong>SEEKER NAME</strong></th>
@@ -65,7 +65,7 @@
 
 					<label for="date">Date</label> <input type="date" id="date"
 						name="date" required="required"> <input type="submit"
-						value="submit">
+						value="submit" />
 
 
 

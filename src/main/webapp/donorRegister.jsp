@@ -35,12 +35,12 @@ $(document).ready(function(){
 
 					<input type="text" id="name" name="firstname" required autofocus
 						placeholder="Enter the First Name" pattern="[A-Za-z]{3,}"
-						title="mininum 3 character">
+						title="mininum 3 character" />
 				</div>
 				<div class="formcontrol">
 					<input type="text" id="lastName" name="lastName" required
 						placeholder="Enter the lastName" pattern="[A-Za-z]+"
-						title="enter the last name">
+						title="enter the last name" />
 
 				</div>
 				<div class="formcontrol">
@@ -52,24 +52,24 @@ $(document).ready(function(){
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[9876][0-9]{9}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters">
+						title=" mininum 10characters" />
 				</div>
 				<div class="formcontrol">
 					<p class="text-secondary" style="font-family: fantasy;">Date of
 						Birth</p>
 					<input type="date" id="bio" name="bio" required="required"
-						placeholder="BIO">
+						placeholder="BIO" />
 
 				</div>
 				<div class="formcontrol">
 					<input type="text" id="ADHARCARD" name="ADHARCARD" required
 						pattern="[456789][0-9]{11}"
 						placeholder="Enter the Aadharcard Number"
-						title="enter the valid Aadharcard number">
+						title="enter the valid Aadharcard number" />
 				</div>
 				<div class="formcontrol">
 					<input list="blood type" id="bloodtype" name="bloodtype" required
-						placeholder="Choose the Blood Type">
+						placeholder="Choose the Blood Type" />
 
 					<datalist id="blood type">
 						<option value="a+">a+</option>

@@ -31,7 +31,7 @@
 <div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
-		<table style="text-align: center;" >
+		<table style="text-align: center;"  aria-describedby="Stack details">
 			<tr>
 				<th><strong>Blood Type</strong></th>
 				<th><strong>Quantity</strong></th>
@@ -69,7 +69,7 @@
 
 				<input list="blood type" id="bloodType" name="bloodtype"
 					required="required" autofocus="autofocus"
-					placeholder="Choose the Blood Type">
+					placeholder="Choose the Blood Type" />
 
 				<datalist id="blood type">
 					<option value="a+">a+</option>

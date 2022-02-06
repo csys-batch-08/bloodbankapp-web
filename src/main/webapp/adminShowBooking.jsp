@@ -32,7 +32,7 @@
 		});
 	</script>
 	<div class="adminCard">	
-		<table  id="table_id" 	>
+		<table  id="table_id" aria-describedby="bookig table"	>
 			<thead>
 				<tr>
 					<th id=""><strong>AADHARCARD</strong></th>

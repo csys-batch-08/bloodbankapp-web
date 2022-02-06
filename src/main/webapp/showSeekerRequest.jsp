@@ -37,7 +37,7 @@
 		<div class="flexbox">
 			<div class="adminImage">
 
-		<table>
+		<table aria-describedby="Request table">
 
 			<tr>
 				<th>HOSPITAL NAME</th>

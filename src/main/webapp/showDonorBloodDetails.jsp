@@ -10,7 +10,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>ShowDonorBloodDetails</title>
@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="adminCard">
-		<table class="center">
+		<table class="center" aria-describedby="Donor blooddetails">
 			<tr>
 				<th><strong>AADHARCARD</strong></th>
 				<th><strong>ADDRESS</strong></th>

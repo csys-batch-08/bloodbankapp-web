@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Donor</title>
@@ -32,7 +32,7 @@
 	<div class="homeContent">
 		<img alt="nothing " src="assets/images/005.gif">
 
-		<P>If you're a blood donor, you're a hero to someone, somewhere,
+		<P>If you're a blood Donor, you're a hero to someone, somewhere,
 			who received your gracious gift of life.</P>
 	</div>
 </body>

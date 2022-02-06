@@ -25,7 +25,7 @@
 	<script type="text/javascript"> showMessage('approvedRequest')</script>
 	</c:if>
 	<div class="adminCard">
-		<table class="center" >
+		<table class="center" aria-describedby="Request table">
 
 			<tr>
 				<th>HOSPITAL NAME</th>

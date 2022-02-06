@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="adminCard">
-		<table>
+		<table aria-describedby="seeker report">
 
 			<tr>
 				<th><strong>BLOODTYPE</strong></th>

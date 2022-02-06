@@ -3,7 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Donor Login</title>
@@ -64,12 +64,12 @@ $(document).ready(function(){
 					<input type="text" id="aadharcard" name="aadharcard" autofocus
 						required="required" pattern="[0-9]{12}"
 						placeholder="Enter the Aadharcard Number"
-						title="enter the valid Aadharcard number"><br /> <br />
+						title="enter the valid Aadharcard number"/><br /> <br />
 
 				</div>
 
 				<div class="formbtn">
-					<input type="submit" value="Login">
+					<input type="submit" value="Login"/>
 
 				</div>
 

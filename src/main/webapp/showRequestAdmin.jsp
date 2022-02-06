@@ -18,7 +18,7 @@
 
 
 	<div class="adminCard">
-		<table class="center">
+		<table class="center" aria-describedby="Request details">
 
 			<tr>
 				<th>HOSPITAL NAME</th>

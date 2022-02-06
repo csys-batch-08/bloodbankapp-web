@@ -41,14 +41,14 @@ $(document).ready(function(){
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[0-9]{10}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters"><br /> <br />
+						title=" mininum 10characters" /><br /> <br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="PASSWORD" name="PASSWORD" required
 						placeholder="Enter the Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br />
+						title=" mininum 8characters may includes @#$%&*_?/ " /><br />
 					<br />
 
 				</div>
@@ -56,7 +56,7 @@ $(document).ready(function(){
 					<input type="password" id="CONFIRM" name="CONFIRM" required
 						placeholder="Enter the Confirm Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "><br />
+						title=" mininum 8characters may includes @#$%&*_?/ " /><br />
 					<br />
 
 				</div>
@@ -64,8 +64,8 @@ $(document).ready(function(){
 
 
 				<div class="formbtn">
-					<input type="submit" value="submit"> <input type="reset"
-						value="reset">
+					<input type="submit" value="submit" /> <input type="reset"
+						value="reset" />
 				</div>
 
 
