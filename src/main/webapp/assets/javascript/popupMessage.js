@@ -136,7 +136,7 @@ function showMessage(check)
 			  timer: 2000})
 	break;
 	
-	case "productAdded":
+	case "qualified":
 	
 	   var toastMixin = Swal.mixin({
 			toast: true,
@@ -156,7 +156,7 @@ function showMessage(check)
 			
 			toastMixin.fire({
 			animation: true,
-			title: 'New Product Added Successfully'
+			title: 'you are qualified '
 			});
 	break;
 	case "forgotpassword":

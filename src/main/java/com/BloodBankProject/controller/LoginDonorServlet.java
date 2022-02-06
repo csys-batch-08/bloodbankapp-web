@@ -35,14 +35,8 @@ public class LoginDonorServlet extends HttpServlet {
 			if (donor != null) {
 				request.setAttribute("Login", "Success");
 				session.setAttribute("Donor", donor);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp?loginStatus=sucess");
 				dispatcher.forward(request, response);
-//
-//
-//				writer.println("<script type=\"text/javascript\">");
-//				writer.println("alert('Login success');");
-//				writer.println("location='donorCheckUp.jsp';");
-//				writer.println("</script>");
 
 			} else {
 

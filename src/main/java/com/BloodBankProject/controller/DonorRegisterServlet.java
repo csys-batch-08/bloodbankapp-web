@@ -1,7 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bloodbank.DaoImpl.DonorDAOImpl;
 import com.bloodbank.exception.ExeceptionHandle;
@@ -30,8 +28,15 @@ public class DonorRegisterServlet extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 
 		String address = request.getParameter("address");
-		Long phoneNumber = Long.parseLong(request.getParameter("number"));
-		Long aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
+		Long phoneNumber = null;
+		Long aadharcard = null;
+		try {
+			phoneNumber = Long.parseLong(request.getParameter("number"));
+			aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
+		} catch (NumberFormatException e1) {
+
+			e1.printStackTrace();
+		}
 		String bloodType = request.getParameter("bloodtype");
 
 		try {
@@ -42,7 +47,6 @@ public class DonorRegisterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		PrintWriter writer = response.getWriter();
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
 		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
 
@@ -53,11 +57,8 @@ public class DonorRegisterServlet extends HttpServlet {
 
 				if (donorDAOImpl.insertDonor(donor) > 0) {
 
-					writer.println("<script type=\"text/javascript\">");
-					writer.println("alert('Register success');");
-					writer.println("location='donorLogin.jsp';");
-					writer.println("</script>");
-
+					RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp?registerSucces=sucess");
+					dispatcher.forward(request, response);
 				}
 
 			} else {
