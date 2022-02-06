@@ -27,17 +27,24 @@ public class ShowStackServlet extends HttpServlet {
 		if (request.getAttribute("priceChange") != null) {
 
 			request.setAttribute("stackDetails", stackDetails);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("showStack.jsp?priceChange=sucess");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("showStack.jsp?priceChange=sucess");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 
 		} else {
 
 			try {
 				request.setAttribute("stackDetails", stackDetails);
+
 				RequestDispatcher dispatcher = request.getRequestDispatcher("showStack.jsp");
 				dispatcher.forward(request, response);
 
-			} catch (IOException e) {
+			} catch (IOException | ServletException e) {
 
 				e.printStackTrace();
 			}

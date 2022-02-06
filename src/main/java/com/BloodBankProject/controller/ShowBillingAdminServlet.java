@@ -15,21 +15,26 @@ import com.bloodbank.model.BillingModel;
 
 @WebServlet("/ShowBillingAdminServlet")
 public class ShowBillingAdminServlet extends HttpServlet {
-	
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		
-		BillingDAOlmpl billingDAOlmpl    = new BillingDAOlmpl();
+
+		BillingDAOlmpl billingDAOlmpl = new BillingDAOlmpl();
 
 		List<BillingModel> billingList = billingDAOlmpl.biilingShowAdmin();
 		request.setAttribute("billingList", billingList);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("showBillAdminjsp.jsp");
-		dispatcher.forward(request, response);
+
+		try {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("showBillAdminjsp.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException | IOException e) {
+
+			e.printStackTrace();
+		}
 
 	}
-
 
 }

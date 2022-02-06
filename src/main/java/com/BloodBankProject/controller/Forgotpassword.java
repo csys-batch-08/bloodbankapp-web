@@ -52,8 +52,14 @@ public class Forgotpassword extends HttpServlet {
 				} catch (ExeceptionHandle e) {
 
 					request.setAttribute("PasswordError", e.forgotPassword());
-					RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
-					dispatcher.forward(request, response);
+
+					try {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e1) {
+
+						e1.printStackTrace();
+					}
 
 				}
 
@@ -65,8 +71,14 @@ public class Forgotpassword extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("numbererror", e.seekerPhoneNumberFind());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+
+				e1.printStackTrace();
+			}
 
 		}
 

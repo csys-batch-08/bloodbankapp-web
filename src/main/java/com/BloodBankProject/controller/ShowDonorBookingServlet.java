@@ -1,7 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,20 +27,26 @@ public class ShowDonorBookingServlet extends HttpServlet {
 		Donor donor = (Donor) session.getAttribute("Donor");
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
 
-		PrintWriter writer = response.getWriter();
-
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingDonor(donor);
 		if (bookingList.isEmpty()) {
 
-			writer.println("<script type=\"text/javascript\">");
-			writer.println("alert('You are a New Comer');");
-			writer.println("location='bloodBookingProcess.jsp';");
-			writer.println("</script>");
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("bloodBookingProcess.jsp?noDate");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
 
+				e.printStackTrace();
+			}
 		} else {
 			request.setAttribute("bookingList", bookingList);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("showDonorBooking.jsp");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("showDonorBooking.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 

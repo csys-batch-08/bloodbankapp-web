@@ -43,8 +43,13 @@ public class SeekerLoginServlet extends HttpServlet {
 
 				session.setAttribute("seeker", seekerDetails);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?loginStatus=sucess");
-				dispatcher.forward(request, response);
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?loginStatus=sucess");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
 
 			} else {
 
@@ -55,8 +60,13 @@ public class SeekerLoginServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("SeekerError", e.seekerMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("seekerLogin.jsp");
-			dispatcher.forward(request, response);
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("seekerLogin.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+
+				e1.printStackTrace();
+			}
 
 		}
 

@@ -45,9 +45,14 @@ public class AdminServlet extends HttpServlet {
 				throw new ExeceptionHandle();
 			} catch (ExeceptionHandle e) {
 
-				request.setAttribute("error", e.adminMessage());
-				RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp");
-				dispatcher.forward(request, response);
+				try {
+					request.setAttribute("error", e.adminMessage());
+					RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e1) {
+
+					e1.printStackTrace();
+				}
 
 			}
 		}

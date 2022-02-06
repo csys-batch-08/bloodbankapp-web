@@ -15,21 +15,25 @@ import com.bloodbank.model.RequestModel;
 
 @WebServlet("/RequestShowAndDeleteServlet")
 public class RequestShowAndDeleteServlet extends HttpServlet {
-	
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-	
+
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 		List<RequestModel> requestList = requestDAOlmpl.requestUpdateAndDelete();
-		 request.setAttribute("requestList",requestList );
-		RequestDispatcher dispatcher=request.getRequestDispatcher("requestShowAndDeleteAdmin.jsp");
-	   dispatcher.forward(request, response);
-	    
-	
-	}
+		request.setAttribute("requestList", requestList);
 
+		try {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("requestShowAndDeleteAdmin.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException | IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
 
 }

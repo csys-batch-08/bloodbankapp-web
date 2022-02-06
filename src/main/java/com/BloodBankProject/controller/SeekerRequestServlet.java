@@ -29,11 +29,20 @@ public class SeekerRequestServlet extends HttpServlet {
 		String firstName = request.getParameter("FIRSTNAME");
 		String lastName = request.getParameter("LASTNAME");
 		String collectorName = firstName + lastName;
-		Long aadharcard = Long.parseLong(request.getParameter("number"));
+
 		String hospitalName = request.getParameter("HOSPITAL");
 		String bloodtype = request.getParameter("bloodtype");
 
-		int unit = Integer.parseInt(request.getParameter("UNIT"));
+		Long aadharcardNumber = null;
+		int bloodUnit = 0;
+		try {
+			aadharcardNumber = Long.parseLong(request.getParameter("number"));
+			bloodUnit = Integer.parseInt(request.getParameter("UNIT"));
+		} catch (NumberFormatException e1) {
+
+			e1.printStackTrace();
+		}
+
 		Date date = null;
 
 		try {
@@ -50,12 +59,12 @@ public class SeekerRequestServlet extends HttpServlet {
 
 		BloodStackDAOlmpl stackDAOlmpl = new BloodStackDAOlmpl();
 
-		if (stackDAOlmpl.checkOfQuantity(bloodtype) > unit) {
+		if (stackDAOlmpl.checkOfQuantity(bloodtype) > bloodUnit) {
 
 			String status = "approved";
 
-			RequestModel requestModel = new RequestModel(hospitalName, bloodtype, unit, collectorName,
-					seekerDetails.getPhoneNumber(), aadharcard, date, status);
+			RequestModel requestModel = new RequestModel(hospitalName, bloodtype, bloodUnit, collectorName,
+					seekerDetails.getPhoneNumber(), aadharcardNumber, date, status);
 
 			session.setAttribute("requestModel", requestModel);
 
@@ -73,8 +82,8 @@ public class SeekerRequestServlet extends HttpServlet {
 		} else {
 			String status = "pending";
 
-			RequestModel requestModel = new RequestModel(hospitalName, bloodtype, unit, collectorName,
-					seekerDetails.getPhoneNumber(), aadharcard, date, status);
+			RequestModel requestModel = new RequestModel(hospitalName, bloodtype, bloodUnit, collectorName,
+					seekerDetails.getPhoneNumber(), aadharcardNumber, date, status);
 
 			session.setAttribute("requestModel", requestModel);
 

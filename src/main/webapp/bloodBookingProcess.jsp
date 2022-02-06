@@ -40,6 +40,14 @@
 <c:if test="${param.qualified!=null}">
 	<script type="text/javascript"> showMessage('qualified')</script>
 	</c:if>
+	<script src="assets/javascript/popupMessage.js"></script>
+<c:if test="${param.bookingStatus!=null}">
+	<script type="text/javascript"> showMessage('booking')</script>
+	</c:if>
+	<script src="assets/javascript/popupMessage.js"></script>
+<c:if test="${param.noDate!=null}">
+	<script type="text/javascript"> showMessage('noDate')</script>
+	</c:if>
 	
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>

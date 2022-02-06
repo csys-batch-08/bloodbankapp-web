@@ -23,8 +23,17 @@ public class SeekerRegisterServlet extends HttpServlet {
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastName");
 		String address = request.getParameter("address");
-		Long phoneNumber = Long.parseLong(request.getParameter("number"));
-		Long patient = Long.parseLong(request.getParameter("PATIENT"));
+
+		Long phoneNumber = null;
+		Long patient = null;
+		try {
+			phoneNumber = Long.parseLong(request.getParameter("number"));
+			patient = Long.parseLong(request.getParameter("PATIENT"));
+		} catch (NumberFormatException e1) {
+
+			e1.printStackTrace();
+		}
+
 		String hospital = request.getParameter("HOSPITAL");
 		String bloodtype = request.getParameter("bloodtype");
 		String password = request.getParameter("PASSWORD");
@@ -39,9 +48,14 @@ public class SeekerRegisterServlet extends HttpServlet {
 
 				if (seekerDAOlmpl.insertSeekerDetails(seekerDetails) > 0) {
 
-					RequestDispatcher dispatcher = request
-							.getRequestDispatcher("seekerLogin.jsp?registerSucces=sucess");
-					dispatcher.forward(request, response);
+					try {
+						RequestDispatcher dispatcher = request
+								.getRequestDispatcher("seekerLogin.jsp?registerSucces=sucess");
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
 
 				}
 			} else {
@@ -52,8 +66,14 @@ public class SeekerRegisterServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("phoneNumber", e.phoneNumber());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("seekerRegister.jsp");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("seekerRegister.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+
+				e1.printStackTrace();
+			}
 
 		}
 

@@ -57,8 +57,14 @@ public class DonorRegisterServlet extends HttpServlet {
 
 				if (donorDAOImpl.insertDonor(donor) > 0) {
 
-					RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp?registerSucces=sucess");
-					dispatcher.forward(request, response);
+					try {
+						RequestDispatcher dispatcher = request
+								.getRequestDispatcher("donorLogin.jsp?registerSucces=sucess");
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
 				}
 
 			} else {
@@ -70,8 +76,14 @@ public class DonorRegisterServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("aadharcardNumber", e.aadharcardNumber());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+
+				e1.printStackTrace();
+			}
 
 		}
 

@@ -27,8 +27,14 @@ public class AdminShowBookingServlet extends HttpServlet {
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingAdmin();
 
 		request.setAttribute("bookingList", bookingList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("adminShowBooking.jsp");
-		dispatcher.forward(request, response);
+
+		try {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("adminShowBooking.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException | IOException e) {
+
+			e.printStackTrace();
+		}
 
 	}
 

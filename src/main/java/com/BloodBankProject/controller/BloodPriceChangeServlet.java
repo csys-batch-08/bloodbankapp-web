@@ -31,8 +31,13 @@ public class BloodPriceChangeServlet extends HttpServlet {
 		if (bloodStackDAOlmpl.bloodPriceChange(bloodtype, bloodPrice) > 0) {
 
 			request.setAttribute("priceChange", "priceChange");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ShowStakServlet");
-			dispatcher.forward(request, response);
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("ShowStakServlet");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 

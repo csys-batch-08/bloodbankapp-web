@@ -1,7 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +21,14 @@ public class LoginDonorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		PrintWriter writer = response.getWriter();
+		Long aadharcard = null;
+		try {
+			aadharcard = Long.parseLong(request.getParameter("aadharcard"));
+		} catch (NumberFormatException e1) {
 
-		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
+			e1.printStackTrace();
+		}
+
 		HttpSession session = request.getSession();
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
 
@@ -35,8 +39,14 @@ public class LoginDonorServlet extends HttpServlet {
 			if (donor != null) {
 				request.setAttribute("Login", "Success");
 				session.setAttribute("Donor", donor);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp?loginStatus=sucess");
-				dispatcher.forward(request, response);
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp?loginStatus=sucess");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
 
 			} else {
 
@@ -46,8 +56,14 @@ public class LoginDonorServlet extends HttpServlet {
 		} catch (ExeceptionHandle e) {
 
 			request.setAttribute("DonorError", e.donorMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp");
-			dispatcher.forward(request, response);
+
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+
+				e1.printStackTrace();
+			}
 		}
 
 	}

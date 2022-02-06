@@ -1,8 +1,8 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,15 +22,18 @@ public class RequestDeleteAdminServlet extends HttpServlet {
 		String bloodType = request.getParameter("bloodtype");
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 
-		PrintWriter writer = response.getWriter();
 		String status = requestDAOlmpl.statusCheck(aadharcard, bloodType);
 
 		if (status.equals("approved")) {
 
-			writer.println("<script type=\"text/javascript\">");
-			writer.println("alert('can t delete the request it is approved');");
-			writer.println("location='requestShowAndDeleteAdmin.jsp';");
-			writer.println("</script>");
+			try {
+				RequestDispatcher dispatcher = request
+						.getRequestDispatcher("requestShowAndDeleteAdmin.jsp?approvedRequest");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 
 		} else {
 

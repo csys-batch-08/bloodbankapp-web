@@ -79,8 +79,32 @@ function showMessage(check)
         });
     
     break;
+     case "approvedRequest":
+	console.log("admin login");
+   var toastMixin = Swal.mixin({
+        toast: true,
+        icon: 'success',
+        title: 'General Title',
+        animation: false,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        });
+    
+       
+        toastMixin.fire({
+        animation: true,
+        title: 'can t delete the request it is approved'
+        });
+    
+    break;
 
-  case "deleteSucess":
+  case "Booking":
    var toastMixin = Swal.mixin({
 			toast: true,
 			icon: 'success',
@@ -99,12 +123,35 @@ function showMessage(check)
 			
 			toastMixin.fire({
 			animation: true,
-			title: 'Successfully Deleted'
+			title: 'Booking Successfully '
 			});
 			
     break;
 
-	case "deleteFailure":
+	case "bookingDate":
+   var toastMixin = Swal.mixin({
+			toast: true,
+			icon: 'success',
+			title: 'General Title',
+			animation: false,
+			position: 'top-right',
+			showConfirmButton: false,
+			timer: 5000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+			});
+
+		
+			toastMixin.fire({
+			animation: true,
+			title: 'your previous donated date is with in 90 days,so please donate after 90 days '
+			});
+			
+	break;	
+	case "RequestDeleted":
    var toastMixin = Swal.mixin({
 			toast: true,
 			icon: 'success',
@@ -123,7 +170,7 @@ function showMessage(check)
 		
 			toastMixin.fire({
 			animation: true,
-			title: 'Unable To Delete Product Something Went Wrong'
+			title: 'Request Cancel '
 			});
 			
 	break;			
@@ -157,6 +204,29 @@ function showMessage(check)
 			toastMixin.fire({
 			animation: true,
 			title: 'you are qualified '
+			});
+	break;
+	case "InvalidAadharcardNumber":
+	
+	   var toastMixin = Swal.mixin({
+			toast: true,
+			icon: 'success',
+			title: 'General Title',
+			animation: false,
+			position: 'top-right',
+			showConfirmButton: false,
+			timer: 1500,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+			});
+
+			
+			toastMixin.fire({
+			animation: true,
+			title: 'Invalid Aadharcard Number '
 			});
 	break;
 	case "forgotpassword":

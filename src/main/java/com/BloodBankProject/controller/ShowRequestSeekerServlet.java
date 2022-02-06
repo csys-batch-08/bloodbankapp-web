@@ -28,14 +28,53 @@ public class ShowRequestSeekerServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		SeekerDetails seeker = (SeekerDetails) session.getAttribute("seeker");
 		List<RequestModel> requestList = requestDAOlmpl.showRequestSeeker(seeker.getPhoneNumber());
+
 		if (requestList.isEmpty()) {
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?noDate=noDate");
-			dispatcher.forward(request, response);
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?noDate=noDate");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
+
 		} else {
+
 			request.setAttribute("requestList", requestList);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("showSeekerRequest.jsp");
-			dispatcher.forward(request, response);
+
+			if (request.getAttribute("approved") != null) {
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("showSeekerRequest.jsp?approved");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
+
+			} else if (request.getAttribute("Requestcancel") != null) {
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("showSeekerRequest.jsp?Requestcancel");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
+
+			} else if (request.getAttribute("InvalidAadharcardNumber") != null) {
+
+				try {
+					RequestDispatcher dispatcher = request
+							.getRequestDispatcher("showSeekerRequest.jsp?InvalidAadharcardNumber");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
+			}
+
 		}
 
 	}

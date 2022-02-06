@@ -1,8 +1,8 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,19 +24,15 @@ public class BookingCancelServlet extends HttpServlet {
 
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
 
-		PrintWriter writer = response.getWriter();
-
-		writer.println("<script type=\"text/javascript\">");
-		writer.println("alert('are you delete now');");
-		// writer.println("location='index.jsp';");
-		writer.println("</script>");
-
 		if (bookingDAOlmpl.deleteBooking(donor.getAadharcard()) > 0) {
 
-			writer.println("<script type=\"text/javascript\">");
-			writer.println("alert('Request deleted ');");
-			writer.println("location='index.jsp';");
-			writer.println("</script>");
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp?RequestDeleted=sucess");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 		}
 	}
 

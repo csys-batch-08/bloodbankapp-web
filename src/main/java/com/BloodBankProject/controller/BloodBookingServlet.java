@@ -1,9 +1,9 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +20,7 @@ import com.bloodbank.model.Donor;
 public class BloodBookingServlet extends HttpServlet {
 
 	static final String LOCALDATE = "bookingDate";
+	static final String LOCATION = "BookingProcess.jsp?bookingStatus=sucess";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,14 +31,6 @@ public class BloodBookingServlet extends HttpServlet {
 		String choice = request.getParameter("Choice");
 
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
-
-		PrintWriter writer = null;
-		try {
-			writer = response.getWriter();
-		} catch (IOException e1) {
-
-			e1.printStackTrace();
-		}
 
 		LocalDate date = null;
 		try {
@@ -79,10 +72,13 @@ public class BloodBookingServlet extends HttpServlet {
 
 				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					writer.println("<script type=\"text/javascript\">");
-					writer.println("alert('Booking Successfully');");
-					writer.println("location='BookingProcess.jsp';");
-					writer.println("</script>");
+					try {
+						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
 
 				}
 
@@ -97,10 +93,13 @@ public class BloodBookingServlet extends HttpServlet {
 
 				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					writer.println("<script type=\"text/javascript\">");
-					writer.println("alert('Booking Successfully');");
-					writer.println("location='bloodBookingIndex.jsp';");
-					writer.println("</script>");
+					try {
+						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
 
 				}
 
@@ -121,11 +120,13 @@ public class BloodBookingServlet extends HttpServlet {
 
 				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					writer.println("<script type=\"text/javascript\">");
-					writer.println("alert('Booking Successfully');");
-					writer.println("location='bloodBookingIndex.jsp';");
-					writer.println("</script>");
+					try {
+						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
 
+						e.printStackTrace();
+					}
 				}
 
 			} else {
@@ -136,10 +137,13 @@ public class BloodBookingServlet extends HttpServlet {
 
 				if (bookingDAOlmpl.booking(bookingModel) > 0) {
 
-					writer.println("<script type=\"text/javascript\">");
-					writer.println("alert('Booking Successfully');");
-					writer.println("location='bloodBookingIndex.jsp';");
-					writer.println("</script>");
+					try {
+						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
 
 				}
 
@@ -147,10 +151,13 @@ public class BloodBookingServlet extends HttpServlet {
 
 		} else {
 
-			writer.println("<script type=\"text/javascript\">");
-			writer.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
-			writer.println("location='donorNotQualified.jsp';");
-			writer.println("</script>");
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("donorNotQualified.jsp?bookingDate=sucess");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 

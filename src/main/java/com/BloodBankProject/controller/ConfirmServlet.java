@@ -1,9 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,24 +14,22 @@ import javax.servlet.http.HttpSession;
 import com.bloodbank.DaoImpl.AdminDAOlmpl;
 import com.bloodbank.DaoImpl.BloodDetailsDAOlmpl;
 import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
-import com.bloodbank.DaoImpl.BookingDAOlmpl;
 import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.BloodStack;
-import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
 @WebServlet("/ConfirmServlet")
 public class ConfirmServlet extends HttpServlet {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		
-		HttpSession  session = request.getSession();
 
-		AdminDAOlmpl  adminDAOlmpl = new AdminDAOlmpl();
+		HttpSession session = request.getSession();
+
+		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
 
 		int unit = 1;
 		int price = 300;
@@ -42,7 +37,7 @@ public class ConfirmServlet extends HttpServlet {
 		Donor donor = (Donor) session.getAttribute("Donor");
 
 		BloodDetailsModel bloodDetails = new BloodDetailsModel(donor, unit, donor.getBloodType(), price);
-		BloodDetailsDAOlmpl  bloodDetailsDAOlmpl = new BloodDetailsDAOlmpl();
+		BloodDetailsDAOlmpl bloodDetailsDAOlmpl = new BloodDetailsDAOlmpl();
 
 		if (bloodDetailsDAOlmpl.insertBloodDetails(bloodDetails) > 0) {
 
@@ -53,38 +48,22 @@ public class ConfirmServlet extends HttpServlet {
 			if (bloodStackDAOlmpl.updateStack(bloodStack) > 0) {
 
 				adminDAOlmpl.updateWallet();
-				
-				List<BloodDetailsModel> detailsList  = bloodDetailsDAOlmpl.showBloodDetails(donor);
+
+				List<BloodDetailsModel> detailsList = bloodDetailsDAOlmpl.showBloodDetails(donor);
 				request.setAttribute("detailsList", detailsList);
-				RequestDispatcher  dispatcher=request.getRequestDispatcher("showDonorBloodDetails.jsp");
-				dispatcher.forward(request, response);
-				
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("showDonorBloodDetails.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
 
 			}
 
 		}
 
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		
-}
 }
