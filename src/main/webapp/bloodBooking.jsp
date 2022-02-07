@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Booking</title>
+
+<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+	<title><fmt:message key="Booking" /></title>
+</fmt:bundle>
+<title></title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -21,8 +26,12 @@
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 
-			<li><a href="seekerIndex.jsp">Seeker</a></li>
-			<li><a href="DonorLogoutServlet">Logout</a></li>
+			<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+
+
+				<li><a href="seekerIndex.jsp"><fmt:message key="Seeker" /></a></li>
+				<li><a href="DonorLogoutServlet"><fmt:message key="Logout" /></a></li>
+			</fmt:bundle>
 		</ul>
 	</nav>
 	<div class="d-flex book align-items-center">
@@ -31,24 +40,37 @@
 
 			<form action="BloodBookingServlet " method="post">
 
-				<h1>BOOKING</h1>
+
+
+				<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+					<h1>
+						<fmt:message key="BOOKING" />
+					</h1>
+					<fmt:message key="BOOKING" />
+				</fmt:bundle>
 				<div>
 					<div class="inputtype">
-						<input type="date" id="bookingDate" name="bookingDate"
-							required="required" placeholder="" />
+						<label for="bookingDate"><input type="date"
+							id="bookingDate" name="bookingDate" required="required"
+							placeholder="" /></label>
 
 					</div>
 					<div class="inputtype">
-						<select name="Choice" id="Choice" required="required">
-							<option disabled="disabled">Select any one</option>
-							<option value="center">center</option>
-							<option value="home">Home</option>
+						<label for="Choice"> <select name="Choice" id="Choice"
+							required="required">
+								<option disabled="disabled">Select any one</option>
 
-						</select>
+								<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+									<option value="center"><fmt:message key="center" /></option>
+									<option value="home"><fmt:message key="Home" /></option>
+								</fmt:bundle>
+
+						</select></label>
 
 						<div class="inputtype">
-							<textarea style="visibility: hidden;" id="address" name="address"
-								maxlength="50" placeholder="Enter the Home Address"></textarea>
+							<label for="address"> <textarea
+									style="visibility: hidden;" id="address" name="address"
+									maxlength="50" placeholder="Enter the Home Address"></textarea></label>
 
 						</div>
 					</div>

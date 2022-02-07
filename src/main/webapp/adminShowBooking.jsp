@@ -72,7 +72,10 @@
 			</tbody>
 		</table>
 		<div class="backBtn">
-			<a href="adminWork.jsp">back</a>
+
+			<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+				<a href="adminWork.jsp"><fmt:message key="Back" /></a>
+			</fmt:bundle>
 		</div>
 	</div>
 </body>
