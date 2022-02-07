@@ -27,7 +27,9 @@ public class BloodPriceChangeServlet extends HttpServlet {
 
 			e.printStackTrace();
 		}
+
 		BloodStackDAOlmpl bloodStackDAOlmpl = new BloodStackDAOlmpl();
+		// The admin change the blood price
 		if (bloodStackDAOlmpl.bloodPriceChange(bloodtype, bloodPrice) > 0) {
 
 			request.setAttribute("priceChange", "priceChange");

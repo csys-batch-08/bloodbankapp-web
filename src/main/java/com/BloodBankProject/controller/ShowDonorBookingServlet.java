@@ -18,6 +18,8 @@ import com.bloodbank.model.Donor;
 @WebServlet("/ShowDonorBookingServlet")
 public class ShowDonorBookingServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,7 +28,7 @@ public class ShowDonorBookingServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Donor donor = (Donor) session.getAttribute("Donor");
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
-
+		// Show the booking details in donor
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingDonor(donor);
 		if (bookingList.isEmpty()) {
 

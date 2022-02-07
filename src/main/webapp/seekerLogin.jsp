@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,25 +10,26 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/formformat.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
 <body>
-<script src="assets/javascript/popupMessage.js"></script>	
+	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.forgotpassword!=null}">
-	<script type="text/javascript"> showMessage("forgotpassword")</script>
+		<script type="text/javascript"> showMessage("forgotpassword")</script>
 	</c:if>
-	<script src="assets/javascript/popupMessage.js"></script>	
+	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.registerSucces!=null}">
-	<script type="text/javascript"> showMessage("registerSucces")</script>
+		<script type="text/javascript"> showMessage("registerSucces")</script>
 	</c:if>
 
 
-<script>
+	<script>
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
@@ -71,9 +73,17 @@ $(document).ready(function(){
 				<div class="formbtn">
 					<button>Submit</button>
 
-					<button >
-						<a href="forgotPassword.jsp">Forgot password</a>
-					</button>
+					
+					
+					<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+                 <a href="forgotPassword.jsp">  <button>   <fmt:message key="Forgot password" /></button></a>	
+
+				               
+				
+			</fmt:bundle>
+						
+						
+				
 
 				</div>
 

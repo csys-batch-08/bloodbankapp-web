@@ -13,12 +13,12 @@
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
 <body>
-<script src="assets/javascript/popupMessage.js"></script>
-<c:if test="${param.loginStatus!=null}">
-	<script type="text/javascript"> showMessage('loginSucess')</script>
+	<script src="assets/javascript/popupMessage.js"></script>
+	<c:if test="${param.loginStatus!=null}">
+		<script type="text/javascript"> showMessage('loginSucess')</script>
 	</c:if>
 
 
@@ -43,7 +43,7 @@
 
 				<h1>CHECK-UP</h1>
 				<div class="formcontrol">
-			
+
 					<input type="text" id="Height" name="Height" required="required"
 						autofocus="autofocus" pattern="[0-9]{2,}"
 						placeholder="Enter the Height" title="it should be in number" /><br />
@@ -65,19 +65,18 @@
 						<input type="text" id="pressure" name="pressure"
 							required="required" pattern="[0-9]{2,}"
 							placeholder="Enter the blood pressure"
-							title="it should be in number"/><br /> <br />
+							title="it should be in number" /><br /> <br />
 					</div>
 					<div class="formcontrol">
 						<input type="text" id="pulse" name="pulse" required="required"
 							pattern="[0-9]{2,}" placeholder="Enter the pulse"
-							title="it should be in number"/><br /> <br />
+							title="it should be in number" /><br /> <br />
 
 					</div>
 					<div class="formbtn">
-						<input id="submit" type="submit"/> <input id="reset"
-							type="reset"/>
+						<input id="submit" type="submit" /> <input id="reset" type="reset" />
 					</div>
-					</div>
+				</div>
 			</form>
 		</div>
 	</div>

@@ -16,6 +16,8 @@ import com.bloodbank.model.RequestModel;
 @WebServlet("/AdminShowRequestServelt")
 public class AdminShowRequestServelt extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,6 +25,9 @@ public class AdminShowRequestServelt extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
+
+		// Show request details for admin
+
 		List<RequestModel> requestList = requestDAOlmpl.showRequest();
 
 		request.setAttribute("requestList", requestList);

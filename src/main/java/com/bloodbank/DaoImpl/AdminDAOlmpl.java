@@ -16,6 +16,9 @@ public class AdminDAOlmpl implements AdminDAO {
 	static final String PASSWORD = "password";
 	static final String WALLET = "wallet";
 
+	/**
+	 * Admin validation
+	 */
 	@Override
 	public AdminModel verificationAdmin(AdminModel adminModel) {
 		AdminModel adminModel2 = null;
@@ -50,6 +53,9 @@ public class AdminDAOlmpl implements AdminDAO {
 		return adminModel2;
 	}
 
+	/**
+	 * Check the admin wallet and reduce the money
+	 */
 	@Override
 	public AdminModel updateWallet() {
 
@@ -92,6 +98,9 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	}
 
+	/**
+	 * Update the money for admin wallet
+	 */
 	@Override
 	public int seekerPayment(double totalPrice) {
 
@@ -132,6 +141,9 @@ public class AdminDAOlmpl implements AdminDAO {
 
 	}
 
+	/**
+	 * check the admin wallet
+	 */
 	@Override
 	public Double checkWallet() {
 		double wallet = 0;

@@ -23,7 +23,7 @@ public class BookingCancelServlet extends HttpServlet {
 		Donor donor = (Donor) session.getAttribute("Donor");
 
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
-
+		// Donor cancel the booking
 		if (bookingDAOlmpl.deleteBooking(donor.getAadharcard()) > 0) {
 
 			try {

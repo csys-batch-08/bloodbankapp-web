@@ -16,6 +16,9 @@ import com.bloodbank.model.SeekerDetails;
 
 @WebServlet("/SeekerLoginServlet")
 public class SeekerLoginServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,17 +33,17 @@ public class SeekerLoginServlet extends HttpServlet {
 
 			e1.printStackTrace();
 		}
-
+		// session set the phone number
 		session.setAttribute("SeekerPhoneNumber", phoneNumber);
 
 		SeekerDetails seekerDetails = null;
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
-
+		// seeker validation and get the object
 		seekerDetails = seekerDAOlmpl.seekerObject(password, phoneNumber);
 
 		try {
 			if (seekerDetails != null) {
-
+				// session set the seeker details
 				session.setAttribute("seeker", seekerDetails);
 
 				try {

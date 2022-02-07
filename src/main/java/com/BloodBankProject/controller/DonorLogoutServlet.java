@@ -15,7 +15,7 @@ public class DonorLogoutServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// Donor logout
 		HttpSession session = request.getSession();
 		session.setAttribute("Donor", null);
 		session.setAttribute("currentModel", null);

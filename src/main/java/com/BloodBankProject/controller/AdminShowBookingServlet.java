@@ -16,6 +16,8 @@ import com.bloodbank.model.BookingModel;
 @WebServlet("/AdminShowBookingServlet")
 public class AdminShowBookingServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,6 +25,8 @@ public class AdminShowBookingServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		BookingDAOlmpl bookingDAOlmpl = new BookingDAOlmpl();
+
+		// Show booking details for admin
 
 		List<BookingModel> bookingList = bookingDAOlmpl.showBookingAdmin();
 

@@ -16,14 +16,16 @@ import com.bloodbank.model.BloodStack;
 @WebServlet("/ShowStakServlet")
 public class ShowStackServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		BloodStackDAOlmpl bloodStackDAOlmpl = new BloodStackDAOlmpl();
-
+		// Show the stack details in admin
 		List<BloodStack> stackDetails = bloodStackDAOlmpl.showStack();
-
+		// Stack blood price change to show the stack details
 		if (request.getAttribute("priceChange") != null) {
 
 			request.setAttribute("stackDetails", stackDetails);

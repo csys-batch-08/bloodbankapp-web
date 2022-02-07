@@ -21,6 +21,9 @@ public class DonorDAOImpl implements DonorDAO {
 	static final String DONORBIO = "donor_bio";
 	static final String BLOODTYPE = "blood_type";
 
+	/**
+	 * Insert the donor details
+	 */
 	@Override
 	public int insertDonor(Donor donor) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -56,6 +59,9 @@ public class DonorDAOImpl implements DonorDAO {
 		return tempNumber;
 	}
 
+	/**
+	 * donor login validation
+	 */
 	@Override
 	public Donor validAadharcardNumber(Long aadharcard) {
 		Donor donor = null;
@@ -90,35 +96,9 @@ public class DonorDAOImpl implements DonorDAO {
 		return donor;
 	}
 
-	@Override
-	public int updateDonor(Donor donor) {
-		ConnectionUtil connectionUtil = new ConnectionUtil();
-		int returnNumber = 0;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			connection = connectionUtil.getConnection();
-			String commit = "commit";
-			String query = "update donor_details set address=?,donor_bio=?,phone_number=? where aadharcard_number=?";
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, donor.getAddress());
-			preparedStatement.setDate(2, new java.sql.Date(donor.getDonorDate().getTime()));
-			preparedStatement.setLong(3, donor.getNumber());
-			preparedStatement.setLong(4, donor.getAadharcard());
-			returnNumber = preparedStatement.executeUpdate();
-			preparedStatement.executeQuery(commit);
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (SQLException e1) {
-
-			e1.printStackTrace();
-		} finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
-		}
-		return returnNumber;
-	}
+	/**
+	 * Show all donor details
+	 */
 
 	@Override
 	public List<Donor> showDonor() {
@@ -158,6 +138,9 @@ public class DonorDAOImpl implements DonorDAO {
 
 	}
 
+	/**
+	 * Show donor details
+	 */
 	@Override
 	public Long aadharcardNumber(Donor donor) {
 		Long aadharcardNumber = null;
@@ -194,6 +177,9 @@ public class DonorDAOImpl implements DonorDAO {
 		return aadharcardNumber;
 	}
 
+	/**
+	 * The donor the aadharcard number
+	 */
 	@Override
 	public Donor validNumber(Long aadharcardNumber) {
 		Donor donor = null;

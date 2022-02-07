@@ -23,6 +23,9 @@ public class RequestDAOlmpl implements RequestDAO {
 	static final String REQUESTDATE = "request_date";
 	static final String STATUS = "status";
 
+	/**
+	 * Insert the seeker request details
+	 */
 	@Override
 	public int insertRequest(RequestModel requestModel) {
 		int returnNumber = 0;
@@ -60,6 +63,9 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	}
 
+	/**
+	 * The seeker request cancel
+	 */
 	@Override
 	public int deleteRequest(Long aadharcardNumber, String bloodType) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -95,6 +101,9 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	}
 
+	/**
+	 * Check the request status
+	 */
 	@Override
 	public String statusCheck(Long aadharcardNumber, String bloodType) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -134,6 +143,9 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	}
 
+	/**
+	 * Show the all Request details
+	 */
 	@Override
 	public List<RequestModel> showRequest() {
 		List<RequestModel> requestList = new ArrayList();
@@ -172,6 +184,9 @@ public class RequestDAOlmpl implements RequestDAO {
 		return requestList;
 	}
 
+	/**
+	 * Show the request details in seeker
+	 */
 	@Override
 	public List<RequestModel> showRequestSeeker(Long phoneNumber) {
 		List<RequestModel> requestList = new ArrayList();
@@ -209,6 +224,9 @@ public class RequestDAOlmpl implements RequestDAO {
 		return requestList;
 	}
 
+	/**
+	 * The find the request object
+	 */
 	@Override
 	public RequestModel requestObject(Long phoneNumber) {
 		RequestModel requestModel = null;
@@ -246,6 +264,9 @@ public class RequestDAOlmpl implements RequestDAO {
 		return requestModel;
 	}
 
+	/**
+	 * The aadharcad number validation
+	 */
 	@Override
 	public Long aadharcardValid(Long aadharcardNumber) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -281,6 +302,9 @@ public class RequestDAOlmpl implements RequestDAO {
 
 	}
 
+	/**
+	 * Request update and delete method
+	 */
 	@Override
 	public List<RequestModel> requestUpdateAndDelete() {
 		List<RequestModel> requestList = new ArrayList();
@@ -317,6 +341,9 @@ public class RequestDAOlmpl implements RequestDAO {
 		return requestList;
 	}
 
+	/**
+	 * The request are update
+	 */
 	@Override
 	public int requestUpdate(RequestModel requestModel) {
 		int returnNumber = 0;

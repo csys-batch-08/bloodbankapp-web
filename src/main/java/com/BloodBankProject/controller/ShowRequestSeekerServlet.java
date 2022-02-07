@@ -27,6 +27,7 @@ public class ShowRequestSeekerServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		SeekerDetails seeker = (SeekerDetails) session.getAttribute("seeker");
+		// Show the request details in seeker
 		List<RequestModel> requestList = requestDAOlmpl.showRequestSeeker(seeker.getPhoneNumber());
 
 		if (requestList.isEmpty()) {

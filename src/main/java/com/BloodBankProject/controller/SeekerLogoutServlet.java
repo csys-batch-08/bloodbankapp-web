@@ -17,7 +17,7 @@ public class SeekerLogoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		// seeker logout
 		session.setAttribute("seeker", null);
 		session.setAttribute("requestModel", null);
 		session.setAttribute("biilingProces", null);

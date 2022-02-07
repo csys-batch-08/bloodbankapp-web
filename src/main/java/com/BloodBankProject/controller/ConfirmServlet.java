@@ -39,11 +39,15 @@ public class ConfirmServlet extends HttpServlet {
 		BloodDetailsModel bloodDetails = new BloodDetailsModel(donor, unit, donor.getBloodType(), price);
 		BloodDetailsDAOlmpl bloodDetailsDAOlmpl = new BloodDetailsDAOlmpl();
 
+		// Donor confirm the blood donation to insert the blood details
+
 		if (bloodDetailsDAOlmpl.insertBloodDetails(bloodDetails) > 0) {
 
 			BloodStackDAOlmpl bloodStackDAOlmpl = new BloodStackDAOlmpl();
 
 			BloodStack bloodStack = new BloodStack(bloodDetails.getUnit(), bloodDetails.getBloodType(), 0);
+
+			// Stack update the blood quantity 1 and reduce the amount in 300
 
 			if (bloodStackDAOlmpl.updateStack(bloodStack) > 0) {
 

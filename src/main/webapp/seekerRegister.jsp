@@ -9,10 +9,11 @@
 <title>Register</title>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/seekerRegister.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<script>
+	<script>
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
@@ -43,30 +44,28 @@ $(document).ready(function(){
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[0-9]{10}" placeholder="PhoneNumber"
-						title=" mininum 10characters"/><br /> <br />
+						title=" mininum 10characters" /><br /> <br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="PASSWORD" name="PASSWORD" required
 						placeholder="Password" pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ "/><br />
-					<br />
+						title=" mininum 8characters may includes @#$%&*_?/ " /><br /> <br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="TEXT" id="PATIENT" name="PATIENT"
-						placeholder="Patient Id" pattern="[0-9A-Za-z]{5,}"/><br />
-					<br />
+						placeholder="Patient Id" pattern="[0-9A-Za-z]{5,}" /><br /> <br />
 				</div>
 				<div class="formcontrol">
 
 					<input type="TEXT" id="HOSPITAL" name="HOSPITAL" required
 						placeholder="Hospital Name" pattern="[A-Za-z]{5,}"
-						title="mininum 3 character"/><br /> <br />
+						title="mininum 3 character" /><br /> <br />
 				</div>
 				<div class="formcontrol">
 					<input list="blood type" id="bloodtype" name="bloodtype" required
-						placeholder="Blood Type"/><br /> <br />
+						placeholder="Blood Type" /><br /> <br />
 					<datalist id="blood type">
 						<option value="a+">a+</option>
 						<option value="a-">a-</option>

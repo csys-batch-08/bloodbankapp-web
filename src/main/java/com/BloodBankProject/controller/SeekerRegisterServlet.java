@@ -16,6 +16,8 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/SeekerRigester")
 public class SeekerRegisterServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -44,8 +46,9 @@ public class SeekerRegisterServlet extends HttpServlet {
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 
 		try {
+			// Check the phone number validation
 			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) == null) {
-
+				// insert the seeker details
 				if (seekerDAOlmpl.insertSeekerDetails(seekerDetails) > 0) {
 
 					try {

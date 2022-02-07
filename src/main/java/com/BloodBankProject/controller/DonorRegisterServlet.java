@@ -49,7 +49,7 @@ public class DonorRegisterServlet extends HttpServlet {
 
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
 		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
-
+		// Donor is null new donor register
 		try {
 			if (donor == null) {
 

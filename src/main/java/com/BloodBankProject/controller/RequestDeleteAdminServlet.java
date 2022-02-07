@@ -14,6 +14,8 @@ import com.bloodbank.DaoImpl.RequestDAOlmpl;
 @WebServlet("/RequestDeleteAdminServlet")
 public class RequestDeleteAdminServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +25,7 @@ public class RequestDeleteAdminServlet extends HttpServlet {
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 
 		String status = requestDAOlmpl.statusCheck(aadharcard, bloodType);
-
+		// The delete the pending request
 		if (status.equals("approved")) {
 
 			try {
@@ -35,13 +37,9 @@ public class RequestDeleteAdminServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else {
+		} else if (requestDAOlmpl.deleteRequest(aadharcard, bloodType) > 0) {
 
-			if (requestDAOlmpl.deleteRequest(aadharcard, bloodType) > 0) {
-
-				response.sendRedirect("requestShowAndDeleteAdmin.jsp");
-
-			}
+			response.sendRedirect("requestShowAndDeleteAdmin.jsp");
 
 		}
 

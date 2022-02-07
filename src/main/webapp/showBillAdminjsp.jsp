@@ -23,7 +23,8 @@
 	<div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
-				<table style="text-align: center;" class="center"aria-describedby="seeker report">
+				<table style="text-align: center;" class="center"
+					aria-describedby="seeker report">
 					<tr>
 						<th><strong>BLOODTYPE</strong></th>
 						<th><strong>SEEKER NAME</strong></th>

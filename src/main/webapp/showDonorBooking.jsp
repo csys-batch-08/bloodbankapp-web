@@ -17,7 +17,7 @@
 <body>
 
 	<div class="adminCard">
-		<table aria-describedby="blood booking" >
+		<table aria-describedby="blood booking">
 
 			<tr>
 				<th><strong>AADHARCARD</strong></th>
@@ -48,8 +48,8 @@
 			<a href="bloodBookingProcess.jsp">back</a>
 		</div>
 
-		
+
 	</div>
-	
+
 </body>
 </html>

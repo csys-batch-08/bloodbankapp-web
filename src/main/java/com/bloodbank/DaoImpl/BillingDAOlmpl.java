@@ -21,6 +21,9 @@ public class BillingDAOlmpl implements BillingDAO {
 	static final String QUANTITYPRICE = "quantity_price";
 	static final String BILLINGDATE = "billing_date";
 
+	/**
+	 * Insert the bill for seeker
+	 */
 	@Override
 	public int insertBilling(BillingModel billingModel) {
 
@@ -62,6 +65,9 @@ public class BillingDAOlmpl implements BillingDAO {
 
 	}
 
+	/**
+	 * Show the seeker billing
+	 */
 	@Override
 	public List<BillingModel> biilingShow(BillingModel billingModel) {
 
@@ -103,6 +109,9 @@ public class BillingDAOlmpl implements BillingDAO {
 		return billingList;
 	}
 
+	/**
+	 * Show the all billing
+	 */
 	@Override
 	public List<BillingModel> biilingShowAdmin() {
 
@@ -141,6 +150,9 @@ public class BillingDAOlmpl implements BillingDAO {
 		return billingList;
 	}
 
+	/**
+	 * Show the bill for date defined
+	 */
 	@Override
 	public List<BillingModel> biilingShowAdminDate(LocalDate date) {
 

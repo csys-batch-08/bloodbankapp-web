@@ -36,6 +36,7 @@ public class CheckDonorServlet extends HttpServlet {
 
 			e.printStackTrace();
 		}
+		// donor check-up in physicaly
 
 		if (temp <= 100 && temp >= 80) {
 
@@ -46,9 +47,14 @@ public class CheckDonorServlet extends HttpServlet {
 					if (height <= 200 && height >= 100) {
 						if (weight <= 150 && weight >= 35) {
 
-							RequestDispatcher dispatcher = request
-									.getRequestDispatcher("bloodBookingProcess.jsp?qualified=sucess");
-							dispatcher.forward(request, response);
+							try {
+								RequestDispatcher dispatcher = request
+										.getRequestDispatcher("bloodBookingProcess.jsp?qualified=sucess");
+								dispatcher.forward(request, response);
+							} catch (ServletException | IOException e) {
+
+								e.printStackTrace();
+							}
 
 						} else {
 

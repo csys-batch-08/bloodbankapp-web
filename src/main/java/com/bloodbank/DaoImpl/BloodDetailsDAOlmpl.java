@@ -13,10 +13,14 @@ import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.Donor;
 
 public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
-	static final String BLOODTYPE ="blood_type";
-	static final String BLOODUNIT ="blood_unit";
-	static final String BLOODUNITPRICE ="blood_unit_price";
-	
+	static final String BLOODTYPE = "blood_type";
+	static final String BLOODUNIT = "blood_unit";
+	static final String BLOODUNITPRICE = "blood_unit_price";
+
+	/**
+	 * Insert the blood details
+	 */
+	@Override
 	public int insertBloodDetails(BloodDetailsModel detailsModel) {
 		int tempNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -50,6 +54,10 @@ public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 
 	}
 
+	/**
+	 * show for blood details in donor
+	 */
+	@Override
 	public List<BloodDetailsModel> showBloodDetails(Donor donor) {
 		BloodDetailsModel detailsModel = null;
 

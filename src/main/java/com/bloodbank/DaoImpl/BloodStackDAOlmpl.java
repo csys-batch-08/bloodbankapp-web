@@ -11,13 +11,16 @@ import java.util.List;
 import com.bloodbank.Dao.BloodStackDAO;
 import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BloodStack;
-import com.bloodbank.model.RequestModel;
 
 public class BloodStackDAOlmpl implements BloodStackDAO {
 	static final String QUANTITY = "quantity";
 	static final String BLOODTYPE = "blood_type";
 	static final String UNITPRICE = "unit_price";
 
+	/**
+	 * Update the stack S
+	 */
+	@Override
 	public int updateStack(BloodStack bloodStack) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int returnNumber = 0;
@@ -51,6 +54,10 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return returnNumber;
 	}
 
+	/**
+	 * Show the stack details
+	 */
+	@Override
 	public List<BloodStack> showStack() {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		BloodStack bloodStack = null;
@@ -87,6 +94,11 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return stockDetails;
 	}
 
+	/**
+	 * Check the Stack of quantity
+	 */
+
+	@Override
 	public int checkOfQuantity(String bloodtype) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 
@@ -121,6 +133,10 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return returnNumber;
 	}
 
+	/**
+	 * The reduce the blood Unit
+	 */
+	@Override
 	public int updateStackReduce(String bloodType, int unit) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		int returnNumber = 0;
@@ -152,6 +168,10 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return returnNumber;
 	}
 
+	/**
+	 * Find the blood price
+	 */
+	@Override
 	public double findPrice(String bloodType) {
 		double unitPrice = 0;
 		ResultSet resultSet = null;
@@ -184,9 +204,13 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return unitPrice;
 	}
 
+	/**
+	 * The admin change the blood price
+	 */
+	@Override
 	public int bloodPriceChange(String bloodtype, double bloodPrice) {
 		int returnNumber = 0;
-	
+
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -202,7 +226,7 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
-		}finally {
+		} finally {
 			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
 		}
 

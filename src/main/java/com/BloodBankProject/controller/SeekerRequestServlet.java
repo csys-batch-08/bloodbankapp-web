@@ -21,6 +21,8 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/SeekerRequestServlet")
 public class SeekerRequestServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -55,10 +57,12 @@ public class SeekerRequestServlet extends HttpServlet {
 		RequestDAOlmpl requestDAOlmpl = new RequestDAOlmpl();
 
 		HttpSession session = request.getSession();
+		// session get the seeker details
 		SeekerDetails seekerDetails = (SeekerDetails) session.getAttribute("seeker");
 
 		BloodStackDAOlmpl stackDAOlmpl = new BloodStackDAOlmpl();
-
+		// Check the stack blood unit greaterthan in request blood unit to approved the
+		// request
 		if (stackDAOlmpl.checkOfQuantity(bloodtype) > bloodUnit) {
 
 			String status = "approved";
@@ -79,7 +83,10 @@ public class SeekerRequestServlet extends HttpServlet {
 				}
 
 			}
+			// Check the stack blood unit lesstha in request blood unit to pending the
+			// request
 		} else {
+
 			String status = "pending";
 
 			RequestModel requestModel = new RequestModel(hospitalName, bloodtype, bloodUnit, collectorName,

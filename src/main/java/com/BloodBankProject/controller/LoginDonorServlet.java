@@ -17,6 +17,8 @@ import com.bloodbank.model.Donor;
 @WebServlet("/login")
 public class LoginDonorServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,6 +30,7 @@ public class LoginDonorServlet extends HttpServlet {
 
 			e1.printStackTrace();
 		}
+		// session for set the donor details
 
 		HttpSession session = request.getSession();
 		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
@@ -54,7 +57,7 @@ public class LoginDonorServlet extends HttpServlet {
 
 			}
 		} catch (ExeceptionHandle e) {
-
+			// message content for donor validation
 			request.setAttribute("DonorError", e.donorMessage());
 
 			try {

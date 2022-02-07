@@ -11,16 +11,19 @@ import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.SeekerDetails;
 
 public class SeekerDAOlmpl implements SeekerDAO {
-	static final String FIRSTNAME="first_name";
-	static final String LASTNAME="last_name";
-	static final String ADDRESS="address";
-	static final String PHONENUMBER="phone_number";
-	static final String PASSWORD="password";
-	static final String PATIENTID="patient_id";
-	static final String HOSPITALNAME="hospital_name";
-	static final String BLOODTYPE="blood_type";
-	
-	
+	static final String FIRSTNAME = "first_name";
+	static final String LASTNAME = "last_name";
+	static final String ADDRESS = "address";
+	static final String PHONENUMBER = "phone_number";
+	static final String PASSWORD = "password";
+	static final String PATIENTID = "patient_id";
+	static final String HOSPITALNAME = "hospital_name";
+	static final String BLOODTYPE = "blood_type";
+
+	/**
+	 * Insert the seeker details
+	 */
+	@Override
 	public int insertSeekerDetails(SeekerDetails seekerDetails) {
 		int returnNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -59,6 +62,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		return returnNumber;
 	}
 
+	/**
+	 * Find the seekerid
+	 */
+	@Override
 	public int seekerIdFind(SeekerDetails seekerDetails) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 		Connection connection = null;
@@ -91,6 +98,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		return seekerId;
 	}
 
+	/**
+	 * The seeker validation to get the seeker object
+	 */
+	@Override
 	public SeekerDetails seekerObject(String password, Long phoneNumber) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
 
@@ -108,8 +119,9 @@ public class SeekerDAOlmpl implements SeekerDAO {
 
 			while (resultSet.next()) {
 				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
-						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
-						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD),
+						resultSet.getLong(PATIENTID), resultSet.getString(HOSPITALNAME),
+						resultSet.getString(BLOODTYPE));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -127,6 +139,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 
 	}
 
+	/**
+	 * The seeker id to get the seeker details
+	 */
+	@Override
 	public SeekerDetails findSeekerId(int seekerId) {
 
 		SeekerDetails seekerDetails = null;
@@ -141,8 +157,9 @@ public class SeekerDAOlmpl implements SeekerDAO {
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
 				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
-						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
-						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD),
+						resultSet.getLong(PATIENTID), resultSet.getString(HOSPITALNAME),
+						resultSet.getString(BLOODTYPE));
 			}
 		} catch (ClassNotFoundException e) {
 
@@ -159,6 +176,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 
 	}
 
+	/**
+	 * The phone number to find the seeker object
+	 */
+	@Override
 	public SeekerDetails findSeekerObjectId(long phoneNumber) {
 
 		SeekerDetails seekerDetails = null;
@@ -176,8 +197,9 @@ public class SeekerDAOlmpl implements SeekerDAO {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				seekerDetails = new SeekerDetails(resultSet.getString(FIRSTNAME), resultSet.getString(LASTNAME),
-						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD), resultSet.getLong(PATIENTID),
-						resultSet.getString(HOSPITALNAME), resultSet.getString(BLOODTYPE));
+						resultSet.getString(ADDRESS), resultSet.getLong(PHONENUMBER), resultSet.getString(PASSWORD),
+						resultSet.getLong(PATIENTID), resultSet.getString(HOSPITALNAME),
+						resultSet.getString(BLOODTYPE));
 			}
 		} catch (ClassNotFoundException e) {
 
@@ -194,6 +216,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 
 	}
 
+	/**
+	 * The seeker phone number validation
+	 */
+	@Override
 	public Long phoneNumberValid(long phoneNumber) {
 
 		Long returnPhoneNumber = null;
@@ -225,6 +251,10 @@ public class SeekerDAOlmpl implements SeekerDAO {
 
 	}
 
+	/**
+	 * The seeker change password
+	 */
+	@Override
 	public int forgotPassword(Long phoneNumber, String password) {
 		int returnNumber = 0;
 		ConnectionUtil connectionUtil = new ConnectionUtil();

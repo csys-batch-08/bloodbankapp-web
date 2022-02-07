@@ -15,6 +15,9 @@ import com.bloodbank.DaoImpl.RequestDAOlmpl;
 @WebServlet("/SeekerRequestDelete")
 public class SeekerRequestDelete extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	static final String APPROVED = "approved";
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -33,9 +36,9 @@ public class SeekerRequestDelete extends HttpServlet {
 
 		if (requestDAOlmpl.aadharcardValid(aadharcardNumber) != null) {
 
-			if (requestDAOlmpl.statusCheck(aadharcardNumber, bloodType).equals("approved")) {
+			if (requestDAOlmpl.statusCheck(aadharcardNumber, bloodType).equals(APPROVED)) {
 
-				request.setAttribute("approved", "approved");
+				request.setAttribute(APPROVED, APPROVED);
 				try {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("ShowRequestSeekerServlet");
 					dispatcher.forward(request, response);

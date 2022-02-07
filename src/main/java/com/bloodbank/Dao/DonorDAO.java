@@ -10,8 +10,6 @@ public interface DonorDAO {
 
 	public int insertDonor(Donor donor);
 
-	public int updateDonor(Donor donor);
-
 	public List<Donor> showDonor();
 
 	public Long aadharcardNumber(Donor donor);

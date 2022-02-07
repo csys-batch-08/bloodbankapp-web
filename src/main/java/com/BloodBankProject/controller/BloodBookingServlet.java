@@ -19,6 +19,7 @@ import com.bloodbank.model.Donor;
 @WebServlet("/BloodBookingServlet")
 public class BloodBookingServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	static final String LOCALDATE = "bookingDate";
 	static final String LOCATION = "BookingProcess.jsp?bookingStatus=sucess";
 
@@ -55,9 +56,9 @@ public class BloodBookingServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// check the amount in ADMIN wallet to above 300 to Allowed
+		// check the amount in admin wallet to above 300 to Allowed
 
-		// Donor once Donated to come next Donate check the last Donating Date to 90day
+		// Donor once donated to come next Donate check the last Donating Date to 90day
 		// after come to allow
 
 		if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {

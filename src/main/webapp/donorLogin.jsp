@@ -16,25 +16,26 @@
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
 	href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
 <body>
-<script src="assets/javascript/popupMessage.js"></script>
-<c:if test="${param.registerSucces!=null}">
-	<script type="text/javascript"> showMessage('registerSucces')</script>
+	<script src="assets/javascript/popupMessage.js"></script>
+	<c:if test="${param.registerSucces!=null}">
+		<script type="text/javascript"> showMessage('registerSucces')</script>
 	</c:if>
-<script>
+	<script>
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
@@ -64,12 +65,12 @@ $(document).ready(function(){
 					<input type="text" id="aadharcard" name="aadharcard" autofocus
 						required="required" pattern="[0-9]{12}"
 						placeholder="Enter the Aadharcard Number"
-						title="enter the valid Aadharcard number"/><br /> <br />
+						title="enter the valid Aadharcard number" /><br /> <br />
 
 				</div>
 
 				<div class="formbtn">
-					<input type="submit" value="Login"/>
+					<input type="submit" value="Login" />
 
 				</div>
 

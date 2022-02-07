@@ -13,11 +13,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AdminShowBooking</title>
- <link rel="stylesheet" type="text/css" href="assets/css/tableformat.css"> 
+<link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 <script
@@ -31,8 +33,8 @@
 			$('#table_id').DataTable();
 		});
 	</script>
-	<div class="adminCard">	
-		<table  id="table_id" aria-describedby="bookig table"	>
+	<div class="adminCard">
+		<table id="table_id" aria-describedby="bookig table">
 			<thead>
 				<tr>
 					<th id=""><strong>AADHARCARD</strong></th>
@@ -62,7 +64,7 @@
 			</tbody>
 		</table>
 		<div class="backBtn">
-			 <a href="adminWork.jsp">back</a>
+			<a href="adminWork.jsp">back</a>
 		</div>
 	</div>
 </body>

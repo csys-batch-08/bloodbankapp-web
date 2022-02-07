@@ -22,6 +22,9 @@ public class BookingDAOlmpl implements BookingDAO {
 	static final String BLOODTYPE = "blood_type";
 	static final String DONORCHOICE = "blood_collect_choice";
 
+	/**
+	 * Insert the booking details
+	 */
 	@Override
 	public int booking(BookingModel bookingModel) {
 		int tempNumber = 0;
@@ -56,38 +59,9 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
-	@Override
-	public int updateBooking(BookingModel bookingModel) {
-		int tempNumber = 0;
-		ConnectionUtil connectionUtil = new ConnectionUtil();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			connection = connectionUtil.getConnection();
-			String query = "update donor_booking set address=?,book_date=?,blood_collect_choice=? where aadharcard_number=?";
-			preparedStatement = connection.prepareStatement(query);
-
-			preparedStatement.setString(1, bookingModel.getAddress());
-			preparedStatement.setDate(2, java.sql.Date.valueOf((bookingModel.getAppdate())));
-			preparedStatement.setLong(4, bookingModel.getDonor().getAadharcard());
-			preparedStatement.setString(3, bookingModel.getBloodCollectChoice());
-			tempNumber = preparedStatement.executeUpdate();
-
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (SQLException e1) {
-
-			e1.printStackTrace();
-		}
-
-		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
-		}
-		return tempNumber;
-
-	}
-
+	/**
+	 * The donor booking cancel
+	 */
 	@Override
 	public int deleteBooking(Long aadharcard) {
 		ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -120,6 +94,10 @@ public class BookingDAOlmpl implements BookingDAO {
 		return tempNumber;
 
 	}
+
+	/**
+	 * Show the booking details in home collection only
+	 */
 
 	@Override
 	public List<BookingModel> homeCollection() {
@@ -162,6 +140,9 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	/**
+	 * The donor date validation method
+	 */
 	@Override
 	public LocalDate dateCheck(Donor donor) {
 		LocalDate date = null;
@@ -198,36 +179,9 @@ public class BookingDAOlmpl implements BookingDAO {
 		return date;
 	}
 
-	@Override
-	public int updateDateForDonor(BookingModel bookingModel) {
-		int returnNumber = 0;
-		ConnectionUtil connectionUtil = new ConnectionUtil();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			connection = connectionUtil.getConnection();
-			String commit = "commit";
-			String query = "update donor_booking set book_date=? where aadharcard_number=?";
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setDate(1, java.sql.Date.valueOf(bookingModel.getAppdate()));
-			preparedStatement.setLong(2, bookingModel.getDonor().getAadharcard());
-			returnNumber = preparedStatement.executeUpdate();
-			preparedStatement.executeQuery(commit);
-
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (SQLException e1) {
-
-			e1.printStackTrace();
-		}
-
-		finally {
-			ConnectionUtil.closePreparedStatement(preparedStatement, connection, null);
-		}
-		return returnNumber;
-	}
-
+	/**
+	 * Show booking for the donor
+	 */
 	@Override
 	public List<BookingModel> showBookingDonor(Donor donor) {
 		BookingModel bookingModel = null;
@@ -268,6 +222,9 @@ public class BookingDAOlmpl implements BookingDAO {
 
 	}
 
+	/**
+	 * Show all booking details
+	 */
 	@Override
 	public List<BookingModel> showBookingAdmin() {
 		BookingModel bookingModel = null;

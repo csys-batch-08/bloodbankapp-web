@@ -26,7 +26,7 @@ public class ShowForBillingDateServlet extends HttpServlet {
 		date = LocalDate.parse(request.getParameter("date"));
 
 		BillingDAOlmpl billingDAOlmpl = new BillingDAOlmpl();
-
+		// show bill details in date to search
 		List<BillingModel> billingList = billingDAOlmpl.biilingShowAdminDate(date);
 		request.setAttribute("billingList", billingList);
 

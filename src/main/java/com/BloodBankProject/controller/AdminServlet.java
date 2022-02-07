@@ -27,6 +27,8 @@ public class AdminServlet extends HttpServlet {
 		AdminModel adminModel = new AdminModel(username, password, 0);
 		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
 
+		// Check the admin email and password
+
 		if (adminDAOlmpl.verificationAdmin(adminModel) != null) {
 
 			try {

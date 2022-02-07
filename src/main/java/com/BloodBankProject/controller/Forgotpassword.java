@@ -15,6 +15,8 @@ import com.bloodbank.exception.ExeceptionHandle;
 @WebServlet("/Forgotpassword")
 public class Forgotpassword extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -32,18 +34,24 @@ public class Forgotpassword extends HttpServlet {
 		}
 
 		try {
-
+			// check the valid phone number
 			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) != null) {
 
 				try {
+					// Check the two password are same.
 
 					if (password1.equals(password2)) {
 
 						seekerDAOlmpl.forgotPassword(phoneNumber, password2);
 
-						RequestDispatcher dispatcher = request
-								.getRequestDispatcher("seekerLogin.jsp?forgotpassword=sucess");
-						dispatcher.forward(request, response);
+						try {
+							RequestDispatcher dispatcher = request
+									.getRequestDispatcher("seekerLogin.jsp?forgotpassword=sucess");
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e) {
+
+							e.printStackTrace();
+						}
 
 					} else {
 						throw new ExeceptionHandle();

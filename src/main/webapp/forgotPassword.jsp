@@ -9,12 +9,13 @@
 <title>Forgot Password</title>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </head>
 <body>
-<script>
+	<script>
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
@@ -48,16 +49,14 @@ $(document).ready(function(){
 					<input type="password" id="PASSWORD" name="PASSWORD" required
 						placeholder="Enter the Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ " /><br />
-					<br />
+						title=" mininum 8characters may includes @#$%&*_?/ " /><br /> <br />
 
 				</div>
 				<div class="formcontrol">
 					<input type="password" id="CONFIRM" name="CONFIRM" required
 						placeholder="Enter the Confirm Password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/ " /><br />
-					<br />
+						title=" mininum 8characters may includes @#$%&*_?/ " /><br /> <br />
 
 				</div>
 
