@@ -23,22 +23,26 @@
 
 	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.approved!=null}">
-		<script type="text/javascript"> showMessage('approvedRequest')</script>
+		<script type="text/javascript">
+			showMessage('approvedRequest')
+		</script>
 	</c:if>
 	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.Requestcancel!=null}">
-		<script type="text/javascript"> showMessage('RequestDeleted')</script>
+		<script type="text/javascript">
+			showMessage('RequestDeleted')
+		</script>
 	</c:if>
 	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.InvalidAadharcardNumber!=null}">
-		<script type="text/javascript"> showMessage('InvalidAadharcardNumber')</script>
+		<script type="text/javascript">
+			showMessage('InvalidAadharcardNumber')
+		</script>
 	</c:if>
 	<div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
-
 				<table aria-describedby="Request table">
-
 					<tr>
 						<th>HOSPITAL NAME</th>
 						<th>BLOOD TYPE</th>
@@ -61,12 +65,7 @@
 							<td><fmt:parseDate value="${List.requestDate}"
 									pattern="yyyy-MM-dd" var="requestDate" type="date" /> <fmt:formatDate
 									pattern="dd/MM/yyyy" value="${requestDate}" /></td>
-
-
-
 							<td>${List.status}</td>
-
-
 						</tr>
 					</c:forEach>
 
@@ -76,13 +75,10 @@
 			<div class="content">
 				<form action="SeekerRequestDelete" method="post"
 					style="text-align: center;">
-
-
-
-					<input list="blood type" id="bloodType" name="bloodtype"
+					<label for="ADHARCARD" class="d-none"></label> <input
+						list="blood type" id="bloodType" name="bloodtype"
 						required="required" autofocus="autofocus"
 						placeholder="Choose the Blood Type">
-
 					<datalist id="blood type">
 						<option value="a+">a+</option>
 						<option value="a-">a-</option>
@@ -94,9 +90,8 @@
 						<option value="o-">o-</option>
 						<option value="bombay">bombay</option>
 					</datalist>
-
-
-					<input type="text" id="ADHARCARD" name="ADHARCARD" required
+					<label for="ADHARCARD" class="d-none"></label> <input type="text"
+						id="ADHARCARD" name="ADHARCARD" required
 						pattern="[456789][0-9]{11}"
 						placeholder="Enter the Aadharcard Number"
 						title="enter the valid Aadharcard number"> <input

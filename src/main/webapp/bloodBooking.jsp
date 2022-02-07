@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-
 <fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
 	<title><fmt:message key="Booking" /></title>
 </fmt:bundle>
@@ -15,20 +14,14 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/bookingPage.css">
-
 </head>
 <body>
-
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-
 			<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
-
-
 				<li><a href="seekerIndex.jsp"><fmt:message key="Seeker" /></a></li>
 				<li><a href="DonorLogoutServlet"><fmt:message key="Logout" /></a></li>
 			</fmt:bundle>
@@ -39,9 +32,6 @@
 		<div class="bookinner col-sm-3" onMouseover="check()">
 
 			<form action="BloodBookingServlet " method="post">
-
-
-
 				<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
 					<h1>
 						<fmt:message key="BOOKING" />
@@ -50,28 +40,25 @@
 				</fmt:bundle>
 				<div>
 					<div class="inputtype">
-						<label for="bookingDate"><input type="date"
+						<label for="bookingDate" class="d-none"></label><input type="date"
 							id="bookingDate" name="bookingDate" required="required"
-							placeholder="" /></label>
+							placeholder="" />
 
 					</div>
 					<div class="inputtype">
-						<label for="Choice"> <select name="Choice" id="Choice"
-							required="required">
-								<option disabled="disabled">Select any one</option>
+						<label for="Choice" class="d-none"></label> <select name="Choice"
+							id="Choice" required="required">
+							<option disabled="disabled">Select any one</option>
 
-								<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
-									<option value="center"><fmt:message key="center" /></option>
-									<option value="home"><fmt:message key="Home" /></option>
-								</fmt:bundle>
-
-						</select></label>
-
+							<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+								<option value="center"><fmt:message key="center" /></option>
+								<option value="home"><fmt:message key="Home" /></option>
+							</fmt:bundle>
+						</select>
 						<div class="inputtype">
-							<label for="address"> <textarea
-									style="visibility: hidden;" id="address" name="address"
-									maxlength="50" placeholder="Enter the Home Address"></textarea></label>
-
+							<label for="address" class="d-none"></label>
+							<textarea style="visibility: hidden;" id="address" name="address"
+								maxlength="50" placeholder="Enter the Home Address"></textarea>
 						</div>
 					</div>
 				</div>

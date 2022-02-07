@@ -6,11 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
-
-
-			
-			
+<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">			
 <title><fmt:message key="AdminLogin" /></title>
 </fmt:bundle>
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
@@ -21,7 +17,6 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
 	<script type="text/javascript">
@@ -37,19 +32,19 @@ $(document).ready(function(){
 				style="text-align: center;">
 				<h1>Admin login</h1>
 				<div class="formcontrol">
-				 	<label for="email"><input type="email" id="email"
-						name="email" required="required" placeholder="Enter the Email" /></label>
+				 	<label for="email" class="d-none"></label><input type="email" id="email"
+						name="email" required="required" placeholder="Enter the Email" />
 				</div>
 				<div class="formcontrol">
-				<label for="password"><input type="password" id="password"
+				<label for="password" class="d-none"></label><input type="password" id="password"
 						name="password" required="required"
 						placeholder="Enter the password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/" /></label>
+						title=" mininum 8characters may includes @#$%&*_?/" />
 				</div>
 				<div class="formbtn">
-					<input type="submit" value="Login" /> <label for="reset"><input type="reset"
-						value="Reset" id="reset" /></label>
+					<input type="submit" value="Login" /> <label for="reset" class="d-none"></label><input type="reset"
+						value="Reset" id="reset" />
 				</div>
 				<c:if test="${requestScope.error!=null }">
 					<p class="text-primary">${error}</p>

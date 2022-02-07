@@ -30,7 +30,6 @@
 	href="assets/css/requestIndex.css">
 </head>
 <body>
-
 	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.qualified!=null}">
 		<script type="text/javascript"> showMessage('qualified')</script>
@@ -43,11 +42,9 @@
 	<c:if test="${param.noDate!=null}">
 		<script type="text/javascript"> showMessage('noDate')</script>
 	</c:if>
-
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
-
 			<li><a href="seekerIndex.jsp">Seeker</a></li>
 			<li><a href="DonorLogoutServlet">Logout</a></li>
 		</ul>

@@ -12,35 +12,32 @@
 <meta charset="ISO-8859-1">
 <title>Show Booking</title>
 <link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
-
 </head>
 <body>
-
 	<div class="adminCard">
 		<table aria-describedby="blood booking">
-
-			<tr>
-				<th><strong>AADHARCARD</strong></th>
-				<th><strong>ADDRESS</strong></th>
-				<th><strong>BOOK DATE</strong></th>
-				<th><strong>BLOOD TYPE</strong></th>
-				<th><strong>BLOOD COLLECT CHOICE</strong></th>
-
-			</tr>
-			<c:forEach items="${requestScope.bookingList }" var="List">
+			<thead>
 				<tr>
-					<td>${List.donor.aadharcard }</td>
-					<td>${List.address }</td>
-					<td><fmt:parseDate value="${List.appdate }"
-							pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
-							pattern="dd/MM/yyyy" value="${appdate}" /></td>
-					<td>${List.bloodType }</td>
-					<td>${List.bloodCollectChoice }</td>
-
-
+					<th><strong>AADHARCARD</strong></th>
+					<th><strong>ADDRESS</strong></th>
+					<th><strong>BOOK DATE</strong></th>
+					<th><strong>BLOOD TYPE</strong></th>
+					<th><strong>BLOOD COLLECT CHOICE</strong></th>
 				</tr>
-			</c:forEach>
-
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.bookingList }" var="List">
+					<tr>
+						<td>${List.donor.aadharcard }</td>
+						<td>${List.address }</td>
+						<td><fmt:parseDate value="${List.appdate }"
+								pattern="yyyy-MM-dd" var="appdate" type="date" /> <fmt:formatDate
+								pattern="dd/MM/yyyy" value="${appdate}" /></td>
+						<td>${List.bloodType }</td>
+						<td>${List.bloodCollectChoice }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 		<br> <br>
 

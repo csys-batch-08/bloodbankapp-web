@@ -81,7 +81,8 @@ public class BillingDAOlmpl implements BillingDAO {
 		int seekerId = seekerDAOlmpl.seekerIdFind(billingModel.getSeeker());
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill where seeker_id=? order by bill_id desc";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from"
+					+ " seeker_blood_bill where seeker_id=? order by bill_id desc";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setInt(1, seekerId);
@@ -125,7 +126,8 @@ public class BillingDAOlmpl implements BillingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill order by bill_id desc ";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date"
+					+ " from seeker_blood_bill order by bill_id desc ";
 			statement = connection.createStatement();
 
 			resultSet = statement.executeQuery(query);
@@ -166,7 +168,8 @@ public class BillingDAOlmpl implements BillingDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = connectionUtil.getConnection();
-			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill where ?<=billing_date order by bill_id desc";
+			String query = "select blood_type,seeker_id,quantity,quantity_price,billing_date from seeker_blood_bill "
+					+ "where ?<=billing_date order by bill_id desc";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setDate(1, java.sql.Date.valueOf(date));

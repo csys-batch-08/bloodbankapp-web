@@ -10,8 +10,6 @@
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css"
 	href="assets/css/donorLoginpage.css">
-
-
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
@@ -42,8 +40,6 @@ $(document).ready(function(){
   });
 });
 </script>
-
-
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
@@ -52,32 +48,23 @@ $(document).ready(function(){
 			<li><a href="index.jsp">Home</a></li>
 		</ul>
 	</nav>
-
-
-
 	<div class="loginForm">
-
 		<div class="cardContent">
-
 			<form action="login" method="post">
 				<h1>Login</h1>
 				<div class="formcontrol">
+				<label for="aadharcard" class="d-none"></label>
 					<input type="text" id="aadharcard" name="aadharcard" autofocus
 						required="required" pattern="[0-9]{12}"
 						placeholder="Enter the Aadharcard Number"
 						title="enter the valid Aadharcard number" /><br /> <br />
-
-				</div>
-
+     				</div>
 				<div class="formbtn">
 					<input type="submit" value="Login" />
-
 				</div>
-
 				<c:if test="${requestScope.DonorError!=null }">
 					<p class="text-primary">${DonorError}</p>
 				</c:if>
-
 			</form>
 		</div>
 	</div>

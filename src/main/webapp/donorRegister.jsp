@@ -17,62 +17,58 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
 	<script>
-$(document).ready(function(){
-  $("p").click(function(){
-    $(this).hide();
-  });
-});
-</script>
+		$(document).ready(function() {
+			$("p").click(function() {
+				$(this).hide();
+			});
+		});
+	</script>
 	<div class="loginForm">
 		<div class="cardContent">
-
-
-
 			<form action="Register" method="post">
 				<h1>Register</h1>
 				<div class="formcontrol">
-
-					<input type="text" id="name" name="firstname" required autofocus
+					<label for="name" class="d-none"></label> <input type="text"
+						id="name" name="firstname" required autofocus
 						placeholder="Enter the First Name" pattern="[A-Za-z]{3,}"
 						title="mininum 3 character" />
 				</div>
 				<div class="formcontrol">
-					<input type="text" id="lastName" name="lastName" required
+					<label for="lastName" class="d-none"></label> <input type="text"
+						id="lastName" name="lastName" required
 						placeholder="Enter the lastName" pattern="[A-Za-z]+"
 						title="enter the last name" />
-
 				</div>
 				<div class="formcontrol">
-
+					<label for="address" class="d-none"></label>
 					<textarea id="address" name="address" maxlength="50" required
 						placeholder="Enter the Address:"></textarea>
-
 				</div>
 				<div class="formcontrol">
-					<input type="text" id="number" name="number" required
-						pattern="[9876][0-9]{9}" placeholder="Enter the PhoneNumber"
-						title=" mininum 10characters" />
+
+					<label for="number" class="d-none"></label> <input type="text"
+						id="number" name="number" required pattern="[9876][0-9]{9}"
+						placeholder="Enter the PhoneNumber" title=" mininum 10characters" />
 				</div>
 				<div class="formcontrol">
 					<p class="text-secondary" style="font-family: fantasy;">Date of
 						Birth</p>
-					<input type="date" id="bio" name="bio" required="required"
-						placeholder="BIO" />
-
+					<label for="bio" class="d-none"></label> <input type="date"
+						id="bio" name="bio" required="required" placeholder="BIO" />
 				</div>
 				<div class="formcontrol">
-					<input type="text" id="ADHARCARD" name="ADHARCARD" required
+					<label for="ADHARCARD" class="d-none"></label> <input type="text"
+						id="ADHARCARD" name="ADHARCARD" required
 						pattern="[456789][0-9]{11}"
 						placeholder="Enter the Aadharcard Number"
 						title="enter the valid Aadharcard number" />
 				</div>
 				<div class="formcontrol">
-					<input list="blood type" id="bloodtype" name="bloodtype" required
+					<label for="bloodtype" class="d-none"></label> <input
+						list="blood type" id="bloodtype" name="bloodtype" required
 						placeholder="Choose the Blood Type" />
-
 					<datalist id="blood type">
 						<option value="a+">a+</option>
 						<option value="a-">a-</option>
@@ -84,19 +80,14 @@ $(document).ready(function(){
 						<option value="o-">o-</option>
 						<option value="bombay">bombay</option>
 					</datalist>
-
-
 					<c:if test="${requestScope.aadharcardNumber!=null }">
 						<p class="text-primary">${aadharcardNumber}</p>
 					</c:if>
-
 				</div>
 				<div class="formbtn">
 					<button>Submit</button>
 					<button type="reset">Reset</button>
-
 				</div>
-
 			</form>
 		</div>
 	</div>

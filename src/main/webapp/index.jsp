@@ -7,7 +7,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta name="bloodbank" content="bloodbank web app">
-
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/Main.css">
@@ -22,7 +21,6 @@
 	<c:if test="${param.RequestDeleted!=null}">
 		<script type="text/javascript"> showMessage('RequestDeleted')</script>
 	</c:if>
-
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
@@ -34,10 +32,5 @@
 	<div class="homeContent">
 		<img src="assets/images/002.jpg" class="img-fluid" alt="img">
 	</div>
-
-
-
-
-
 </body>
 </html>

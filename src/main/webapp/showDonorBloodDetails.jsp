@@ -15,7 +15,6 @@
 <meta charset="ISO-8859-1">
 <title>ShowDonorBloodDetails</title>
 <link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
-
 </head>
 <body>
 	<div class="adminCard">

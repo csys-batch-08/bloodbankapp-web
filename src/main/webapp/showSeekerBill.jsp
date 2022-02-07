@@ -16,35 +16,32 @@
 <body>
 	<div class="adminCard">
 		<table aria-describedby="seeker report">
-
-			<tr>
-				<th><strong>BLOODTYPE</strong></th>
-				<th><strong>SEEKER NAME</strong></th>
-				<th><strong>SEEKER PHONENUMBER</strong></th>
-				<th><strong>QUANTITY</strong></th>
-				<th><strong>PRICE</strong></th>
-				<th><strong>Date</strong></th>
-			</tr>
-
-			<c:forEach items="${requestScope.billingList }" var="billingList">
+			<thead>
 				<tr>
-					<td>${billingList.bloodType}</td>
-					<td>${billingList.seeker.firstName}</td>
-					<td>${billingList.seeker.phoneNumber}</td>
-					<td>${billingList.unit}</td>
-					<td>${billingList.totalprice}</td>
-
-					<td><fmt:parseDate value="${billingList.billDate}"
-							pattern="yyyy-MM-dd" var="billDate" type="date" /> <fmt:formatDate
-							pattern="dd/MM/yyyy" value="${billDate}" /></td>
-
-
+					<th><strong>BLOODTYPE</strong></th>
+					<th><strong>SEEKER NAME</strong></th>
+					<th><strong>SEEKER PHONENUMBER</strong></th>
+					<th><strong>QUANTITY</strong></th>
+					<th><strong>PRICE</strong></th>
+					<th><strong>Date</strong></th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.billingList }" var="billingList">
+					<tr>
+						<td>${billingList.bloodType}</td>
+						<td>${billingList.seeker.firstName}</td>
+						<td>${billingList.seeker.phoneNumber}</td>
+						<td>${billingList.unit}</td>
+						<td>${billingList.totalprice}</td>
+						<td><fmt:parseDate value="${billingList.billDate}"
+								pattern="yyyy-MM-dd" var="billDate" type="date" /> <fmt:formatDate
+								pattern="dd/MM/yyyy" value="${billDate}" /></td>
+					</tr>
+				</c:forEach>
 
-
+			</tbody>
 		</table>
-
 		<div class="backBtn">
 			<a href="index.jsp">Back</a>
 

@@ -27,42 +27,36 @@
 			showMessage('productUpdated')
 		</script>
 	</c:if>
-
-
-
 	<div class="adminCard">
 		<div class="flexbox">
 			<div class="adminImage">
 				<table style="text-align: center;" aria-describedby="Stack details">
-					<tr>
-						<th><strong>Blood Type</strong></th>
-						<th><strong>Quantity</strong></th>
-						<th><strong>Price</strong></th>
-
-
-					</tr>
-					<c:forEach items="${requestScope.stackDetails}" var="stackList">
+					<thead>
 						<tr>
-							<td>${stackList.bloodType}</td>
-							<td>${stackList.quantity}</td>
-							<td>${stackList.bloodPrice}</td>
-
-
-
+							<th><strong>Blood Type</strong></th>
+							<th><strong>Quantity</strong></th>
+							<th><strong>Price</strong></th>
 						</tr>
-					</c:forEach>
-
+					</thead>
+					<tbody>
+						<c:forEach items="${requestScope.stackDetails}" var="stackList">
+							<tr>
+								<td>${stackList.bloodType}</td>
+								<td>${stackList.quantity}</td>
+								<td>${stackList.bloodPrice}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
-
 			</div>
 			<div class="content">
 				<h2 style="color: black;">PRICE CHANGE</h2>
 
 				<form action="BloodPriceChangeServlet" style="text-align: center;">
-					<input list="blood type" id="bloodType" name="bloodtype"
+					<label for="bloodType" class="d-none"></label> <input
+						list="blood type" id="bloodType" name="bloodtype"
 						required="required" autofocus="autofocus"
 						placeholder="Choose the Blood Type" />
-
 					<datalist id="blood type">
 						<option value="a+">a+</option>
 						<option value="a-">a-</option>
@@ -74,28 +68,17 @@
 						<option value="o-">o-</option>
 						<option value="bombay">bombay</option>
 					</datalist>
-					<input type="number" id="Price" value="Enter the Price"
-						name="Price" required="required" pattern="[1-9][0-9]+"
+					<label for="Price" class="d-none"></label> <input type="number"
+						id="Price" value="Enter the Price" name="Price"
+						required="required" pattern="[1-9][0-9]+"
 						title="plese enter the valid number" placeholder="Blood Price">
 					<input type="submit" value="confirm" />
 				</form>
-
 			</div>
-
 		</div>
-
-
-
 		<div class="backBtn">
 			<a href="adminWork.jsp"><label for="back">back</label></a>
 		</div>
-
-
-
-
 	</div>
-
-
-
 </body>
 </html>

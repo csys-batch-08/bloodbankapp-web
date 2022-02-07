@@ -13,10 +13,8 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 <link rel="stylesheet" type="text/css" href="assets/css/seekerIndex.css">
-
 </head>
 <body>
-
 	<nav class="header seakerindex">
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
@@ -24,11 +22,8 @@
 			<li><a href="donorRegister.jsp">Register</a></li>
 		</ul>
 	</nav>
-
-
 	<div class="homeContent">
 		<img alt="nothing " src="assets/images/005.gif">
-
 		<P>If you're a blood Donor, you're a hero to someone, somewhere,
 			who received your gracious gift of life.</P>
 	</div>

@@ -6,15 +6,11 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-
 <fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
-
 	<title><fmt:message key="AdminWork" /></title>
 </fmt:bundle>
-
 <link rel="stylesheet" type="text/css"
 	href="assets/css/adminworkpagestyle.css">
-
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet'
@@ -25,10 +21,7 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
-
-
 <body>
 	<script src="assets/javascript/popupMessage.js"></script>
 	<c:if test="${param.loginStatus!=null}">
@@ -52,8 +45,7 @@
 			</fmt:bundle>
 		</div>
 		<div class="backBtn">
-		<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
-		
+		<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">		
 			<a href="index.jsp"><fmt:message key="Back" /></a>
 			</fmt:bundle>
 		</div>

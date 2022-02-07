@@ -7,9 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,14 +44,10 @@
 					<th id=""><strong>PRICE</strong></th>
 					<th id=""><strong>Date</strong></th>
 				</tr>
-
-
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.billingList}" var="billingList">
-
 					<tr>
-
 						<td>${billingList.bloodType}</td>
 						<td>${billingList.seeker.firstName}</td>
 						<td>${billingList.seeker.phoneNumber}</td>
