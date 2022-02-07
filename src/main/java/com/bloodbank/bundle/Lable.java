@@ -11,5 +11,9 @@ public class Lable extends ListResourceBundle {
 	}
 
 	static final Object[][] contents = { { "nav.donor", "Donor" }, { "nav.Forgot password", "Forgot password" },
-			{ "nav.AdminLogin", "AdminLogin" } };
+			{ "nav.AdminLogin", "AdminLogin" }, { "nav.AADHARCARD", "AADHARCARD" }, { "nav.ADDRESS", "ADDRESS" },
+
+			{ "nav.AdminShowBooking", "AdminShowBooking" }
+
+	};
 }

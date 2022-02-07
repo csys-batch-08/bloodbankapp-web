@@ -12,7 +12,14 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>AdminShowBooking</title>
+<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+
+
+
+
+	<title><fmt:message key="AdminShowBooking" /></title>
+</fmt:bundle>
+
 <link rel="stylesheet" type="text/css" href="assets/css/tableformat.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -37,12 +44,13 @@
 		<table id="table_id" aria-describedby="bookig table">
 			<thead>
 				<tr>
-					<th id=""><strong>AADHARCARD</strong></th>
-					<th id=""><strong>ADDRESS</strong></th>
+					<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
+						<th id=""><strong><fmt:message key="AADHARCARD" /></strong></th>
+						<th id=""><strong><fmt:message key="ADDRESS" /></strong></th>
+					</fmt:bundle>
 					<th id=""><strong>BOOK DATE</strong></th>
 					<th id=""><strong>BLOOD TYPE</strong></th>
 					<th id=""><strong>BLOOD COLLECT CHOICE</strong></th>
-
 				</tr>
 			</thead>
 			<tbody>
