@@ -10,6 +10,6 @@ public class Lable extends ListResourceBundle {
 		return contents;
 	}
 
-	static final Object[][] contents = { { "nav.donor", "Donor" }, { "nav.Forgot password", "Forgot password" } };
-
+	static final Object[][] contents = { { "nav.donor", "Donor" }, { "nav.Forgot password", "Forgot password" },
+			{ "nav.AdminLogin", "AdminLogin" } };
 }

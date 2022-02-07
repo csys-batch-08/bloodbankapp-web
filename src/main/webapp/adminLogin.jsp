@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
+<fmt:bundle basename="com.bloodbank.bundle.Lable" prefix="nav.">
 
-<title dir="ltr">AdminLogin</title>
+
+			
+			
+<title><fmt:message key="AdminLogin" /></title>
+</fmt:bundle>
 <link rel="stylesheet" type="text/css" href="assets/css/form.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,19 +37,19 @@ $(document).ready(function(){
 				style="text-align: center;">
 				<h1>Admin login</h1>
 				<div class="formcontrol">
-					<input type="email" id="email"
-						name="email" required="required" placeholder="Enter the Email" />
+				 	<label for="email"><input type="email" id="email"
+						name="email" required="required" placeholder="Enter the Email" /></label>
 				</div>
 				<div class="formcontrol">
-				<input type="password" id="password"
+				<label for="password"><input type="password" id="password"
 						name="password" required="required"
 						placeholder="Enter the password"
 						pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}"
-						title=" mininum 8characters may includes @#$%&*_?/" />
+						title=" mininum 8characters may includes @#$%&*_?/" /></label>
 				</div>
 				<div class="formbtn">
-					<input type="submit" value="Login" /> <input type="reset"
-						value="Reset" id="reset" />
+					<input type="submit" value="Login" /> <label for="reset"><input type="reset"
+						value="Reset" id="reset" /></label>
 				</div>
 				<c:if test="${requestScope.error!=null }">
 					<p class="text-primary">${error}</p>
