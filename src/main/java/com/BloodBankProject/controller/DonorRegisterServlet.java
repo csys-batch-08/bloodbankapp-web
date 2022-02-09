@@ -1,7 +1,6 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,26 +57,30 @@ public class DonorRegisterServlet extends HttpServlet {
 					}
 				}
 
-			} else {
+				else {
+					try {
 
-				throw new ExeceptionHandle();
+						throw new ExeceptionHandle();
+					} catch (ExeceptionHandle e) {
+
+						request.setAttribute("aadharcardNumber", e.aadharcardNumber());
+
+						try {
+							RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e1) {
+
+							e1.printStackTrace();
+						}
+
+					}
+
+				}
 
 			}
 
-		} catch (ExeceptionHandle | ParseException e) {
-
-			request.setAttribute("aadharcardNumber", ((ExeceptionHandle) e).aadharcardNumber());
-
-			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e1) {
-
-				e1.printStackTrace();
-			}
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
-
 }

@@ -41,36 +41,33 @@ public class SeekerLoginServlet extends HttpServlet {
 		// seeker validation and get the object
 		seekerDetails = seekerDAOlmpl.seekerObject(password, phoneNumber);
 
-		try {
-			if (seekerDetails != null) {
-				// session set the seeker details
-				session.setAttribute("seeker", seekerDetails);
+		if (seekerDetails != null) {
+			// session set the seeker details
+			session.setAttribute("seeker", seekerDetails);
 
+			try {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?loginStatus=sucess");
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e) {
+
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+				throw new ExeceptionHandle();
+			} catch (ExeceptionHandle e) {
+
+				request.setAttribute("SeekerError", e.seekerMessage());
 				try {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("requestIndex.jsp?loginStatus=sucess");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("seekerLogin.jsp");
 					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
+				} catch (ServletException | IOException e1) {
 
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 
-			} else {
-
-				throw new ExeceptionHandle();
-
 			}
-
-		} catch (ExeceptionHandle e) {
-
-			request.setAttribute("SeekerError", e.seekerMessage());
-			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("seekerLogin.jsp");
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e1) {
-
-				e1.printStackTrace();
-			}
-
 		}
 
 	}
