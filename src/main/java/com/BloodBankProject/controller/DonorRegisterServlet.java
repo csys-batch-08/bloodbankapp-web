@@ -33,24 +33,15 @@ public class DonorRegisterServlet extends HttpServlet {
 		try {
 			phoneNumber = Long.parseLong(request.getParameter("number"));
 			aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
-		} catch (NumberFormatException e1) {
 
-			e1.printStackTrace();
-		}
-		String bloodType = request.getParameter("bloodtype");
-
-		try {
+			String bloodType = request.getParameter("bloodtype");
 
 			date = sdf.parse(request.getParameter("bio"));
-		} catch (ParseException e) {
 
-			e.printStackTrace();
-		}
+			DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
+			Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
+			// Donor is null new donor register
 
-		DonorDAOImpl donorDAOImpl = new DonorDAOImpl();
-		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
-		// Donor is null new donor register
-		try {
 			if (donor == null) {
 
 				donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
@@ -73,9 +64,9 @@ public class DonorRegisterServlet extends HttpServlet {
 
 			}
 
-		} catch (ExeceptionHandle e) {
+		} catch (ExeceptionHandle | ParseException e) {
 
-			request.setAttribute("aadharcardNumber", e.aadharcardNumber());
+			request.setAttribute("aadharcardNumber", ((ExeceptionHandle) e).aadharcardNumber());
 
 			try {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("donorRegister.jsp");

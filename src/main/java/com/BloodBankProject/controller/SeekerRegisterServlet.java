@@ -45,41 +45,38 @@ public class SeekerRegisterServlet extends HttpServlet {
 
 		SeekerDAOlmpl seekerDAOlmpl = new SeekerDAOlmpl();
 
-		try {
-			// Check the phone number validation
-			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) == null) {
-				// insert the seeker details
-				if (seekerDAOlmpl.insertSeekerDetails(seekerDetails) > 0) {
+		// Check the phone number validation
+		if (seekerDAOlmpl.phoneNumberValid(phoneNumber) == null) {
+			// insert the seeker details
+			if (seekerDAOlmpl.insertSeekerDetails(seekerDetails) > 0) {
 
-					try {
-						RequestDispatcher dispatcher = request
-								.getRequestDispatcher("seekerLogin.jsp?registerSucces=sucess");
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e) {
+				try {
+					RequestDispatcher dispatcher = request
+							.getRequestDispatcher("seekerLogin.jsp?registerSucces=sucess");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
 
-						e.printStackTrace();
-					}
-
+					e.printStackTrace();
 				}
-			} else {
-
-				throw new ExeceptionHandle();
 
 			}
-		} catch (ExeceptionHandle e) {
-
-			request.setAttribute("phoneNumber", e.phoneNumber());
-
+		} else {
 			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("seekerRegister.jsp");
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e1) {
+				throw new ExeceptionHandle();
+			} catch (ExeceptionHandle e) {
 
-				e1.printStackTrace();
+				request.setAttribute("phoneNumber", e.phoneNumber());
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("seekerRegister.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e1) {
+
+					e1.printStackTrace();
+				}
+
 			}
-
 		}
-
 	}
 
 }

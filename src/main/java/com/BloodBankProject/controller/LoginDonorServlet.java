@@ -37,35 +37,32 @@ public class LoginDonorServlet extends HttpServlet {
 
 		Donor donor = donorDAOImpl.validAadharcardNumber(aadharcard);
 
-		try {
-
-			if (donor != null) {
-				request.setAttribute("Login", "Success");
-				session.setAttribute("Donor", donor);
-
-				try {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp?loginStatus=sucess");
-					dispatcher.forward(request, response);
-				} catch (ServletException | IOException e) {
-
-					e.printStackTrace();
-				}
-
-			} else {
-
-				throw new ExeceptionHandle();
-
-			}
-		} catch (ExeceptionHandle e) {
-			// message content for donor validation
-			request.setAttribute("DonorError", e.donorMessage());
+		if (donor != null) {
+			request.setAttribute("Login", "Success");
+			session.setAttribute("Donor", donor);
 
 			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("donorCheckUp.jsp?loginStatus=sucess");
 				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e1) {
+			} catch (ServletException | IOException e) {
 
-				e1.printStackTrace();
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+				throw new ExeceptionHandle();
+			} catch (ExeceptionHandle e) {
+				// message content for donor validation
+				request.setAttribute("DonorError", e.donorMessage());
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("donorLogin.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e1) {
+
+					e1.printStackTrace();
+				}
 			}
 		}
 

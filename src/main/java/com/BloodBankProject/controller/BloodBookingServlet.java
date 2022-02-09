@@ -36,19 +36,13 @@ public class BloodBookingServlet extends HttpServlet {
 		LocalDate date = null;
 		try {
 			date = LocalDate.parse(request.getParameter(LOCALDATE));
-		} catch (NullPointerException e) {
 
-			e.printStackTrace();
-		}
+			HttpSession session = request.getSession();
 
-		HttpSession session = request.getSession();
+			Donor donor = (Donor) session.getAttribute("Donor");
 
-		Donor donor = (Donor) session.getAttribute("Donor");
-
-		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
-		// check the date for Donor validation
-
-		try {
+			AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
+			// check the date for Donor validation
 
 			LocalDate date1 = bookingDAOlmpl.dateCheck(donor);
 

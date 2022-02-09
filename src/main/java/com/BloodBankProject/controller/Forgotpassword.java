@@ -33,59 +33,58 @@ public class Forgotpassword extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-		try {
-			// check the valid phone number
-			if (seekerDAOlmpl.phoneNumberValid(phoneNumber) != null) {
-
-				try {
-					// Check the two password are same.
-
-					if (password1.equals(password2)) {
-
-						seekerDAOlmpl.forgotPassword(phoneNumber, password2);
-
-						try {
-							RequestDispatcher dispatcher = request
-									.getRequestDispatcher("seekerLogin.jsp?forgotpassword=sucess");
-							dispatcher.forward(request, response);
-						} catch (ServletException | IOException e) {
-
-							e.printStackTrace();
-						}
-
-					} else {
-						throw new ExeceptionHandle();
-
-					}
-				} catch (ExeceptionHandle e) {
-
-					request.setAttribute("PasswordError", e.forgotPassword());
-
-					try {
-						RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e1) {
-
-						e1.printStackTrace();
-					}
-
-				}
-
-			} else {
-
-				throw new ExeceptionHandle();
-
-			}
-		} catch (ExeceptionHandle e) {
-
-			request.setAttribute("numbererror", e.seekerPhoneNumberFind());
+		// check the valid phone number
+		if (seekerDAOlmpl.phoneNumberValid(phoneNumber) != null) {
 
 			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e1) {
+				// Check the two password are same.
 
-				e1.printStackTrace();
+				if (password1.equals(password2)) {
+
+					seekerDAOlmpl.forgotPassword(phoneNumber, password2);
+
+					try {
+						RequestDispatcher dispatcher = request
+								.getRequestDispatcher("seekerLogin.jsp?forgotpassword=sucess");
+						dispatcher.forward(request, response);
+					} catch (ServletException | IOException e) {
+
+						e.printStackTrace();
+					}
+
+				} else {
+					throw new ExeceptionHandle();
+
+				}
+			} catch (ExeceptionHandle e) {
+
+				request.setAttribute("PasswordError", e.forgotPassword());
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e1) {
+
+					e1.printStackTrace();
+				}
+
+			}
+
+		} else {
+			try {
+				throw new ExeceptionHandle();
+			} catch (ExeceptionHandle e) {
+
+				request.setAttribute("numbererror", e.seekerPhoneNumberFind());
+
+				try {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e1) {
+
+					e1.printStackTrace();
+				}
+
 			}
 
 		}
