@@ -48,10 +48,113 @@ public class BloodBookingServlet extends HttpServlet {
 		AdminDAOlmpl adminDAOlmpl = new AdminDAOlmpl();
 		// check the date for Donor validation
 
-		LocalDate date1 = null;
 		try {
-			date1 = bookingDAOlmpl.dateCheck(donor);
-		} catch (NullPointerException e) {
+
+			LocalDate date1 = bookingDAOlmpl.dateCheck(donor);
+
+			if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {
+
+				// User select by Center Address is Null On time work this condition
+				if (address.isEmpty()) {
+
+					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
+					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+
+					session.setAttribute(LOCALDATE, bookingModel);
+
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+						try {
+							RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e) {
+
+							e.printStackTrace();
+						}
+
+					}
+
+				}
+
+				else {
+
+					// User select by Home On time work this condition
+
+					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					session.setAttribute(LOCALDATE, bookingModel);
+
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+						try {
+							RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e) {
+
+							e.printStackTrace();
+						}
+
+					}
+
+				}
+			}
+			// check the amount in ADMIN wallet to above 300 to Allowed
+
+			else if (date1 == null && adminDAOlmpl.checkWallet() > 300) {
+
+				// User select by Center Address is Null On time work this condition
+
+				if (address.isEmpty()) {
+
+					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
+
+					BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					session.setAttribute(LOCALDATE, bookingModel);
+
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+						try {
+							RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e) {
+
+							e.printStackTrace();
+						}
+					}
+
+				} else {
+					// User select by Home On time work this condition
+
+					BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					session.setAttribute(LOCALDATE, bookingModel);
+
+					if (bookingDAOlmpl.booking(bookingModel) > 0) {
+
+						try {
+							RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
+							dispatcher.forward(request, response);
+						} catch (ServletException | IOException e) {
+
+							e.printStackTrace();
+						}
+
+					}
+
+				}
+
+			} else {
+
+				try {
+					RequestDispatcher dispatcher = request
+							.getRequestDispatcher("donorNotQualified.jsp?bookingDate=sucess");
+					dispatcher.forward(request, response);
+				} catch (ServletException | IOException e) {
+
+					e.printStackTrace();
+				}
+
+			}
+
+		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
@@ -60,107 +163,6 @@ public class BloodBookingServlet extends HttpServlet {
 
 		// Donor once donated to come next Donate check the last Donating Date to 90day
 		// after come to allow
-
-		if (date1 != null && date.isAfter(date1) && adminDAOlmpl.checkWallet() > 300) {
-
-			// User select by Center Address is Null On time work this condition
-			if (address.isEmpty()) {
-
-				String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
-				BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-
-				session.setAttribute(LOCALDATE, bookingModel);
-
-				if (bookingDAOlmpl.booking(bookingModel) > 0) {
-
-					try {
-						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e) {
-
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-
-			else {
-
-				// User select by Home On time work this condition
-
-				BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-				session.setAttribute(LOCALDATE, bookingModel);
-
-				if (bookingDAOlmpl.booking(bookingModel) > 0) {
-
-					try {
-						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e) {
-
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-		}
-		// check the amount in ADMIN wallet to above 300 to Allowed
-
-		else if (date1 == null && adminDAOlmpl.checkWallet() > 300) {
-
-			// User select by Center Address is Null On time work this condition
-
-			if (address.isEmpty()) {
-
-				String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
-
-				BookingModel bookingModel = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
-				session.setAttribute(LOCALDATE, bookingModel);
-
-				if (bookingDAOlmpl.booking(bookingModel) > 0) {
-
-					try {
-						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e) {
-
-						e.printStackTrace();
-					}
-				}
-
-			} else {
-				// User select by Home On time work this condition
-
-				BookingModel bookingModel = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-				session.setAttribute(LOCALDATE, bookingModel);
-
-				if (bookingDAOlmpl.booking(bookingModel) > 0) {
-
-					try {
-						RequestDispatcher dispatcher = request.getRequestDispatcher(LOCATION);
-						dispatcher.forward(request, response);
-					} catch (ServletException | IOException e) {
-
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-
-		} else {
-
-			try {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("donorNotQualified.jsp?bookingDate=sucess");
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e) {
-
-				e.printStackTrace();
-			}
-
-		}
 
 	}
 
